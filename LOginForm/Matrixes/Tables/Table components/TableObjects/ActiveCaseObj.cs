@@ -8,7 +8,6 @@ namespace LOginForm
     /*************************************************************************************
      * 
      * This class Has a bug regarding column index reading after adding a button column
-     * //////////////////////
      * 
      * ***********************************************************************************/
     public class ActiveClassObj : TableCore
