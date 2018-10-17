@@ -1,0 +1,84 @@
+﻿<Window x:Class="LOginForm.Pages.RegisterPage"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:LOginForm"
+        mc:Ignorable="d"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        Title="Login" Height="500" Width="350"  ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" KeyDown="Window_KeyDown"  >
+    <Border  Background="White" CornerRadius="20"  >
+        <Grid Margin="0">
+
+            <!-- The background with filled color -->
+            <Rectangle Height="280" VerticalAlignment="Top">
+                <Rectangle.Fill>
+                    <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                        <GradientStop Color="#FF416481" />
+                        <GradientStop Color="#FF0A1016" Offset="1" />
+                        <GradientStop Color="#FF2F475B" Offset="0.306" />
+                        <GradientStop Color="#FF1C2B38" Offset="0.508"/>
+                    </LinearGradientBrush>
+                </Rectangle.Fill>
+            </Rectangle>
+
+
+
+            <!-- White rectangle with shadow -->
+            <Rectangle Width="280" Height="357" Fill="#FFFCFCFC" VerticalAlignment="Bottom" Margin="35,0,35,66">
+                <Rectangle.Effect>
+                    <DropShadowEffect Color="#FF939393" Direction="0" BlurRadius="15" RenderingBias="Quality" ShadowDepth="1"/>
+                </Rectangle.Effect>
+            </Rectangle>
+
+            <!-- Date place holder for login and password -->
+            <Grid Width="280" Height="240" VerticalAlignment="Bottom" Margin="0, 100">
+                <!-- Header -->
+                <TextBlock Text="REGISTER" HorizontalAlignment="Center" FontSize="18" Foreground="Gray" Margin="102,-78,102,0"/>
+
+                <!-- Error message holder-->
+                <TextBlock Text="Invalid Login or Password" HorizontalAlignment="Center" Margin="0 40 0 0" Foreground="Red" Name="ErrorBox" Visibility="Collapsed"/>
+
+                <!-- User's Information form -->
+                <StackPanel  Margin="10,-70,10,0">
+
+                    <!-- First Name -->
+                    <TextBox Name="FirstN" materialDesign:HintAssist.Hint="FIRST NAME" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0, 10" />
+                    <TextBlock Name="FirstW" Text="Please, enter your first name" HorizontalAlignment="Center" Foreground="#FFDE8814" Margin="0, -10" Visibility="Collapsed" />
+
+                    <!-- Last Name -->
+                    <TextBox Name="LastN" materialDesign:HintAssist.Hint="LAST NAME" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0, 10" />
+                    <TextBlock Name="LastW" Text="Please, enter your last name" HorizontalAlignment="Center" Foreground="#FFDE8814" Margin="0, -10" Visibility="Collapsed" />
+
+                    <!-- Login box-->
+                    <TextBox Name="LoginR" materialDesign:HintAssist.Hint="LOGIN" Style="{StaticResource MaterialDesignFloatingHintTextBox}" Margin="0, 10" />
+                    <TextBlock Name="LoginWorning" Text="Please, enter login name" HorizontalAlignment="Center" Foreground="#FFDE8814" Margin="0, -10" Visibility="Collapsed" />
+                    <TextBlock Name="LoginDanger" Text="This login name already exists" HorizontalAlignment="Center" Foreground="#FFF32525"  Visibility="Collapsed" Margin="0, -10"/>
+
+                    <!-- Password box -->
+                    <PasswordBox Name="PasswordR" materialDesign:HintAssist.Hint="PASSWORD" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0, 10" />
+                    <TextBlock Name="PasswordW" Text="Please, enter password" HorizontalAlignment="Center" Foreground="#FFDE8814" Margin="0, -10" Visibility="Collapsed" />
+
+                    <!-- Password conformation box -->
+                    <PasswordBox Name="PassworConf"  materialDesign:HintAssist.Hint="CONFIRM PASSWORD" Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" Margin="0, 10" />
+                    <TextBlock Name="PasswordConformW" Text="Please, confirm password" HorizontalAlignment="Center" Foreground="#FFDE8814" Margin="0, -10" Visibility="Collapsed" />
+
+
+                    <!-- Error Message holder -->
+                    <TextBlock Text="Passwords do not match" HorizontalAlignment="Center" Margin="0 0 0 0" Foreground="#FFF32525" Name="WorningBox" Visibility="Collapsed"/>
+                </StackPanel>
+            </Grid>
+
+            <!-- Login Button -->
+            <Button VerticalAlignment="Bottom" Width="95"  Content="REGISTER" Name="RegisterBtn" Click="RegisterBtn_Click" RenderTransformOrigin="0.525,0.073" Margin="125,0,130,56" Background="#FF929292" BorderBrush="#FF929292" />
+            <Button VerticalAlignment="Bottom" Width="95" Click="RegisterBtn_Copy_Click" Content="LOGIN" x:Name="RegisterBtn_Copy" RenderTransformOrigin="0.525,0.073" Margin="125,0,130,10" Background="#FF929292" BorderBrush="#FF929292" />
+
+
+
+
+            <!-- Test to see db connection -->
+
+        </Grid>
+
+    </Border>
+</Window>
