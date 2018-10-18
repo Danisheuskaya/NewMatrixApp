@@ -189,6 +189,7 @@
     </Compile>
     <Compile Include="Matrixes\Tables\Table components\Interfaces\RecordCore.cs" />
     <Compile Include="Matrixes\Tables\Table components\TableObjects\ActiveCaseObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\DiscoveryMatrixObj.cs" />
     <Compile Include="Matrixes\Tables\Table components\TableObjects\MedicalMatrixObj.cs" />
     <Compile Include="Matrixes\Tables\Table components\Interfaces\TableCore.cs" />
     <Compile Include="Matrixes\Tables\Table components\TableObjects\CaseLIstObj.cs" />

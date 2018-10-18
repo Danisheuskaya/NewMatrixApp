@@ -115,7 +115,9 @@ namespace LOginForm
 
             btnColumn.UseColumnTextForButtonValue = true;
 
-            dg.Columns.Insert(5, btnColumn);
+            dg.Columns.Add(btnColumn);
+
+            dg.Columns[5].DisplayIndex = 5;
         }
 
 

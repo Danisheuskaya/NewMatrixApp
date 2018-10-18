@@ -304,5 +304,20 @@ namespace LOginForm.Pages
             //Open Form with Active Case Data
             OpenForm(tc);
         }
+
+
+        /// <summary>
+        /// This button will open a page with Discovery Matrix
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DiscoveryMatrixButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Motion Matrix record object
+            TableCore tc = new DiscoveryMatrixObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
     }
 }
