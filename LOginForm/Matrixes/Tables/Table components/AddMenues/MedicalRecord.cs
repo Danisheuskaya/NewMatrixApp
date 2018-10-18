@@ -163,29 +163,7 @@ namespace LOginForm
                 string queryForMedicalRecord = "INSERT INTO `medical_record`(`Case_Pair_ID`, `Case_Name`, `Case_Number`, `Facility`, `Adderess`, `Letter_Type`, `Date_Requested`, `Expiration_Date`, `Date_Recieved`, `Notes`, `Requested_flag`) " +
                                                 "VALUES ('" + casePairID + "', '" + caseName + "', '" + caseNumber + "', '" + facility + "', '" + address + "', '" + letterType + "', '" + dateRequested + "', '" + expirationDate + "', '" + dateRecieved + "', '" + notes + "', '');";
 
-                //TEST
-                MessageBox.Show(queryForMedicalRecord);
-              
-
-                //Create window  dialog for conformation
-                DialogResult dialog = MessageBox.Show("Are you sure to add a new record?", "Add", MessageBoxButtons.YesNo);
-
-                //If yes, return to the login page
-                if (dialog == DialogResult.Yes)
-                {
-                    //Inserting record for MRC
-                    db.InsertDeleteQuery(queryForMedicalRecord);
-
-                    //Show message
-                    MessageBox.Show("Record was added to the table");
-
-
-                    var myParent = (MatrixForm)Owner;
-
-                    myParent.LoadTable();
-
-                    //Cleare form
-                    CleanForm();
+                AddNewRecord(queryForMedicalRecord);
 
                     //Update the ID
                     ShowIdOfTheRecord();
@@ -194,7 +172,7 @@ namespace LOginForm
                     dateRecieved = "";
                     dateRequested = "";
                     expirationDate = "";
-                }
+                
 
 
             }

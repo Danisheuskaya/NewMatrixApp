@@ -228,7 +228,7 @@
             this.Controls.Add(this.caseNumber);
             this.Name = "CourtListRecord";
             this.Text = "CourtListRecord";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CourtListRecord_FormClosing);
+            
             this.ResumeLayout(false);
             this.PerformLayout();
 

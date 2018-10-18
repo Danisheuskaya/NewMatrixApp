@@ -124,6 +124,12 @@
     <Compile Include="Matrixes\Tables\Table components\AddMenues\MedicalMatrixRecord.Designer.cs">
       <DependentUpon>MedicalMatrixRecord.cs</DependentUpon>
     </Compile>
+    <Compile Include="Matrixes\Tables\Table components\AddMenues\MotionMatrixRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Matrixes\Tables\Table components\AddMenues\MotionMatrixRecord.Designer.cs">
+      <DependentUpon>MotionMatrixRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="Matrixes\Tables\Table components\AddMenues\SetteledJudgesRecord.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -190,6 +196,7 @@
     <Compile Include="Matrixes\Tables\Table components\TableObjects\ClientListDataObj.cs" />
     <Compile Include="Matrixes\Tables\Table components\TableObjects\CourtListObj.cs" />
     <Compile Include="Matrixes\Tables\Table components\TableObjects\MedicalRecordObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\MotionMatrixObj.cs" />
     <Compile Include="Matrixes\Tables\Table components\TableObjects\SateledCasesObj.cs" />
     <Compile Include="Matrixes\Tables\Table components\TableObjects\SetteledAttorneysObj.cs" />
     <Compile Include="Matrixes\Tables\Table components\TableObjects\SetteledJudgesObj.cs" />
@@ -245,6 +252,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Matrixes\Tables\Table components\AddMenues\MedicalRecord.resx">
       <DependentUpon>MedicalRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Matrixes\Tables\Table components\AddMenues\MotionMatrixRecord.resx">
+      <DependentUpon>MotionMatrixRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Matrixes\Tables\Table components\AddMenues\SetteledJudgesRecord.resx">
       <DependentUpon>SetteledJudgesRecord.cs</DependentUpon>

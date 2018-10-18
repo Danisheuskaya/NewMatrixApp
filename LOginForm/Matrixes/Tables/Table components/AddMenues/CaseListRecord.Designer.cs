@@ -31,7 +31,7 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.dateOfDeath = new System.Windows.Forms.TextBox();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dateFiledTimePicker = new System.Windows.Forms.DateTimePicker();
             this.clearBtn = new System.Windows.Forms.Button();
             this.addBtn = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
@@ -70,13 +70,13 @@
             this.dateOfDeath.Size = new System.Drawing.Size(307, 26);
             this.dateOfDeath.TabIndex = 26;
             // 
-            // dateTimePicker1
+            // dateFiledTimePicker
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(281, 178);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(307, 26);
-            this.dateTimePicker1.TabIndex = 24;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.dateFiledTimePicker.Location = new System.Drawing.Point(281, 178);
+            this.dateFiledTimePicker.Name = "dateFiledTimePicker";
+            this.dateFiledTimePicker.Size = new System.Drawing.Size(307, 26);
+            this.dateFiledTimePicker.TabIndex = 24;
+            this.dateFiledTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
             // clearBtn
             // 
@@ -178,7 +178,7 @@
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.dateOfDeath);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.dateFiledTimePicker);
             this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.addBtn);
             this.Controls.Add(this.label4);
@@ -189,8 +189,7 @@
             this.Controls.Add(this.caseNumber);
             this.Name = "CaseListRecord";
             this.Text = "CaseListRecord";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.CaseListRecord_FormClosing);
-          
+           
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -201,7 +200,7 @@
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox dateOfDeath;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
+        private System.Windows.Forms.DateTimePicker dateFiledTimePicker;
         private System.Windows.Forms.Button clearBtn;
         private System.Windows.Forms.Button addBtn;
         private System.Windows.Forms.Label label4;

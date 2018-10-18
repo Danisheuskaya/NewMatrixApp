@@ -50,25 +50,7 @@ namespace LOginForm
                 q += "( '" + caseNo + "', '" + name + "', '" + judge + "' ,'" + Court + "' ,'" + Reporter + "' ,'" + Rullings + "' ,'" + Motion + "')";
 
 
-                //Create window  dialog for conformation
-                DialogResult dialog = MessageBox.Show("Are you sure to add a new record?", "Add", MessageBoxButtons.YesNo);
-
-                //If yes, return to the login page
-                if (dialog == DialogResult.Yes)
-                {
-                    //Inserting record
-                    db.InsertDeleteQuery(q);
-
-                    //Show message
-                    MessageBox.Show("Record was added to the table");
-
-                    var myParent = (MatrixForm)this.Owner;
-
-                    myParent.LoadTable();
-
-                    //Cleare form
-                    CleanForm();
-                }
+                AddNewRecord(q);
 
             }
         }
@@ -111,16 +93,6 @@ namespace LOginForm
 
         #endregion
 
-        /// <summary>
-        /// This will prevent an error on load of one or more Records
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CourtListRecord_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Hide();
-            Parent = null;
-            e.Cancel = true;
-        }
+        
     }
 }

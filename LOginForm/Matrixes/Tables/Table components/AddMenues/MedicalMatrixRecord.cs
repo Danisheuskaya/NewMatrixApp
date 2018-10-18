@@ -69,34 +69,12 @@ namespace LOginForm
                     "('" + ClientName + "','" + CaseNumber + "','" + FacilityRecord + "','" + RequestDate + "','" + DateToCopy + "','" + OrderNotes + "','" + DateEFileRecieved + "','" +
                     FlagHardCopy + "','" + HardCopyBy + "','" + DateHardCopyRecieved + "','" + DateSentForReview + "','" + BatesRange + "'," + FlagPrinted + "," + FlagNotebooked + ")";
 
-                //TEST
-                MessageBox.Show(addQueryForMedicalMatrix);
-
-
-                //Create window  dialog for conformation
-                DialogResult dialog = MessageBox.Show("Are you sure to add a new record?", "Add", MessageBoxButtons.YesNo);
-
-                //If yes, return to the login page
-                if (dialog == DialogResult.Yes)
-                {
-                    //Inserting record to the database Table
-                    db.InsertDeleteQuery(addQueryForMedicalMatrix);
-
-                    //Show message
-                    MessageBox.Show("Record was added to the table");
-
-
-                    var myParent = (MatrixForm)Owner;
-
-                    myParent.LoadTable();
-
-                    //Cleare form
-                    CleanForm();
+                AddNewRecord(addQueryForMedicalMatrix);
 
                     //clean dates
                     DateEFileRecieved = " ";
                     DateHardCopyRecieved = " ";
-                }
+                
 
             }
         }

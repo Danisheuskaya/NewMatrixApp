@@ -28,7 +28,7 @@ namespace LOginForm
         string caseNo = "";
         string name = "";
         string venue = "";
-        int team = 0;
+        string team = "0";
         string dateServed = "";
         string initDisc = "";
         string attorney = "";
@@ -51,21 +51,15 @@ namespace LOginForm
             db = new DBConnection();
 
             //On load clear date
-            dateTimePicker1.CustomFormat = " ";
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            trialDateTimePicker.CustomFormat = " ";
+            trialDateTimePicker.Format = DateTimePickerFormat.Custom;
+
+            generateTeamOptions(teamComboBox, teamQ, keyV, valueV);
         }
 
-        #region Load Functions
+        #region Event Handelers
 
-        /// <summary>
-        /// On form load, generate oprions for the team
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CaseTruckingRecord_Load(object sender, System.EventArgs e)
-        {
-            generateTeamOptions(comboBox1, teamQ,  keyV, valueV);
-        }
+       
 
         /// <summary>
         /// When user tryes to select date, return to the standart format
@@ -74,9 +68,22 @@ namespace LOginForm
         /// <param name="e"></param>
         private void dateTimePicker1_ValueChanged(object sender, System.EventArgs e)
         {
-            dateTimePicker1.CustomFormat = "dd/MM/yyyy";
+            //Get value for the SQL
+            trialDate = trialDateTimePicker.Value.ToString("yyyy-MM-dd");
+
+            //Show user this format
+            trialDateTimePicker.CustomFormat = "dd/MM/yyyy";
         }
 
+        /// <summary>
+        /// This function will assign a new team value when usere selects new drop box index
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            team = teamComboBox.SelectedIndex.ToString();
+        }
 
         #endregion
 
@@ -101,26 +108,10 @@ namespace LOginForm
                 q += "( '" + caseNo + "', '" + name + "', '" + venue + "' ,'" + team + "' ,'" + dateServed + "' ,'" + initDisc + "' ,'" + attorney + "' ,'" + trialDate + "' ,'" + attLvl + "' ,'" + demand + "' ,'" + offer + "' ,'" + issue + "' ,'" + medRewiew + "')";
 
 
-                //Create window  dialog for conformation
-                DialogResult dialog = MessageBox.Show("Are you sure to add a new record?", "Add", MessageBoxButtons.YesNo);
+                AddNewRecord(q);
 
-                //If yes, return to the login page
-                if (dialog == DialogResult.Yes)
-                {
-                    //Inserting record
-                    db.InsertDeleteQuery(q);
-
-                    //Show message
-                    MessageBox.Show("Record was added to the table");
-
-
-                    var myParent = (MatrixForm)Owner;
-
-                    myParent.LoadTable();
-
-                    //Cleare form
-                    CleanForm();
-                }
+                //Clean the date
+                trialDate = "";
 
             }
         }
@@ -130,11 +121,11 @@ namespace LOginForm
              caseNo = caseNumber.Text;
              name = caseName.Text;
              venue = VenueText.Text;
-             team = Convert.ToInt32(comboBox1.SelectedValue);
+            //Team is handeled by event Handeler
              dateServed = ComplaintServed.Text;
              initDisc = intDiscovery.Text;
              attorney = attorneyText.Text;
-             trialDate = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+             //Trial date is handeled by the event handeler
              attLvl = AttorneyLevel.Text;
              demand = DemandText.Text;
              offer = offerText.Text;
@@ -144,7 +135,7 @@ namespace LOginForm
 
         #endregion
 
-        #region clear button
+        #region Clear button
         /// <summary>
         /// Clear button
         /// </summary>
@@ -155,18 +146,10 @@ namespace LOginForm
             CleanForm();
         }
 
-        /// <summary>
-        /// This will prevent a bug when the form closed
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CaseTruckingRecord_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Hide();
-            Parent = null;
-            e.Cancel = true;
-        }
+        
 
         #endregion
+
+       
     }
 }

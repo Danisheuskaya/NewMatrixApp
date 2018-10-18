@@ -170,7 +170,7 @@
             this.Controls.Add(this.caseNumber);
             this.Name = "ClientListRecord";
             this.Text = "ClientListRecord";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClientListRecord_FormClosing);
+            //this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ClientListRecord_FormClosing);
             
             this.ResumeLayout(false);
             this.PerformLayout();

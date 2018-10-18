@@ -41,32 +41,11 @@ namespace LOginForm
                 string q = "INSERT INTO `settled_attorneys`( `Attorneys`, `Case_Name`, `Year_Closed`) " +
                             "VALUES ('"+Attorney+"','"+CaseName+"','"+YearClosed+"')";
 
-                //TEST
-                MessageBox.Show(q);
+                AddNewRecord(q);
 
-                //Create window  dialog for conformation
-                DialogResult dialog = MessageBox.Show("Are you sure you want to add a new record?", "Yes", MessageBoxButtons.YesNo);
-
-                //If yes, return to the login page
-                if (dialog == DialogResult.Yes)
-                {
-                    //Inserting record
-                    db.InsertDeleteQuery(q);
-
-                    //Show message
-                    MessageBox.Show("Record was added to the table");
-
-
-                    var myParent = (MatrixForm)Owner;
-
-                    myParent.LoadTable();
-
-                    //Cleare form
-                    CleanForm();
-
-                    //Make a comboBox year selected a current year
-                    closedYearComboBox.SelectedIndex = closedYearComboBox.Items.IndexOf(DateTime.Now.Year);
-                }
+               //Make a comboBox year selected a current year
+               closedYearComboBox.SelectedIndex = closedYearComboBox.Items.IndexOf(DateTime.Now.Year);
+                
 
             }
         }

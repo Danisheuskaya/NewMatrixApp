@@ -22,8 +22,11 @@ namespace LOginForm
         {
             db = new DBConnection();
             InitializeComponent();
-            ActiveCaseRecord_Load();
 
+            generateTeamOptions(teamIdComboHolder, query, keyV, valueV);
+
+            trialDateTimePicker.CustomFormat = " ";
+            trialDateTimePicker.Format = DateTimePickerFormat.Custom;
 
         }      
 
@@ -31,18 +34,11 @@ namespace LOginForm
         private string CaseNumber = "";
         private string CaseName = "";
         private string TrialDate = "";
-        private int TeamId = 0;
+        private string TeamId = "0";
         private string Note = "";
         #endregion
 
-        private void ActiveCaseRecord_Load()
-        {
-            generateTeamOptions(comboBox1, query, keyV, valueV);
-
-            dateTimePicker1.CustomFormat = " ";
-
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
-        }
+        
 
 
        
@@ -56,40 +52,24 @@ namespace LOginForm
         /// <param name="e"></param>
         private void button1_Click(object sender, EventArgs e)
         {
+            //get all the info
+            getFormValues();
             //check if the case number is unique
             if (CheckUniqueKeyField(caseNumber, warning, uniqueQ, dbKey))
             {
                 //get all the info
-                getFormValues();
+                //getFormValues();
 
                 //create query
                 string q = "INSERT INTO `active_case`(`Case_No`, `Case_Name`, `Trial_Date`, `Team_ID`, `Note`) VALUES ";
 
                 q += "( '" + CaseNumber + "', '" + CaseName + "', '" + TrialDate + "' ,'" + TeamId + "' ,'" + Note +"')";
 
-                //TEST
-                MessageBox.Show(q);
-                
-                //Create window  dialog for conformation
-                DialogResult dialog = MessageBox.Show("Are you sure to add a new record?", "Add", MessageBoxButtons.YesNo);
+                AddNewRecord(q);
 
-                //If yes, return to the login page
-                if (dialog == DialogResult.Yes)
-                {
-                    //Inserting record
-                    db.InsertDeleteQuery(q);
-
-                    //Show message
-                    MessageBox.Show("Record was added to the table");
-
-                   
-                    var myParent = (MatrixForm)Owner;
-
-                    myParent.LoadTable();
-
-                    //Cleare form
-                    CleanForm();
-                }                
+                //Clear Dates
+                TrialDate = "";
+                TeamId = "0";
                 
             }
 
@@ -106,17 +86,17 @@ namespace LOginForm
         /// </summary>
         private void getFormValues()
         {
-            //get case number
+            //Case Number has been collected earlyer
+
             CaseNumber = caseNumber.Text;
 
             //get Case Name value if there is one
             CaseName = caseName.Text;
 
-            //get Trial date if there is any
-            TrialDate = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+           //Trial Date Has been handeled in calendarValue change event
 
-            //get Team Id
-            TeamId = Convert.ToInt32(comboBox1.SelectedValue);
+            //Team Id Has been handeled
+            
 
             //get Note
             Note = note.Text;
@@ -138,7 +118,21 @@ namespace LOginForm
         /// <param name="e"></param>
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            dateTimePicker1.CustomFormat = "dd/MM/yyyy";
+            //Get calendar value in SQL format
+            TrialDate = trialDateTimePicker.Value.ToString("yyyy-MM-dd");
+
+            //Show user selected value in this format
+            trialDateTimePicker.CustomFormat = "dd/MM/yyyy";
+        }
+
+        /// <summary>
+        /// This Method reasigns the selected Team Id
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            TeamId = teamIdComboHolder.SelectedIndex.ToString();
         }
 
         #endregion
@@ -157,17 +151,9 @@ namespace LOginForm
         #endregion
 
 
-        /// <summary>
-        /// This will prevent an error on load of more that one Record
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
+       
 
-        private void ActiveCaseRecord_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Hide();
-            Parent = null;
-            e.Cancel = true;
-        }
+
+        
     }
 }

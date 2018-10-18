@@ -176,6 +176,17 @@
                 <DropShadowEffect Color="#FF9D6060"/>
             </Button.Effect>
         </Button>
+        <Button Content="Motion Matrix" x:Name="MotionMatrixButton" Click="MotionMatrixButton_Click" HorizontalAlignment="Left" Margin="632,234,0,0" VerticalAlignment="Top" Width="134" Height="30" BorderBrush="{x:Null}" Foreground="White" FontFamily="Century Gothic">
+            <Button.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFB55C5E" Offset="0"/>
+                    <GradientStop Color="#FF3D2C2D" Offset="1"/>
+                </LinearGradientBrush>
+            </Button.Background>
+            <Button.Effect>
+                <DropShadowEffect Color="#FF9D6060"/>
+            </Button.Effect>
+        </Button>
 
     </Grid>
 </Window>

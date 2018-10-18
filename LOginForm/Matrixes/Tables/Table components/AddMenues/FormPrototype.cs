@@ -72,6 +72,8 @@ namespace LOginForm
 
             //hide the key
            combo.ValueMember = "Key";
+
+            combo.SelectedIndex = 0;
         }
 
 
@@ -134,6 +136,38 @@ namespace LOginForm
         #endregion
 
 
+        /// <summary>
+        /// This method adds new query to the Form's Data Table
+        /// </summary>
+        /// <param name="addQuery"></param>
+        public void AddNewRecord(string addQuery)
+        {
+            
+            //TEST
+            MessageBox.Show(addQuery);
+
+            //Create window  dialog for conformation
+            DialogResult dialog = MessageBox.Show("Are you sure you want to add a new record?", "Yes", MessageBoxButtons.YesNo);
+
+            //If yes, return to the login page
+            if (dialog == DialogResult.Yes)
+            {
+                //Inserting record
+                db.InsertDeleteQuery(addQuery);
+
+                //Show message
+                MessageBox.Show("Record was added to the table");
+
+
+                var myParent = (MatrixForm)Owner;
+
+                myParent.LoadTable();
+
+                //Cleare form
+                CleanForm();
+                
+            }
+        }
         
     }
 }

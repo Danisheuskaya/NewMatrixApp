@@ -63,39 +63,17 @@ namespace LOginForm
                 string addRecorQuery = "INSERT INTO `trial_dates`(`Start_Date`, `End_Date`, `Case_Name`, `Place`, `Tag`) " +
                                "VALUES ('" + StartDate + "','" + EndDate + "','" + CaseNoteInfo + "','" + Place + "','"+RecordType+"')";
 
-                //TEST
-                MessageBox.Show(addRecorQuery);
+                AddNewRecord(addRecorQuery);
 
 
-                //Create window  dialog for conformation
-                DialogResult dialog = MessageBox.Show("Are you sure to add a new record?", "Add", MessageBoxButtons.YesNo);
+               //Update calendar dates, for some reason there is a bug
+               StartDate = "";
+               EndDate = "";
 
-                //If yes, return to the login page
-                if (dialog == DialogResult.Yes)
-                {
-                    //Inserting record for MRC
-                    db.InsertDeleteQuery(addRecorQuery);
-
-                    //Show message
-                    MessageBox.Show("Record was added to the table");
-
-
-                    var myParent = (MatrixForm)Owner;
-
-                    myParent.LoadTable();
-
-                    //Cleare form
-                    CleanForm();
-
-
-                    //Update calendar dates, for some reason there is a bug
-                    StartDate = "";
-                    EndDate = "";
-
-                    //Uncheck radio buttons
-                    travelRadioButton.Checked = false;
-                    trialRadioButton.Checked = false;
-                }
+               //Uncheck radio buttons
+               travelRadioButton.Checked = false;
+               trialRadioButton.Checked = false;
+                
 
             }
         }

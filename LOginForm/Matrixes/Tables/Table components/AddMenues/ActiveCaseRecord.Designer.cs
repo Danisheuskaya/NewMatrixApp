@@ -36,8 +36,8 @@
             this.label4 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
             this.clearBtn = new System.Windows.Forms.Button();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
+            this.trialDateTimePicker = new System.Windows.Forms.DateTimePicker();
+            this.teamIdComboHolder = new System.Windows.Forms.ComboBox();
             this.label5 = new System.Windows.Forms.Label();
             this.note = new System.Windows.Forms.TextBox();
             this.warning = new System.Windows.Forms.Label();
@@ -114,21 +114,22 @@
             this.clearBtn.UseVisualStyleBackColor = true;
             this.clearBtn.Click += new System.EventHandler(this.clearBtn_Click);
             // 
-            // dateTimePicker1
+            // trialDateTimePicker
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(372, 199);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(307, 26);
-            this.dateTimePicker1.TabIndex = 10;
-            this.dateTimePicker1.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
+            this.trialDateTimePicker.Location = new System.Drawing.Point(372, 199);
+            this.trialDateTimePicker.Name = "trialDateTimePicker";
+            this.trialDateTimePicker.Size = new System.Drawing.Size(307, 26);
+            this.trialDateTimePicker.TabIndex = 10;
+            this.trialDateTimePicker.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
             // 
-            // comboBox1
+            // teamIdComboHolder
             // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Location = new System.Drawing.Point(372, 285);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(307, 28);
-            this.comboBox1.TabIndex = 11;
+            this.teamIdComboHolder.FormattingEnabled = true;
+            this.teamIdComboHolder.Location = new System.Drawing.Point(372, 285);
+            this.teamIdComboHolder.Name = "teamIdComboHolder";
+            this.teamIdComboHolder.Size = new System.Drawing.Size(307, 28);
+            this.teamIdComboHolder.TabIndex = 11;
+            this.teamIdComboHolder.SelectedIndexChanged += new System.EventHandler(this.comboBox1_SelectedIndexChanged);
             // 
             // label5
             // 
@@ -176,8 +177,8 @@
             this.Controls.Add(this.warning);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.note);
-            this.Controls.Add(this.comboBox1);
-            this.Controls.Add(this.dateTimePicker1);
+            this.Controls.Add(this.teamIdComboHolder);
+            this.Controls.Add(this.trialDateTimePicker);
             this.Controls.Add(this.clearBtn);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label4);
@@ -188,7 +189,7 @@
             this.Controls.Add(this.caseNumber);
             this.Name = "ActiveCaseRecord";
             this.Text = "ActiveCaseRecord";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ActiveCaseRecord_FormClosing);
+          
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -204,8 +205,8 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button clearBtn;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.ComboBox comboBox1;
+        private System.Windows.Forms.DateTimePicker trialDateTimePicker;
+        private System.Windows.Forms.ComboBox teamIdComboHolder;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox note;
         private System.Windows.Forms.Label warning;

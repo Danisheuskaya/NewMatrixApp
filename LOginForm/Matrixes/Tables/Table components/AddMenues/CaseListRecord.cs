@@ -28,8 +28,8 @@ namespace LOginForm
         {
             InitializeComponent();
             db = new DBConnection();
-            dateTimePicker1.CustomFormat = " ";
-            dateTimePicker1.Format = DateTimePickerFormat.Custom;
+            dateFiledTimePicker.CustomFormat = " ";
+            dateFiledTimePicker.Format = DateTimePickerFormat.Custom;
         }
 
 
@@ -52,27 +52,10 @@ namespace LOginForm
 
                 q += "( '" + caseNo + "', '" + name + "', '" + dateFiled + "' ,'" + dateServed + "' ,'" + DOD + "')";
 
+                AddNewRecord(q);
 
-                //Create window  dialog for conformation
-                DialogResult dialog = System.Windows.Forms.MessageBox.Show("Are you sure to add a new record?", "Add", MessageBoxButtons.YesNo);
-
-                //If yes, return to the login page
-                if (dialog == System.Windows.Forms.DialogResult.Yes)
-                {
-                    //Inserting record
-                    db.InsertDeleteQuery(q);
-
-                    //Show message
-                    MessageBox.Show("Record was added to the table");
-
-
-                    var myParent = (MatrixForm)this.Owner;
-
-                    myParent.LoadTable();
-
-                    //Cleare form
-                    CleanForm();
-                }
+                //Clear date:
+                dateFiled = "";
 
             }
         }
@@ -82,7 +65,7 @@ namespace LOginForm
         {
             caseNo = caseNumber.Text;
             name = caseName.Text;
-            dateFiled = dateTimePicker1.Value.ToString("yyyy-MM-dd");
+            //dateFiled  has been handeled in datePicker
             dateServed = ComplaintServed.Text;
             DOD = dateOfDeath.Text;
         }
@@ -113,19 +96,13 @@ namespace LOginForm
         /// <param name="e"></param>
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            dateTimePicker1.CustomFormat = "dd/MM/yyyy";
+            //Get walue in sql format 
+            dateFiled = dateFiledTimePicker.Value.ToString("yyyy-MM-dd");
+
+            //Show user this format
+            dateFiledTimePicker.CustomFormat = "dd/MM/yyyy";
         }
 
-        /// <summary>
-        /// This will prevent an error on load of one or more Records
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void CaseListRecord_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Hide();
-            Parent = null;
-            e.Cancel = true;
-        }
+       
     }
 }

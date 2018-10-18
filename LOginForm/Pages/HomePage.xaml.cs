@@ -290,5 +290,19 @@ namespace LOginForm.Pages
             //Open Form with Active Case Data
             OpenForm(tc);
         }
+
+        /// <summary>
+        /// This button will open a page with Motion Matrix
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MotionMatrixButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Motion Matrix record object
+            TableCore tc = new MotionMatrixObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
     }
 }
