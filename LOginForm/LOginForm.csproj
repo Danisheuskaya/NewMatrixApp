@@ -118,6 +118,12 @@
     <Compile Include="Matrixes\DisplayPageContainer\MatrixForm.Designer.cs">
       <DependentUpon>MatrixForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Matrixes\Tables\Table components\AddMenues\DiscoveryMatrixRecord.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Matrixes\Tables\Table components\AddMenues\DiscoveryMatrixRecord.Designer.cs">
+      <DependentUpon>DiscoveryMatrixRecord.cs</DependentUpon>
+    </Compile>
     <Compile Include="Matrixes\Tables\Table components\AddMenues\MedicalMatrixRecord.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -247,6 +253,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Matrixes\Tables\Table components\AddMenues\CourtListRecord.resx">
       <DependentUpon>CourtListRecord.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Matrixes\Tables\Table components\AddMenues\DiscoveryMatrixRecord.resx">
+      <DependentUpon>DiscoveryMatrixRecord.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Matrixes\Tables\Table components\AddMenues\MedicalMatrixRecord.resx">
       <DependentUpon>MedicalMatrixRecord.cs</DependentUpon>

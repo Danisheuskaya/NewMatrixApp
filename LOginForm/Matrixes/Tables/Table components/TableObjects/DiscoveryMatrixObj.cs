@@ -31,7 +31,7 @@ namespace LOginForm
             DeliteQuery = "DELETE FROM `settled_attorneys` WHERE ID = ";
 
             //Add Controle Form
-            MyRecord = new SettelesdAttorneys();
+            MyRecord = new DiscoveryMatrixRecord();
         }
 
         #region Overrides

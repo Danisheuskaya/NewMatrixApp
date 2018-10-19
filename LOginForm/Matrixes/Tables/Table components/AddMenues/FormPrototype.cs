@@ -42,6 +42,10 @@ namespace LOginForm
         #region Load helpers
         /// <summary>
         /// This function adds the team options as the comboBox menue
+        /// comboBox is reference to the form UI
+        /// query is query for the team 
+        /// KeyValue is field that would be collected from comboBox
+        /// String Value is string that will be displayed to user
         /// </summary>
         public void generateTeamOptions(ComboBox combo, string query, string key, string value)
         {
