@@ -1,5 +1,7 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -10,6 +12,7 @@ namespace LOginForm
 {
     class TrialDatesObj : TableCore
     {
+        DBConnection db = new DBConnection();
         public TrialDatesObj()
         {
             TableName = "Trial Dates";
@@ -18,7 +21,7 @@ namespace LOginForm
             DbTable = "trial_dates";
 
             //key field
-            keyField = "Case_Name";
+            keyField = "Record_ID";
 
             //key field index
             KeyFieldIndex = 0;
@@ -42,7 +45,9 @@ namespace LOginForm
 
         #region Override Function
 
-        
+
+
+       
 
 
         /// <summary>
@@ -55,6 +60,50 @@ namespace LOginForm
 
             dg.Columns[5].Visible = false;
             dg.Columns[0].Visible = false;
+
+            DataTable dt = (DataTable)dg.DataSource;
+           
+        }
+
+
+        public override bool ButtonInsideTableHandler(DataGridView dg, DataGridViewCellEventArgs e)
+        {
+            //Get the index of the column, and if it is Dates (column 1, and 2)
+            //Show prompt to collect user's input
+
+            if(e.ColumnIndex == 1 || e.ColumnIndex == 2)
+            {
+                //Get new Value coordinates
+                int column = e.ColumnIndex;
+                int row = e.RowIndex;
+
+                //A holder for user's input
+                string newValue = "";
+
+                //Get the value from the tabel
+                string defaultValue = dg.Rows[row].Cells[column].Value.ToString();
+
+                //Trim the time stamp off
+                defaultValue = defaultValue.Split(' ')[0];
+
+                //Run checks, and if input is correct - convert to date
+               newValue = UserDateInputHandeler(newValue, defaultValue);
+
+                //if input is correct, show it in the table and update query
+                if (!string.IsNullOrEmpty(newValue))
+                {
+                  
+                    //Update string for this record
+                    UpdateStringConstructor(e.ColumnIndex, newValue, dg.Rows[row].Cells[KeyFieldIndex].Value.ToString());
+
+                    //Show value in the table:                   
+                    dg.Rows[row].Cells[column].Value = newValue;
+
+                    return true;
+                }
+            }
+
+            return false;
         }
 
         /// <summary>

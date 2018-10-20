@@ -118,37 +118,54 @@ namespace LOginForm
             UpdateQuery = querey;
         }
 
+        #endregion
 
-        public string ConvertToDateFormat(string date)
+        /*****************************************************************************
+         * 
+         * This functios handel user input that is done through the DataGridView Table
+         * And Dates related. This methods called from the ButtonInsideCell();
+         * 
+         * **************************************************************************/
+        #region Date Formating Handelers
+        
+        public string UserDateInputHandeler(string newValue, string defaultValue)
         {
-            //Check if string is a date
-            if (CheckDate(date))
+            //User's input will be stored in UserAnsver if they press "OK"
+            string UserAnswer = Microsoft.VisualBasic.Interaction.InputBox("Please, enter the date ", "Date", defaultValue);
+
+            if (!string.IsNullOrEmpty(UserAnswer))
             {
+                //If we in here, user has entered a new date, so now we check if it is valid value:
 
-                Console.WriteLine("******************** I Am HERE *********************");
-                //convert date to the DateTime type
-                DateTime dateValue = Convert.ToDateTime(date);
+                //This method discribed in TabelCore Class
+                UserAnswer = ConvertToDateFormat(UserAnswer);
 
-                string formatForMySql = dateValue.ToString("yyyy-MM-dd");
+                //Test
+                MessageBox.Show("New User Ansver : " + UserAnswer);
 
-                date = formatForMySql;
+                //If user entered the right value:
+                if (!string.IsNullOrEmpty(UserAnswer))
+                {
+                    //Override update query
+                    newValue = UserAnswer;                    
 
-                return date;
+                }
             }
+            //User submited an empty stringm so assign flag to the new Value
             else
             {
-                Console.WriteLine("I Am HERE");
-                return "0000-00-00";
+                MessageBox.Show("Cancel ?");
             }
+
+            return newValue;    
         }
 
 
-
-        #endregion
-
-
-        #region Helpers
-
+        /// <summary>
+        /// This method checks if the string is a date
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
         public bool CheckDate(String date)
 
         {
@@ -161,6 +178,40 @@ namespace LOginForm
             return false;
 
         }
+
+        /// <summary>
+        /// This method converts string into date format
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public string ConvertToDateFormat(string date)
+        {
+            //Check if string is a date
+            if (CheckDate(date))
+            {
+                               
+                //convert date to the DateTime type
+                DateTime dateValue = Convert.ToDateTime(date);
+
+                string formatForMySql = dateValue.ToString("yyyy-MM-dd");
+
+                return formatForMySql;   
+            }
+            else
+            {
+                MessageBox.Show("Please, enter the date im format : mm/dd/yyyy");
+                return "0000-00-00";
+            }
+        }
+
+
+
+        #endregion
+
+
+        #region Helpers
+
+        
 
 
 
