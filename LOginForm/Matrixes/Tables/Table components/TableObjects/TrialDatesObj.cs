@@ -73,34 +73,8 @@ namespace LOginForm
 
             if(e.ColumnIndex == 1 || e.ColumnIndex == 2)
             {
-                //Get new Value coordinates
-                int column = e.ColumnIndex;
-                int row = e.RowIndex;
-
-                //A holder for user's input
-                string newValue = "";
-
-                //Get the value from the tabel
-                string defaultValue = dg.Rows[row].Cells[column].Value.ToString();
-
-                //Trim the time stamp off
-                defaultValue = defaultValue.Split(' ')[0];
-
-                //Run checks, and if input is correct - convert to date
-               newValue = UserDateInputHandeler(newValue, defaultValue);
-
-                //if input is correct, show it in the table and update query
-                if (!string.IsNullOrEmpty(newValue))
-                {
-                  
-                    //Update string for this record
-                    UpdateStringConstructor(e.ColumnIndex, newValue, dg.Rows[row].Cells[KeyFieldIndex].Value.ToString());
-
-                    //Show value in the table:                   
-                    dg.Rows[row].Cells[column].Value = newValue;
-
-                    return true;
-                }
+                UserDateInputThrougtTableHaneler(dg, e);
+                return true;
             }
 
             return false;

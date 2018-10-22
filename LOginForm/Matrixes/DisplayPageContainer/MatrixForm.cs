@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Diagnostics;
-using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
@@ -56,7 +54,7 @@ namespace LOginForm
 
             //Adding special controls if there any
             //such as dropdown options, check marks, buttons...
-            tc.AddControls(dataGridView1, controlWasAdded);
+            //tc.AddControls(dataGridView1, controlWasAdded);
 
             //Eddit flag, in order to prevent multiple controll additing
             controlWasAdded = true;
@@ -114,6 +112,10 @@ namespace LOginForm
             
             //Blocking the key value column from being modefyed
             blockKeyColumn();
+
+            //Adding special controls if there any
+            //such as dropdown options, check marks, buttons...
+            tc.AddControls(dataGridView1, controlWasAdded);
         }
 
         
@@ -336,6 +338,7 @@ namespace LOginForm
         private void dataGridView1_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)
         {
             tc.ColorTable(dataGridView1);
+            return;
         }
 
 

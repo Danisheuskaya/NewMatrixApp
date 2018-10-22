@@ -71,6 +71,8 @@ namespace LOginForm
 
         public Form MyRecord { get; set;}
 
+        public string DateFromTheFormHolder { get; set; }
+
         #endregion       
 
 
@@ -127,37 +129,63 @@ namespace LOginForm
          * 
          * **************************************************************************/
         #region Date Formating Handelers
-        
-        public string UserDateInputHandeler(string newValue, string defaultValue)
+
+
+        public void UserDateInputThrougtTableHaneler(DataGridView dg, DataGridViewCellEventArgs e)
         {
-            //User's input will be stored in UserAnsver if they press "OK"
-            string UserAnswer = Microsoft.VisualBasic.Interaction.InputBox("Please, enter the date ", "Date", defaultValue);
+            //Get the index of the column, and if it is Dates (column 1, and 2)
+            //Show prompt to collect user's input
 
-            if (!string.IsNullOrEmpty(UserAnswer))
+            
+                //Get new Value coordinates
+                int column = e.ColumnIndex;
+                int row = e.RowIndex;
+
+                //A holder for user's input
+                string newValue = "";
+
+                //Get the value from the tabel
+                string defaultValue = dg.Rows[row].Cells[column].Value.ToString();
+
+                //Trim the time stamp off
+                defaultValue = defaultValue.Split(' ')[0];
+
+                //Run checks, and if input is correct => convert to date
+                newValue = UserDateInputHandeler();
+
+            //if input is correct, show it in the table and update query
+            if (!string.IsNullOrEmpty(newValue))
             {
-                //If we in here, user has entered a new date, so now we check if it is valid value:
 
-                //This method discribed in TabelCore Class
-                UserAnswer = ConvertToDateFormat(UserAnswer);
+                //Update string for this record
+                UpdateStringConstructor(e.ColumnIndex, newValue, dg.Rows[row].Cells[KeyFieldIndex].Value.ToString());
 
-                //Test
-                MessageBox.Show("New User Ansver : " + UserAnswer);
-
-                //If user entered the right value:
-                if (!string.IsNullOrEmpty(UserAnswer))
-                {
-                    //Override update query
-                    newValue = UserAnswer;                    
-
-                }
-            }
-            //User submited an empty stringm so assign flag to the new Value
-            else
-            {
-                MessageBox.Show("Cancel ?");
+                //Show value in the table:                   
+                dg.Rows[row].Cells[column].Value = newValue;
+                
             }
 
-            return newValue;    
+          
+        }
+
+        /// <summary>
+        /// This method helps to retrive a new date from the user
+        /// through helping form
+        /// </summary>
+        /// <param name="newValue"></param>
+        /// <param name="defaultValue"></param>
+        /// <returns></returns>
+        public string UserDateInputHandeler()
+        {
+            DateFromTheFormHolder = "";
+            //Open form for user to enter new date
+            DateConverterForm dateForm = new DateConverterForm(this);
+
+            dateForm.ShowDialog();
+
+            MessageBox.Show("User input after form closed is : " + DateFromTheFormHolder);
+
+            return DateFromTheFormHolder;
         }
 
 
@@ -199,8 +227,8 @@ namespace LOginForm
             }
             else
             {
-                MessageBox.Show("Please, enter the date im format : mm/dd/yyyy");
-                return "0000-00-00";
+                MessageBox.Show("Please, enter the date in format : mm/dd/yyyy");
+                return " ";
             }
         }
 
