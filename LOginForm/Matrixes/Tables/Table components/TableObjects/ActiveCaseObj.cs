@@ -124,11 +124,16 @@ namespace LOginForm
         /// <summary>
         /// This method will mark method as setteled and add flag  
         /// that will mark if record is finished
+        /// Also, this method will Handel Date inputs from the user in Column 3
         /// </summary>
         /// <param name="dg"></param>
         public override bool ButtonInsideTableHandler(DataGridView dg, DataGridViewCellEventArgs e)
         {
             
+            /************************
+             * Part to handel Button
+             * **********************/
+
             //Check if clicked cell is a button
             if(e.ColumnIndex == 0)
             {
@@ -148,6 +153,21 @@ namespace LOginForm
 
                 UpdateQuery = "UPDATE `active_case` SET `Satteled` = '1', `Flag_Finished` = '"+isFinished+"' WHERE `active_case`.`Case_No` = '"+keyValue+"';";
 
+                return true;
+            }
+
+            /************************
+             *   Part to handel date
+             * **********************/
+            
+            //Get the index of the column, and if it is Dates (column 3)
+            //Show prompt to collect user's input
+
+            if (e.ColumnIndex == 3)
+            {
+                //Get User's Input. Method described in TableCore
+                UserDateInputThrougtTableHaneler(dg, e);
+                //Since it was collected, return true
                 return true;
             }
 

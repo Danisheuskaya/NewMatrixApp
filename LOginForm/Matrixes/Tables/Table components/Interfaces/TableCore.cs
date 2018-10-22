@@ -144,12 +144,6 @@ namespace LOginForm
                 //A holder for user's input
                 string newValue = "";
 
-                //Get the value from the tabel
-                string defaultValue = dg.Rows[row].Cells[column].Value.ToString();
-
-                //Trim the time stamp off
-                defaultValue = defaultValue.Split(' ')[0];
-
                 //Run checks, and if input is correct => convert to date
                 newValue = UserDateInputHandeler();
 

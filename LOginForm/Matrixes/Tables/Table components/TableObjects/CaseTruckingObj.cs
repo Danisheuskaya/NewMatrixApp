@@ -46,7 +46,30 @@ namespace LOginForm
             }
             dg.Columns.Insert(13, col_chkbox);
         
-    }
+        }
+
+        /// <summary>
+        /// This method will help to collect User Input that is dates related
+        /// </summary>
+        /// <param name="dg"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public override bool ButtonInsideTableHandler(DataGridView dg, DataGridViewCellEventArgs e)
+        {
+            //Get the index of the column, and if it is Dates (column 8)
+            //Show prompt to collect user's input
+
+            if (e.ColumnIndex == 8)
+            {
+                //Get User's Input. Method described in TableCore
+                UserDateInputThrougtTableHaneler(dg, e);
+                //Since it was collected, return true
+                return true;
+            }
+
+            //No user's input was collected => return false
+            return false;
+        }
 
     }
 }

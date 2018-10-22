@@ -36,51 +36,36 @@ namespace LOginForm
             MyRecord = new CaseListRecord();
         }
 
+        #region Override
+
         /// <summary>
-        /// This method coverts string value of the date into the Date type for MySQL
+        /// This method will help to collect User Input that is dates related
         /// </summary>
-        /// <param name="index"></param>
-        /// <param name="newValue"></param>
-        /// <param name="key"></param>
-        public override void UpdateStringConstructor(int index, string newValue, string key)
+        /// <param name="dg"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public override bool ButtonInsideTableHandler(DataGridView dg, DataGridViewCellEventArgs e)
         {
+            //Get the index of the column, and if it is Dates (column 2)
+            //Show prompt to collect user's input
 
-            
-
-
-            //convert to the DateTime value if index = 2
-            /*
-            if (index == 2)
-            {              
-
-                if (CheckDate(newValue))
-                {
-                    newValue = ConvertToDateFormat(newValue);
-                }
-                else
-                {
-                    newValue = "0000-00-00";
-                }
-            }*/ 
-
-            if(index == 2)
+            if (e.ColumnIndex == 2 )
             {
-                newValue = Convert.ToDateTime(newValue).ToString("yyyy-mm-dd");
+                //Get User's Input. Method described in TableCore
+                UserDateInputThrougtTableHaneler(dg, e);
+                //Since it was collected, return true
+                return true;
             }
 
-
-            //create update string
-            string querey = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ";
-
-
-            //update UpdateQuery
-            UpdateQuery = querey;
+            //No user's input was collected => return false
+            return false;
         }
 
-       
+        #endregion
+
 
 
     }
 
-    
+
 }
