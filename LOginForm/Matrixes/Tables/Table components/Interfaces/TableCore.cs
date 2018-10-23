@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MySql.Data.MySqlClient;
+using System;
 using System.Data;
 using System.Globalization;
 using System.Windows.Forms;
@@ -73,6 +74,8 @@ namespace LOginForm
 
         public string DateFromTheFormHolder { get; set; }
 
+        public string TeamIndexFromTheFormHolder { get; set; }
+
         #endregion       
 
 
@@ -125,27 +128,46 @@ namespace LOginForm
         /*****************************************************************************
          * 
          * This functios handel user input that is done through the DataGridView Table
-         * And Dates related. This methods called from the ButtonInsideCell();
+         * And Dates or Team member related. This methods called from the ButtonInsideCell();
          * 
          * **************************************************************************/
         #region Date Formating Handelers
 
+     
 
-        public void UserDateInputThrougtTableHaneler(DataGridView dg, DataGridViewCellEventArgs e)
+
+
+        /// <summary>
+        /// This method will help to gater User's input through the specific forms
+        /// </summary>
+        /// <param name="dg">dataGridView of the current table</param>
+        /// <param name="e"></param>
+        /// <param name="HelpingFunction">if index == 1, it is a date; if index == 2 it is a teamMember</param>
+        public void DateOrTeamSelectionThroughTheTableHandelr(DataGridView dg, DataGridViewCellEventArgs e, int functionIndex)
         {
-            //Get the index of the column, and if it is Dates (column 1, and 2)
-            //Show prompt to collect user's input
+            //Get the index of the cell
+            //Get new Value coordinates
+            int column = e.ColumnIndex;
+            int row = e.RowIndex;
 
+            //Get an old Value for the Team Option case
+            string oldValue = dg.Rows[row].Cells[column].Value.ToString();
             
-                //Get new Value coordinates
-                int column = e.ColumnIndex;
-                int row = e.RowIndex;
+            //A holder for user's input
+            string newValue = "";
 
-                //A holder for user's input
-                string newValue = "";
+            //If index == 1, Open form to colect date, if index == 2
+            //Open form to get a teamMember index
 
-                //Run checks, and if input is correct => convert to date
+            if(functionIndex == 1)
+            {
                 newValue = UserDateInputHandeler();
+            }
+            else
+            {
+                newValue = UserTeamMemberInput(oldValue);
+            }
+            
 
             //if input is correct, show it in the table and update query
             if (!string.IsNullOrEmpty(newValue))
@@ -156,18 +178,29 @@ namespace LOginForm
 
                 //Show value in the table:                   
                 dg.Rows[row].Cells[column].Value = newValue;
-                
-            }
 
-          
+            }
+        }
+
+        public string UserTeamMemberInput(string OldValue)
+        {
+            //Clear holder for the TeamId
+            TeamIndexFromTheFormHolder = "";
+
+            //Open Form, so User can select new team:
+            TeamMembersDropBox teamDropBox = new TeamMembersDropBox(this, OldValue);
+
+            //Get input from the user
+            teamDropBox.ShowDialog();
+
+            return TeamIndexFromTheFormHolder;
+
         }
 
         /// <summary>
         /// This method helps to retrive a new date from the user
         /// through helping form
         /// </summary>
-        /// <param name="newValue"></param>
-        /// <param name="defaultValue"></param>
         /// <returns></returns>
         public string UserDateInputHandeler()
         {
@@ -175,10 +208,10 @@ namespace LOginForm
             //Open form for user to enter new date
             DateConverterForm dateForm = new DateConverterForm(this);
 
+            //Collect input from the user through the form
             dateForm.ShowDialog();
 
-            MessageBox.Show("User input after form closed is : " + DateFromTheFormHolder);
-
+            //return collected value
             return DateFromTheFormHolder;
         }
 
@@ -230,13 +263,46 @@ namespace LOginForm
 
         #endregion
 
+        /// <summary>
+        /// This method will add a checkBox column to the dataGridView Table
+        /// </summary>
+        /// <param name="dg">current tabel's dataGridView instance</param>
+        /// <param name="columnName">Name that will be displayed to the User</param>
+        /// <param name="SQLQuery">Query to get needed column</param>
+        /// <param name="fieldName">Name of the field from the database</param>
+        /// <param name="columnIndex">Index of the checkBox column in the DataTable</param>
+        #region Add Controls Functions
+        public void AddCheckBoxColumn(DataGridView dg, string columnName, string SQLQuery, string fieldName, int columnIndex)
+        {
+            //Get the instance of the dataTable
+            DataTable dt = (DataTable)dg.DataSource;
 
-        #region Helpers
+            //Add 2 columns
+            dt.Columns.Add(columnName, typeof(bool));            
 
-        
+            //Cololect result into the reader
+            MySqlDataReader reader = db.Reader(SQLQuery);
+
+            int i = 0;
+
+            //For each row, add value from the db to the new columns
+            while (reader.Read())
+            {
+                dt.Rows[i][columnIndex] = reader[fieldName];
+                i++;
+            }
+            //Close connection
+            db.CloseConnection();
+
+            //assign new, modefyed table to the dataGridView
+            dg.DataSource = dt;
+        }
 
 
+        #endregion
 
+
+        #region "Interface" functions
 
         /// <summary>
         /// This method is used to add comboBoxes and CheckBoxes to the existing dataGrid

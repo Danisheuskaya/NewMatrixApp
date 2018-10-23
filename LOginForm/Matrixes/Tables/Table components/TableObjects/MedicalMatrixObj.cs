@@ -68,14 +68,16 @@ namespace LOginForm
         public override void AddControls(DataGridView dg, bool flag)
         {
            
-            //Hide ID column
-            dg.Columns[0].Visible = false;
+            
 
             //Hide flag columns where 13 is printed and 14 is noteboo
             dg.Columns[13].Visible = false;
             dg.Columns[14].Visible = false;
 
-            AddCheckBoxColumn(dg);
+            AddNewColumns(dg);
+
+            //Hide ID column
+            dg.Columns[0].Visible = false;
 
         }
         #endregion
@@ -87,37 +89,17 @@ namespace LOginForm
         /// printed or if record is notebooked
         /// </summary>
         /// <param name="dg"></param>
-        private void AddCheckBoxColumn(DataGridView dg)
+        private void AddNewColumns(DataGridView dg)
         {
-            //Get the instance of the dataTable
-            DataTable dt = (DataTable)dg.DataSource;
+            //Query to get the "Printed" column
+            string q1 = "SELECT `Flag_printed` FROM `medical_matrix` ";
 
-            //Add 2 columns
-            dt.Columns.Add("Printed?", typeof(bool));
-            dt.Columns.Add("Notebooked?", typeof(bool));
+            //Query to get the "Notebooked" column
+            string q2 = "SELECT `Flag_notebooked` FROM `medical_matrix` ";
 
-            //String to get values of flags
-            string q = "SELECT `Flag_printed`, `Flag_notebooked` FROM `medical_matrix` ";
-
-            //Cololect result into the reader
-            MySqlDataReader reader = db.Reader(q);
-
-            int i = 0;    
-
-            //For each row, add value from the db to the new columns
-            while (reader.Read())
-            {
-                dt.Rows[i][15] = reader["Flag_printed"];
-                dt.Rows[i][16] = reader["Flag_notebooked"];
-                i++;
-            }
-            //Close connection
-            db.CloseConnection();
-
-            //assign new, modefyed table to the dataGridView
-            dg.DataSource = dt;
-
-            dg.Columns[0].Visible = false;
+            //This method will add CheckBox coulm. It is described in TableCore class
+            AddCheckBoxColumn(dg, "Printed?", q1, "Flag_printed", 15);
+            AddCheckBoxColumn(dg, "Notebooked?", q2, "Flag_notebooked", 16);
         }
 
         #endregion

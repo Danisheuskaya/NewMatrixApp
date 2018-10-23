@@ -62,7 +62,7 @@ namespace LOginForm
             if (e.ColumnIndex == 8)
             {
                 //Get User's Input. Method described in TableCore
-                UserDateInputThrougtTableHaneler(dg, e);
+                DateOrTeamSelectionThroughTheTableHandelr(dg, e, 1);
                 //Since it was collected, return true
                 return true;
             }

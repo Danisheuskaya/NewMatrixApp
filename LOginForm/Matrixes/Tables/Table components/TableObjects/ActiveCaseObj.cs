@@ -117,7 +117,7 @@ namespace LOginForm
 
             dg.Columns.Add(btnColumn);
 
-            dg.Columns[5].DisplayIndex = 5;
+            dg.Columns["buttonColumn"].DisplayIndex = 5;
         }
 
 
@@ -166,7 +166,22 @@ namespace LOginForm
             if (e.ColumnIndex == 3)
             {
                 //Get User's Input. Method described in TableCore
-                UserDateInputThrougtTableHaneler(dg, e);
+                DateOrTeamSelectionThroughTheTableHandelr(dg, e, 1);
+                //Since it was collected, return true
+                return true;
+            }
+
+            /************************
+            *   Part to handel Team Members
+            * **********************/
+
+            //Get the index of the column, and if it is Dates (column 3)
+            //Show prompt to collect user's input
+
+            if (e.ColumnIndex == 4)
+            {
+                //Get User's Input. Method described in TableCore
+                DateOrTeamSelectionThroughTheTableHandelr(dg, e, 2);
                 //Since it was collected, return true
                 return true;
             }
