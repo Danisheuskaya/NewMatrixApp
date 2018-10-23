@@ -29,7 +29,7 @@ namespace LOginForm
             DisplayQuery = "SELECT * FROM `trial_dates` ORDER by Start_Date";
 
             //Fields in DB
-            DbFields = new string[] { "Record_ID", "Start_Date", "End_Date", "Case_Name", "Place", "Tag" };
+            DbFields = new string[] { "Record_ID", "Start_Date", "End_Date", "Case_Name", "Place", "Tag", "Tag" };
 
             //Headers for the table columns
             ColumnHeaders = new string[] { "Record ID","Start Date", "End Date", "Case Name", "Place", "Tag"};
@@ -58,11 +58,33 @@ namespace LOginForm
         public override void AddControls(DataGridView dg, bool flag)
         {
 
-            dg.Columns[5].Visible = false;
-            dg.Columns[0].Visible = false;
+            //Add checkBox that will show if dates show "team member out of office"
+            AddCheckBoxColumn(dg, "Out of Office?", DisplayQuery, "Tag", 6);
+
+            //dg.Columns[5].Visible = false;
+            //dg.Columns[0].Visible = false;
 
             DataTable dt = (DataTable)dg.DataSource;
            
+        }
+
+        /// <summary>
+        /// This method Sets an Update query depending on the value user changed
+        /// if User selected a checkBox, UpdateStringForCheckBoxInput() will
+        /// convert value to the SQL format
+        /// </summary>
+        /// <param name="index">indecates column</param>
+        /// <param name="newValue">new User's input</param>
+        /// <param name="key">SQL key field for this record</param>
+        public override void UpdateStringConstructor(int index, string newValue, string key)
+        {
+            //Check if the column is a checkBox
+            if(index == 6)
+            {
+                //Override update string for the checkBox input value
+                UpdateStringForCheckBoxInput(index, newValue, key);
+            }
+
         }
 
         /// <summary>

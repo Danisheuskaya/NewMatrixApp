@@ -19,13 +19,14 @@ namespace LOginForm
             //key field index
             KeyFieldIndex = 0;
 
-            DisplayQuery = "SELECT c.Case_Number, c.Case_Name, c.Venue, t.Name, c.Date_Served, c.Initial_Discovery, c.Attorney, c.Trial_Date, c.Attorney_lvl, c.Demand, c.Offer, c.Issues, c.Medical_Rewiever FROM `case_trucking` c JOIN team t ON c.Team_ID = t.Team_ID";
+            //"SELECT c.Case_Number, c.Case_Name, c.Venue, t.Name, c.Date_Served, c.Initial_Discovery, c.Attorney, c.Trial_Date, c.Attorney_lvl, c.Demand, c.Offer, c.Issues, c.Medical_Rewiever FROM `case_trucking` c JOIN team t ON c.Team_ID = t.Team_ID"
+            DisplayQuery = "SELECT C.*, T.Name FROM `case_trucking` C JOIN team T on C.Team_ID = T.Team_ID ";
 
             //Fields in DB
-            DbFields = new string[] {"Case_Number", "Case_Name", "Venue", "Team_ID", "Date_Served", "Initial_Discovery", "Attorney", "Trial_Date", "Attorney_lvl", "Demand", "Offer", "Issues", "Medical_Rewiever", "Satteled" };
+            DbFields = new string[] {"Case_Number", "Case_Name", "Venue", "Team_ID", "Date_Served", "Initial_Discovery", "Attorney", "Trial_Date", "Attorney_lvl", "Demand", "Offer", "Issues", "Medical_Rewiever", "Satteled", "Team_ID", "Satteled" };
 
             //Headers for the table columns
-            ColumnHeaders = new string[] { "Case Number", "Case Name", "Venue", "Team", "Date Served", "Initial Discovery", "Attorney", "Trial Date", "Attorney Level", "Demand", "Offer", "Issues", "Medical Rewiever"};
+            ColumnHeaders = new string[] { "Case Number", "Case Name", "Venue", "Team ", "Date Served", "Initial Discovery", "Attorney", "Trial Date", "Attorney Level", "Demand", "Offer", "Issues", "Medical Rewiever", "Satteled?", "Team"};
 
             //Delete query
             DeliteQuery = "DELETE FROM `case_trucking` WHERE Case_Number = ";
@@ -36,16 +37,16 @@ namespace LOginForm
 
         public override void AddControls(DataGridView dg, bool flag)
         {
-             
-            // add checkboxes
-            DataGridViewCheckBoxColumn col_chkbox = new DataGridViewCheckBoxColumn();
-            {
-                col_chkbox.HeaderText = "Move to Satteled Case?";
-                col_chkbox.Name = "checked";
+            //Add check Box column that will show which case is satteled
+            AddCheckBoxColumn(dg, "Sateled ?", DisplayQuery, "Satteled", 15);
 
-            }
-            dg.Columns.Insert(13, col_chkbox);
-        
+            //Hide column that numericaly shows team index
+            dg.Columns[3].Visible = false;
+
+            //Move Names of the team to the 4th column
+            dg.Columns[14].DisplayIndex = 3;
+
+
         }
 
         /// <summary>
@@ -59,7 +60,11 @@ namespace LOginForm
             //Get the index of the column, and if it is Dates (column 8)
             //Show prompt to collect user's input
 
-            if (e.ColumnIndex == 8)
+            /*********************
+             * Handel date input:
+             * *******************/
+
+            if (e.ColumnIndex == 7)
             {
                 //Get User's Input. Method described in TableCore
                 DateOrTeamSelectionThroughTheTableHandelr(dg, e, 1);
@@ -67,8 +72,31 @@ namespace LOginForm
                 return true;
             }
 
+            /**********************
+             * Handel Team input
+             * *******************/
+            if (e.ColumnIndex == 14)
+            {
+                //Get User's Input. Method described in TableCore
+                DateOrTeamSelectionThroughTheTableHandelr(dg, e, 2);
+                //Since it was collected, return true
+                return true;
+            }
+
             //No user's input was collected => return false
             return false;
+        }
+
+        public override void UpdateStringConstructor(int index, string newValue, string key)
+        {
+           if(index == 15)
+            {
+                //This method will convert boolean input into SQL format
+                UpdateStringForCheckBoxInput(index, newValue, key);
+                
+            }
+
+
         }
 
     }

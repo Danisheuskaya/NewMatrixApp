@@ -107,6 +107,14 @@ namespace LOginForm
             return false;
         }
 
+        public override void UpdateStringConstructor(int index, string newValue, string key)
+        {
+            if(index == 8)
+            {
+                UpdateStringForCheckBoxInput(index, newValue, key);
+            }
+        }
+
         #endregion
     }
 }

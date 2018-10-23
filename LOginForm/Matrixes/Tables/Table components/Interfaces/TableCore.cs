@@ -114,7 +114,9 @@ namespace LOginForm
 
 
         public virtual void UpdateStringConstructor(int index, string newValue, string key)
-        {            
+        {
+
+            MessageBox.Show("Old UpdateString!");
             //create update string
             string   querey = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ";           
           
@@ -182,6 +184,12 @@ namespace LOginForm
             }
         }
 
+        /// <summary>
+        /// This method helps to collect User's input regarding
+        /// team members through the form.
+        /// </summary>
+        /// <param name="OldValue">String that shows current team member(s)</param>
+        /// <returns></returns>
         public string UserTeamMemberInput(string OldValue)
         {
             //Clear holder for the TeamId
@@ -196,6 +204,32 @@ namespace LOginForm
             return TeamIndexFromTheFormHolder;
 
         }
+
+        /// <summary>
+        /// This method converts boolean into SQL numeric format
+        /// </summary>
+        /// <param name="newValue"></param>
+        /// <returns></returns>
+        public void UpdateStringForCheckBoxInput(int index, string newValue, string key)
+        {
+            if (newValue.Equals("True"))
+            {
+                newValue = "" + 1;
+            }
+            else if(newValue.Equals("True"))
+            {
+                newValue = "" + 0;
+            }
+            
+            //create update string
+            string querey = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ";
+
+
+            //update UpdateQuery
+            UpdateQuery = querey;
+        }
+
+
 
         /// <summary>
         /// This method helps to retrive a new date from the user

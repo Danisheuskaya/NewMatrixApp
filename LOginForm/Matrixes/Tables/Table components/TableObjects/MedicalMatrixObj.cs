@@ -120,23 +120,9 @@ namespace LOginForm
             //Check if the index is 15 or 16
             if(index == 15 || index == 16)
             {
-                if (newValue.Equals("True"))
-                {
-                    newValue = "" + 1;
-                }
-                else
-                {
-                    newValue = "" + 0;
-                }
-            }
-
-            //Now construct a normal add query:
-            //create update string
-            string querey = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ";
-
-
-            //update UpdateQuery
-            UpdateQuery = querey;
+                //This method will convert boolean input into SQL format
+                UpdateStringForCheckBoxInput(index, newValue, key);                
+            }          
 
         }
 

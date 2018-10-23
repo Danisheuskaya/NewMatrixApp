@@ -87,15 +87,7 @@ namespace LOginForm
         public override void AddControls(DataGridView dg, bool controlWasAdded)
         {
 
-            if (!controlWasAdded)
-            {
-                AddButtonColumn(dg);
-                controlWasAdded = true;
-            }
-
-
-        }
-
+        }  
         /// <summary>
         /// This method Adds a button column in order to move
         /// Cases to the Archive
