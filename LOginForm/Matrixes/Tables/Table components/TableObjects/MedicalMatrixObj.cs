@@ -122,7 +122,10 @@ namespace LOginForm
             {
                 //This method will convert boolean input into SQL format
                 UpdateStringForCheckBoxInput(index, newValue, key);                
-            }          
+            }
+
+            // create update string
+            UpdateQuery = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ;";
 
         }
 

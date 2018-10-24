@@ -34,9 +34,6 @@ namespace LOginForm
 
             InitializeComponent();
 
-            //Show the id for this record
-            ShowIdOfTheRecord();
-
             //Fill the letter type options: 48(2 days) and 1158??(6 days)
             FillLetterTypeOptions();
 
@@ -54,29 +51,7 @@ namespace LOginForm
 
         #region Load Helpers
 
-        /// <summary>
-        /// This method will calculate the unique id of the pair, 
-        /// save the result in the casePairID,
-        /// and display the value in the form for user to know.
-        /// </summary>
-        private void ShowIdOfTheRecord()
-        {
-            //Get the value of the largest id in the table at the moment:
 
-            //run the query
-            MySqlDataReader reader = db.Reader("SELECT MAX(Case_Pair_ID) from medical_record");
-
-            //read the line
-            reader.Read();
-
-            //convert value into the integer and add one, to make value unique
-            casePairID = Convert.ToInt32(reader["MAX(Case_Pair_ID)"].ToString()) + 1;
-
-            db.CloseConnection();
-
-            //Display future ID in the form holder
-            caseIDHolder.Text = "" + casePairID;
-        }
 
 
         /// <summary>
@@ -164,9 +139,6 @@ namespace LOginForm
                                                 "VALUES ('" + casePairID + "', '" + caseName + "', '" + caseNumber + "', '" + facility + "', '" + address + "', '" + letterType + "', '" + dateRequested + "', '" + expirationDate + "', '" + dateRecieved + "', '" + notes + "', '');";
 
                 AddNewRecord(queryForMedicalRecord);
-
-                    //Update the ID
-                    ShowIdOfTheRecord();
 
                     //Update calendar dates, for some reason there is a bug
                     dateRecieved = "";

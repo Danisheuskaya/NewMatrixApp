@@ -75,11 +75,12 @@ namespace LOginForm
         public string DateFromTheFormHolder { get; set; }
 
         public string TeamIndexFromTheFormHolder { get; set; }
+        public string LetterTypeFromTheForm { get; set; }
 
         #endregion       
 
 
-        #region Functions
+        #region Query Related Functions
 
         public virtual DataTable FillTable()
         {
@@ -118,7 +119,7 @@ namespace LOginForm
 
             MessageBox.Show("Old UpdateString!");
             //create update string
-            string   querey = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ";           
+            string   querey = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ;";           
           
 
             //update UpdateQuery
@@ -134,10 +135,6 @@ namespace LOginForm
          * 
          * **************************************************************************/
         #region Date Formating Handelers
-
-     
-
-
 
         /// <summary>
         /// This method will help to gater User's input through the specific forms
@@ -165,11 +162,16 @@ namespace LOginForm
             {
                 newValue = UserDateInputHandeler();
             }
-            else
+            else if (functionIndex == 2)
             {
                 newValue = UserTeamMemberInput(oldValue);
             }
-            
+            //User is deling with MedicalRecord, which means Expiration date might need to change
+            else if (functionIndex == 3)
+            {
+                newValue = LetterTypeInput(oldValue);
+            }
+
 
             //if input is correct, show it in the table and update query
             if (!string.IsNullOrEmpty(newValue))
@@ -205,6 +207,8 @@ namespace LOginForm
 
         }
 
+      
+
         /// <summary>
         /// This method converts boolean into SQL numeric format
         /// </summary>
@@ -212,6 +216,7 @@ namespace LOginForm
         /// <returns></returns>
         public void UpdateStringForCheckBoxInput(int index, string newValue, string key)
         {
+            
             if (newValue.Equals("True"))
             {
                 newValue = "" + 1;
@@ -220,13 +225,10 @@ namespace LOginForm
             {
                 newValue = "" + 0;
             }
-            
+
             //create update string
-            string querey = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ";
-
-
-            //update UpdateQuery
-            UpdateQuery = querey;
+            UpdateQuery = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ;";
+                                  
         }
 
 
@@ -250,49 +252,22 @@ namespace LOginForm
         }
 
 
-        /// <summary>
-        /// This method checks if the string is a date
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public bool CheckDate(String date)
+        
+  
 
+        public string LetterTypeInput(string OldValue)
         {
-            DateTime dt;
-            if (DateTime.TryParseExact(date, "M/d/yyyy", null, DateTimeStyles.None, out dt) == true)
-            {
-                return true;
-            }
+            //Clear holder for the letter type
+            LetterTypeFromTheForm = "";
 
-            return false;
+            //Open Form, so User can select new team:
+            LetterTypeForm LetterForm = new LetterTypeForm(this, OldValue);
 
+            //Get input from the user
+            LetterForm.ShowDialog();
+
+            return LetterTypeFromTheForm;
         }
-
-        /// <summary>
-        /// This method converts string into date format
-        /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
-        public string ConvertToDateFormat(string date)
-        {
-            //Check if string is a date
-            if (CheckDate(date))
-            {
-                               
-                //convert date to the DateTime type
-                DateTime dateValue = Convert.ToDateTime(date);
-
-                string formatForMySql = dateValue.ToString("yyyy-MM-dd");
-
-                return formatForMySql;   
-            }
-            else
-            {
-                MessageBox.Show("Please, enter the date in format : mm/dd/yyyy");
-                return " ";
-            }
-        }
-
 
 
         #endregion

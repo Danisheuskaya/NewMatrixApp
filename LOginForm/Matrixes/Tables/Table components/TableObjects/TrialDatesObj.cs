@@ -61,8 +61,8 @@ namespace LOginForm
             //Add checkBox that will show if dates show "team member out of office"
             AddCheckBoxColumn(dg, "Out of Office?", DisplayQuery, "Tag", 6);
 
-            //dg.Columns[5].Visible = false;
-            //dg.Columns[0].Visible = false;
+            dg.Columns[5].Visible = false;
+            dg.Columns[0].Visible = false;
 
             DataTable dt = (DataTable)dg.DataSource;
            
@@ -84,6 +84,9 @@ namespace LOginForm
                 //Override update string for the checkBox input value
                 UpdateStringForCheckBoxInput(index, newValue, key);
             }
+
+            // create update string
+             UpdateQuery = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ;";
 
         }
 
@@ -124,9 +127,7 @@ namespace LOginForm
 
             foreach (DataGridViewRow row in dg.Rows)
             {
-                //For some reason, the last row of the table is empty, Hence we need to stop
-                if (row.Index == dg.RowCount - 1) { return; }
-
+               
                 //Get flag value
                 string flag = row.Cells[5].Value.ToString();
 

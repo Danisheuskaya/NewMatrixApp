@@ -141,15 +141,28 @@ namespace LOginForm
                 if (newValue.Equals("True")) { newValue = "" + 1; }
                 else { newValue = "" + 0; }
             }
-            
-            //create update string
-            string querey = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ";
 
-
-            //update UpdateQuery
-            UpdateQuery = querey;
+        
+            // create update string
+            UpdateQuery = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ;";
         }
 
+        /// <summary>
+        /// This method will handel the date input modefication through the DataGridView
+        /// </summary>
+        /// <param name="dg"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public override bool ButtonInsideTableHandler(DataGridView dg, DataGridViewCellEventArgs e)
+        {
+            if(e.ColumnIndex == 2)
+            {
+                DateOrTeamSelectionThroughTheTableHandelr(dg, e, 1);
+                return true;
+            }
+
+            return false;
+        }
         #endregion
     }
 }

@@ -199,6 +199,12 @@
     <Compile Include="Matrixes\Tables\Table components\HelperForms\DateConverterForm.Designer.cs">
       <DependentUpon>DateConverterForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Matrixes\Tables\Table components\HelperForms\LetterTypeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Matrixes\Tables\Table components\HelperForms\LetterTypeForm.Designer.cs">
+      <DependentUpon>LetterTypeForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Matrixes\Tables\Table components\HelperForms\TeamMembersDropBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -289,6 +295,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Matrixes\Tables\Table components\HelperForms\DateConverterForm.resx">
       <DependentUpon>DateConverterForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Matrixes\Tables\Table components\HelperForms\LetterTypeForm.resx">
+      <DependentUpon>LetterTypeForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Matrixes\Tables\Table components\HelperForms\TeamMembersDropBox.resx">
       <DependentUpon>TeamMembersDropBox.cs</DependentUpon>

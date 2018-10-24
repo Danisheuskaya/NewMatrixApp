@@ -113,6 +113,9 @@ namespace LOginForm
             {
                 UpdateStringForCheckBoxInput(index, newValue, key);
             }
+
+            // create update string
+            UpdateQuery = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ;";
         }
 
         #endregion
