@@ -84,10 +84,11 @@ namespace LOginForm
                 //Override update string for the checkBox input value
                 UpdateStringForCheckBoxInput(index, newValue, key);
             }
-
-            // create update string
-             UpdateQuery = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ;";
-
+            else
+            {
+                // create update string
+                UpdateQuery = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ;";
+            }
         }
 
         /// <summary>

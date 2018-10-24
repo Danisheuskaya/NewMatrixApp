@@ -71,8 +71,17 @@ namespace LOginForm
         /// <returns></returns>
         public override bool ButtonInsideTableHandler(DataGridView dg, DataGridViewCellEventArgs e)
         {
-            //Handel recuest time cells
-            if(e.ColumnIndex == 6)
+
+            //Handel Recieved date time cells
+            if (e.ColumnIndex == 8)
+            {
+                //Get User's Input. Method described in TableCore
+                DateOrTeamSelectionThroughTheTableHandelr(dg, e, 1);
+
+                return true;
+            }
+            //Handel request time cells
+            else if (e.ColumnIndex == 6)
             {
                 //Get User's Input. Method described in TableCore
                 DateOrTeamSelectionThroughTheTableHandelr(dg, e, 1);
@@ -85,7 +94,7 @@ namespace LOginForm
             }
 
             //Handel letter type cells
-            if (e.ColumnIndex == 5)
+            else if (e.ColumnIndex == 5)
             {
                 // Get User's Input. Method described in TableCore
                 DateOrTeamSelectionThroughTheTableHandelr(dg, e, 3);

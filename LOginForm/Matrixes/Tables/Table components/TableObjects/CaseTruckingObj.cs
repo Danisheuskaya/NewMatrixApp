@@ -1,5 +1,6 @@
 ﻿
 
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace LOginForm
@@ -20,10 +21,10 @@ namespace LOginForm
             KeyFieldIndex = 0;
 
             //"SELECT c.Case_Number, c.Case_Name, c.Venue, t.Name, c.Date_Served, c.Initial_Discovery, c.Attorney, c.Trial_Date, c.Attorney_lvl, c.Demand, c.Offer, c.Issues, c.Medical_Rewiever FROM `case_trucking` c JOIN team t ON c.Team_ID = t.Team_ID"
-            DisplayQuery = "SELECT C.*, T.Name FROM `case_trucking` C JOIN team T on C.Team_ID = T.Team_ID ";
+            DisplayQuery = "SELECT C.*, T.Name FROM `case_trucking` C JOIN team T on C.Team_ID = T.Team_ID ORDER By Archived  ";
 
             //Fields in DB
-            DbFields = new string[] {"Case_Number", "Case_Name", "Venue", "Team_ID", "Date_Served", "Initial_Discovery", "Attorney", "Trial_Date", "Attorney_lvl", "Demand", "Offer", "Issues", "Medical_Rewiever", "Satteled", "Team_ID", "Satteled" };
+            DbFields = new string[] {"Case_Number", "Case_Name", "Venue", "Team_ID", "Date_Served", "Initial_Discovery", "Attorney", "Trial_Date", "Attorney_lvl", "Demand", "Offer", "Issues", "Medical_Rewiever", "Archived", "Team_ID", "Archived" };
 
             //Headers for the table columns
             ColumnHeaders = new string[] { "Case Number", "Case Name", "Venue", "Team ", "Date Served", "Initial Discovery", "Attorney", "Trial Date", "Attorney Level", "Demand", "Offer", "Issues", "Medical Rewiever", "Satteled?", "Team"};
@@ -38,10 +39,13 @@ namespace LOginForm
         public override void AddControls(DataGridView dg, bool flag)
         {
             //Add check Box column that will show which case is satteled
-            AddCheckBoxColumn(dg, "Sateled ?", DisplayQuery, "Satteled", 15);
+            AddCheckBoxColumn(dg, "Mark as Settaled?", DisplayQuery, "Archived", 15);
 
             //Hide column that numericaly shows team index
             dg.Columns[3].Visible = false;
+
+            //Hide archived flagm index
+            dg.Columns[13].Visible = false;
 
             //Move Names of the team to the 4th column
             dg.Columns[14].DisplayIndex = 3;
@@ -87,6 +91,12 @@ namespace LOginForm
             return false;
         }
 
+        /// <summary>
+        /// This method handels the updateQuery within the table
+        /// </summary>
+        /// <param name="index"></param>
+        /// <param name="newValue"></param>
+        /// <param name="key"></param>
         public override void UpdateStringConstructor(int index, string newValue, string key)
         {
            if(index == 15)
@@ -95,9 +105,29 @@ namespace LOginForm
                 UpdateStringForCheckBoxInput(index, newValue, key);
                 
             }
-
-
+            else
+            {
+                //create update string
+                UpdateQuery = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ;";
+            }
         }
 
+        public override void ColorTable(DataGridView dg)
+        {
+            foreach (DataGridViewRow row in dg.Rows)
+            {
+                //Get flag:
+                string flag = row.Cells[13].Value.ToString();
+
+                if (flag.Equals("1"))
+                {
+                    row.DefaultCellStyle.BackColor = Color.DarkGray;
+                }
+                else
+                {
+                    row.DefaultCellStyle.BackColor = Color.White;
+                }
+            }
+        }
     }
 }
