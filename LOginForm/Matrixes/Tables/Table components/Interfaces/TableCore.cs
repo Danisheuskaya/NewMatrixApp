@@ -150,6 +150,7 @@ namespace LOginForm
             int row = e.RowIndex;
 
             //Get an old Value for the Team Option case
+
             string oldValue = dg.Rows[row].Cells[column].Value.ToString();
             
             //A holder for user's input
@@ -323,7 +324,6 @@ namespace LOginForm
         public virtual void ColorTable(DataGridView dg) { }
 
         public virtual bool ButtonInsideTableHandler(DataGridView dg, DataGridViewCellEventArgs e) { return false; }
-
 
         #endregion
 

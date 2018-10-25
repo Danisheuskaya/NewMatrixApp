@@ -4,6 +4,7 @@ using System.Data;
 using System.Linq;
 using System.Windows.Forms;
 using Microsoft.VisualBasic;
+using DGVPrinterHelper;
 
 
 namespace LOginForm
@@ -52,19 +53,28 @@ namespace LOginForm
             //Load the table
             LoadTable();
 
-            //Adding special controls if there any
-            //such as dropdown options, check marks, buttons...
-            //tc.AddControls(dataGridView1, controlWasAdded);
-
-            //Eddit flag, in order to prevent multiple controll additing
-            controlWasAdded = true;
-
             //Cleare a query holder
             updateQueryes = new List<string>();
 
             //Block buttons if user is not allowed to modefy/add new records
             BlockRestrictedButtons(restrictionLvl);
+
+            //Make table sortable:
+            //SortTable();
     }
+
+
+        /// <summary>
+        /// This method will make table sortable
+        /// </summary>
+        private void SortTable()
+        {
+
+            foreach (DataGridViewColumn column in dataGridView1.Columns)
+            {
+                column.SortMode = DataGridViewColumnSortMode.Automatic;
+            }
+        }
 
         #endregion
 
@@ -375,7 +385,21 @@ namespace LOginForm
         /// <param name="e"></param>
         private void button5_Click(object sender, EventArgs e)
         {
-            Interaction.InputBox("What is Defendant Name?", "Satteled Case", "Default Text");
+            DGVPrinter printer = new DGVPrinter();
+            printer.Title = "Here will be some dinamic title";//Header
+            printer.SubTitle = string.Format("Date: {0}", DateTime.Now.Date);
+            printer.SubTitleFormatFlags = System.Drawing.StringFormatFlags.LineLimit | System.Drawing.StringFormatFlags.NoClip;
+            printer.PageNumbers = true;
+            printer.PageNumberInHeader = false;
+            printer.PorportionalColumns = true;
+            printer.HeaderCellAlignment = System.Drawing.StringAlignment.Near;
+            printer.Footer = "Some Footer Titel";
+            printer.FooterSpacing = 15;
+            printer.printDocument.DefaultPageSettings.Landscape = true;
+            //printer.PrintDataGridView(dataGridView1);
+            printer.PrintPreviewDataGridView(dataGridView1);
+
+
         }
 
 
