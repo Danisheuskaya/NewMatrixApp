@@ -32,7 +32,7 @@ namespace LOginForm
             //Delete query
             DeliteQuery = "DELETE FROM `case_trucking` WHERE Case_Number = ";
 
-            TableGroupNumber = "6";
+            TableGroupNumber = "5";
 
             //Add Controle Form
             MyRecord = new CaseTruckingRecord();

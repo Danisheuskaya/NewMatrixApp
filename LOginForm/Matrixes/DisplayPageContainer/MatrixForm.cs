@@ -27,7 +27,7 @@ namespace LOginForm
         /// </summary>
         /// <param name="tableCore"> Type of the table object that was passed through the button</param>
         /// <param name="restrictionLvl">Restriction of the user, that was passed trough the information about logged in user</param>
-        public MatrixForm(TableCore tableCore, int restrictionLvl)
+        public MatrixForm(TableCore tableCore,  Person person)
         {
 
             InitializeComponent();
@@ -38,6 +38,8 @@ namespace LOginForm
             //Changethe name of table holder 
             tabelNameLabel.Text = tc.TableName;
 
+            CheckUserPemition(person);
+
             //Load the table
             LoadTable();
 
@@ -45,8 +47,14 @@ namespace LOginForm
             updateQueryes = new List<string>();
 
             //Block buttons if user is not allowed to modefy/add new records
-            BlockRestrictedButtons(restrictionLvl);
+            //BlockRestrictedButtons(person.AdminGroupList);
     }
+
+        private void CheckUserPemition(Person person)
+        {
+            var a = 2;
+        }
+
 
 
 

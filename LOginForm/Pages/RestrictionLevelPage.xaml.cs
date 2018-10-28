@@ -1,8 +1,11 @@
 ﻿using MySql.Data.MySqlClient;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Forms;
+
 namespace LOginForm.Pages
 {
     /// <summary>
@@ -18,7 +21,11 @@ namespace LOginForm.Pages
 
         string tableGroups = "0";
 
+        string newAdminGroups = "0";
+
         string oldGroups = "";
+
+        string oldAdminGroups = "";
         #endregion
 
         public RestrictionLevelPage()
@@ -26,6 +33,8 @@ namespace LOginForm.Pages
             InitializeComponent();
 
             LoadComboBox();
+
+            SetDefaultControls();
         }
 
         /// <summary>
@@ -42,7 +51,7 @@ namespace LOginForm.Pages
             MySqlDataReader reader = db.Reader(SelectAllUsers);
 
             //Add empty list
-            List<string> a = new List<string> { " ", " "};
+            List<string> a = new List<string> { " ", " ", " "};
             options.Add(a, "");
 
             //For each line in the table
@@ -56,6 +65,7 @@ namespace LOginForm.Pages
 
                 userKey.Add(reader["Login"].ToString());
                 userKey.Add(reader["tabel_groups"].ToString());
+                userKey.Add(reader["Admin_group_list"].ToString());
 
 
                 //Add team member's names as Value, and team_ID as the key
@@ -94,17 +104,125 @@ namespace LOginForm.Pages
                 //Get value of old groups permission
                 oldGroups = userInformation[1];
 
+                //Get value of Admin permissions
+                oldAdminGroups = userInformation[2];
+
                 ShowUsersGroups();
             }
             
         }
 
+       
         /// <summary>
         /// This method will show what groups User can Access NOW
         /// </summary>
         private void ShowUsersGroups()
-        {
+        {            
 
+            SetDefaultControls();
+
+
+            //Move get button groups list
+            List<string> groups = oldGroups.Split('_').OfType<string>().ToList();
+
+            //Get admin list
+            List<string> admin = oldAdminGroups.Split('_').OfType<string>().ToList();
+
+            //For some reson Controls do not exist
+            //Hence, hard code
+
+            if (groups.IndexOf("1") != -1)
+            {
+                group1CheckBox.IsChecked = true;
+                //Unlock radio ButtonGroup:
+                gridGroup1.IsEnabled = true;
+
+                //set radioButton value, showing if user is Admin or Viewer
+                if(admin.IndexOf("1") != -1)
+                {
+                    adminRadio1.IsChecked = true;
+                }
+                else
+                {
+                    viewerRadio1.IsChecked = true;
+                }
+            }           
+            if (groups.IndexOf("2") != -1)
+            {
+                group2CheckBox.IsChecked = true;
+                //Unlock radio ButtonGroup:
+                gridGroup2.IsEnabled = true;
+
+                //set radioButton value, showing if user is Admin or Viewer
+                if (admin.IndexOf("2") != -1)
+                {
+                    adminRadio2.IsChecked = true;
+                }
+                else
+                {
+                    viewerRadio2.IsChecked = true;
+                }
+            }
+            if (groups.IndexOf("3") != -1)
+            {
+                group3CheckBox.IsChecked = true;
+                //Unlock radio ButtonGroup:
+                gridGroup3.IsEnabled = true;
+
+                //set radioButton value, showing if user is Admin or Viewer
+                if (admin.IndexOf("3") != -1)
+                {
+                    adminRadio3.IsChecked = true;
+                }
+                else
+                {
+                    viewerRadio3.IsChecked = true;
+                }
+            }
+            if (groups.IndexOf("4") != -1)
+            {
+                group4CheckBox.IsChecked = true;
+                //Unlock radio ButtonGroup:
+                gridGroup4.IsEnabled = true;
+
+                //set radioButton value, showing if user is Admin or Viewer
+                if (admin.IndexOf("4") != -1)
+                {
+                    adminRadio4.IsChecked = true;
+                }
+                else
+                {
+                    viewerRadio4.IsChecked = true;
+                }
+            }
+            if (groups.IndexOf("5") != -1)
+            {
+                group5CheckBox.IsChecked = true;
+                //Unlock radio ButtonGroup:
+                gridGroup5.IsEnabled = true;
+
+                //set radioButton value, showing if user is Admin or Viewer
+                if (admin.IndexOf("5") != -1)
+                {
+                    adminRadio5.IsChecked = true;
+                }
+                else
+                {
+                    viewerRadio5.IsChecked = true;
+                }
+            }
+        }
+
+       
+
+  
+
+        /// <summary>
+        /// This method Unchecks all CheckBoxes
+        /// And blocks all radio buttons groups by default
+        /// </summary>
+        private void SetDefaultControls()
+        {
             //By default everything is unchecked
             group1CheckBox.IsChecked = false;
             group2CheckBox.IsChecked = false;
@@ -112,37 +230,29 @@ namespace LOginForm.Pages
             group4CheckBox.IsChecked = false;
             group5CheckBox.IsChecked = false;
 
+            //Block all ragioButton groups:
+            gridGroup1.IsEnabled = false;
+            gridGroup2.IsEnabled = false;
+            gridGroup3.IsEnabled = false;
+            gridGroup4.IsEnabled = false;
+            gridGroup5.IsEnabled = false;
 
-            //Move get old groups values
-            List<string> groups = oldGroups.Split('_').OfType<string>().ToList();
+            //Uncheck All radio buttons
+            adminRadio1.IsChecked = false;
+            adminRadio2.IsChecked = false;
+            adminRadio3.IsChecked = false;
+            adminRadio4.IsChecked = false;
+            adminRadio5.IsChecked = false;
 
             
-            //For some reson Controls do not exist
-            //Hence, hard code
-
-            if (groups.IndexOf("1") != -1)
-            {
-                group1CheckBox.IsChecked = true;
-            }           
-            if (groups.IndexOf("2") != -1)
-            {
-                group2CheckBox.IsChecked = true;
-            }
-            if (groups.IndexOf("3") != -1)
-            {
-                group3CheckBox.IsChecked = true;
-            }
-            if (groups.IndexOf("4") != -1)
-            {
-                group4CheckBox.IsChecked = true;
-            }
-            if (groups.IndexOf("5") != -1)
-            {
-                group5CheckBox.IsChecked = true;
-            }
+            viewerRadio1.IsChecked = false;
+            viewerRadio2.IsChecked = false;
+            viewerRadio3.IsChecked = false;
+            viewerRadio4.IsChecked = false;
+            viewerRadio5.IsChecked = false;
+          
         }
 
-      
 
         /// <summary>
         /// This method saves all the setting for the User
@@ -153,15 +263,15 @@ namespace LOginForm.Pages
         {
             ConstructGenerateGroupString();
 
-            string UpdateUsersTableGroups = "UPDATE `person` SET `tabel_groups` = '" + tableGroups + "' where `Login` = '" + Login + "'";
+            string UpdateUsersTableGroups = "UPDATE `person` SET `Admin_group_list` = '"+newAdminGroups+"', `tabel_groups` = '"+tableGroups+"' WHERE Login = '"+Login+"';";
 
             //TEST
-            MessageBox.Show(UpdateUsersTableGroups);
+            System.Windows.MessageBox.Show(UpdateUsersTableGroups);
 
             db.InsertDeleteQuery(UpdateUsersTableGroups);
 
             //TEST
-            MessageBox.Show("Record Updated");
+            System.Windows.MessageBox.Show("Record Updated");
 
             //Update table groups in comboBox values
             LoadComboBox();
@@ -177,28 +287,129 @@ namespace LOginForm.Pages
             //By default, user can access and modefy Archive groups
             tableGroups = "0";
 
+            newAdminGroups = "0";
+
             //Mark what group user can modefy
             if (group1CheckBox.IsChecked == true)
             {
                 tableGroups += "_1";
+
+                if(adminRadio1.IsChecked == true)
+                {
+                    newAdminGroups += "_1";
+                }
             }            
             if (group2CheckBox.IsChecked == true)
             {
                 tableGroups += "_2";
+                if (adminRadio2.IsChecked == true)
+                {
+                    newAdminGroups += "_2";
+                }
             }
             
             if (group3CheckBox.IsChecked == true)
             {
                 tableGroups += "_3";
+                if (adminRadio3.IsChecked == true)
+                {
+                    newAdminGroups += "_3";
+                }
             }
 
             if (group4CheckBox.IsChecked == true)
             {
                 tableGroups += "_4";
+                if (adminRadio4.IsChecked == true)
+                {
+                    newAdminGroups += "_4";
+                }
             }
             if (group5CheckBox.IsChecked == true)
             {
                 tableGroups += "_5";
+                if (adminRadio5.IsChecked == true)
+                {
+                    newAdminGroups += "_5";
+                }
+            }
+        }
+
+        /// <summary>
+        /// This will handel the radio Buttons appearnece
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void group1CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            if(group1CheckBox.IsChecked == true)
+            {
+                //Show radio buttons
+                gridGroup1.IsEnabled = true;
+            }
+            else
+            {
+                //Show radio buttons
+                gridGroup1.IsEnabled = false;
+
+            }
+        }
+
+        private void group2CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (group2CheckBox.IsChecked == true)
+            {
+                //Show radio buttons
+                gridGroup2.IsEnabled = true;
+            }
+            else
+            {
+                //Show radio buttons
+                gridGroup2.IsEnabled = false;
+
+                
+            }
+        }
+
+        private void group3CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (group3CheckBox.IsChecked == true)
+            {
+                //Show radio buttons
+                gridGroup3.IsEnabled = true;
+            }
+            else
+            {
+                //Show radio buttons
+                gridGroup3.IsEnabled = false;
+            }
+        }
+
+        private void group4CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (group4CheckBox.IsChecked == true)
+            {
+                //Show radio buttons
+                gridGroup4.IsEnabled = true;
+            }
+            else
+            {
+                //Show radio buttons
+                gridGroup4.IsEnabled = false;
+            }
+        }
+
+        private void group5CheckBox_Click(object sender, RoutedEventArgs e)
+        {
+            if (group5CheckBox.IsChecked == true)
+            {
+                //Show radio buttons
+                gridGroup5.IsEnabled = true;
+            }
+            else
+            {
+                //Show radio buttons
+                gridGroup5.IsEnabled = false;
             }
         }
     }

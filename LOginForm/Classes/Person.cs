@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace LOginForm
 {
@@ -21,17 +17,19 @@ namespace LOginForm
         //0 : View public pages only
         //1 : View and Add public pages only
         //2 : View and Add secret pages
-        public int Priority { get; set; }
+        public string AdminGroupList { get; set; }
+        public string TableGroups { get; set; }
 
         #endregion
 
         #region Constructor
-        public Person(int id, String fname, String lname, int priority)
+        public Person(int id, String fname, String lname, string adminGroupList, string tableGroups)
         {
             ID = id;
             Fname = fname;
             Lname = lname;
-            Priority = priority;
+            AdminGroupList = adminGroupList;
+            TableGroups = tableGroups;
 
         }
 

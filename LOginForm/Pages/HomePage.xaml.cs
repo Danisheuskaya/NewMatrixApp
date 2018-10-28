@@ -1,4 +1,7 @@
 ﻿
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
@@ -14,7 +17,7 @@ namespace LOginForm.Pages
         public Window1(Person p)
         {
             InitializeComponent();
-            CheckRestriction(p.Priority);
+           // CheckRestriction(p.Priority);
             person = p;
 
             //On load show User's name
@@ -245,9 +248,38 @@ namespace LOginForm.Pages
         /// <param name="query"></param>
         private void OpenForm(TableCore tc)
         {
-            //Creating instance of the new page and sending corespondent query
-            MatrixForm mf = new MatrixForm(tc, person.Priority);
-            mf.Show();
+            if (PersonCanOpen(tc))
+            {
+                //Creating instance of the new page and sending corespondent query
+                MatrixForm mf = new MatrixForm(tc, person);
+                mf.ShowDialog();
+            }
+
+            
+        }
+
+        /// <summary>
+        /// This method will determine if this person can modefy this form
+        /// </summary>
+        /// <param name="tc"></param>
+        /// <returns></returns>
+        private bool PersonCanOpen(TableCore tc)
+        {
+
+            //Get the tag of the table
+            var tableTag = tc.TableGroupNumber;
+
+            //retrieve persons group list
+            List<string> groups = person.TableGroups.Split('_').OfType<string>().ToList();
+
+            if (groups.IndexOf(tableTag) == -1)
+            {
+                System.Windows.MessageBox.Show("Sorry, the access is denyed!");
+
+                return false;
+            }
+
+            return true;
         }
 
 

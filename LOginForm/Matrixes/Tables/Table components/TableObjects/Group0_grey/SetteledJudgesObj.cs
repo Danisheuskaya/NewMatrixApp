@@ -29,7 +29,7 @@ namespace LOginForm
             //Delete query
             DeliteQuery = "DELETE FROM `settled_judges` WHERE ID = ";
 
-            TableGroupNumber = "5";
+            TableGroupNumber = "0";
 
             //Add Controle Form
             MyRecord = new SetteledJudgesRecord();

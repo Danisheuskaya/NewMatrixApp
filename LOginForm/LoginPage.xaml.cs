@@ -33,8 +33,10 @@ namespace LOginForm
         //Holder for th elast name
         string Lname = "";
 
-        //Holder for the priority 
-        int Priority = 0;
+        //Holder for the admin list
+        string AdminGroupList = "";
+
+        string TableGroups = "";
 
         #endregion
 
@@ -136,7 +138,8 @@ namespace LOginForm
                 ID = Convert.ToInt32(reader["ID"]);
                 Fname = reader["Fname"].ToString();
                 Lname = reader["Lname"].ToString();
-                Priority = Convert.ToInt32(reader["Priority"]);               
+                AdminGroupList = reader["Admin_group_list"].ToString();
+                TableGroups = reader["tabel_groups"].ToString();
             }
             Console.ReadLine();
 
@@ -154,7 +157,7 @@ namespace LOginForm
                 ErrorBox.Visibility = Visibility.Hidden;
 
                 //Create a person obj
-                person = new Person(ID, Fname, Lname, Priority);
+                person = new Person(ID, Fname, Lname, AdminGroupList, TableGroups);
 
                 return true;
             }
