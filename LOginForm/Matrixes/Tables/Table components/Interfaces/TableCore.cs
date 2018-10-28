@@ -15,8 +15,6 @@ namespace LOginForm
         #region values
         private DataTable dt = new DataTable();
         private DBConnection db = new DBConnection();
-        
-
         #endregion
 
         #region Getters/setters
@@ -76,6 +74,8 @@ namespace LOginForm
 
         public string TeamIndexFromTheFormHolder { get; set; }
         public string LetterTypeFromTheForm { get; set; }
+
+        public string TableGroupNumber { get; set; }
 
         #endregion       
 
@@ -318,11 +318,20 @@ namespace LOginForm
         /// This method is used to add comboBoxes and CheckBoxes to the existing dataGrid
         /// </summary>
         /// <param name="dg"></param>
-        public virtual void AddControls(DataGridView dg, bool controlWasAdded) { }
+        public virtual void AddControls(DataGridView dg) { }
 
-
+        /// <summary>
+        /// This method will color Tabel's rows
+        /// </summary>
+        /// <param name="dg"></param>
         public virtual void ColorTable(DataGridView dg) { }
 
+        /// <summary>
+        /// This method will handel interactive cells incide the table
+        /// </summary>
+        /// <param name="dg"></param>
+        /// <param name="e"></param>
+        /// <returns></returns>
         public virtual bool ButtonInsideTableHandler(DataGridView dg, DataGridViewCellEventArgs e) { return false; }
 
         #endregion

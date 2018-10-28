@@ -30,12 +30,14 @@ namespace LOginForm
             //Delete query
             DeliteQuery = "DELETE FROM `motion_matrix` WHERE Case_ID = ";
 
+            TableGroupNumber = "3";
+
             //Add Controle Form
             MyRecord = new MotionMatrixRecord();
         }
 
         #region Override method
-        public override void AddControls(DataGridView dg, bool controlWasAdded)
+        public override void AddControls(DataGridView dg)
         {
             //Hide ID column
             dg.Columns[0].Visible = false;

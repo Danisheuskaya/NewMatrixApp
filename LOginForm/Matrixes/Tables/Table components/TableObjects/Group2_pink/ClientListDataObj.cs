@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
+﻿
 namespace LOginForm
 {
     class ClientListDataObj : TableCore
@@ -28,6 +23,8 @@ namespace LOginForm
 
             //Delete query
             DeliteQuery = "DELETE FROM `client_list` WHERE Case_No = ";
+
+            TableGroupNumber = "2";
 
             //Add record form
             MyRecord = new ClientListRecord();

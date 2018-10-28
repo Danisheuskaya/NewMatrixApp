@@ -32,11 +32,13 @@ namespace LOginForm
             //Delete query
             DeliteQuery = "DELETE FROM `case_trucking` WHERE Case_Number = ";
 
+            TableGroupNumber = "6";
+
             //Add Controle Form
             MyRecord = new CaseTruckingRecord();
         }
 
-        public override void AddControls(DataGridView dg, bool flag)
+        public override void AddControls(DataGridView dg)
         {
             //Add check Box column that will show which case is satteled
             AddCheckBoxColumn(dg, "Mark as Settaled?", DisplayQuery, "Archived", 15);

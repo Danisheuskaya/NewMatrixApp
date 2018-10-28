@@ -27,6 +27,8 @@ namespace LOginForm
             //Delete query
             DeliteQuery = "DELETE FROM `court_list` WHERE Case_Number = ";
 
+            TableGroupNumber = "2";
+
             //Adding Record object
             MyRecord = new CourtListRecord();
         }

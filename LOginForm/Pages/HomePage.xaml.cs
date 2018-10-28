@@ -16,6 +16,9 @@ namespace LOginForm.Pages
             InitializeComponent();
             CheckRestriction(p.Priority);
             person = p;
+
+            //On load show User's name
+            userNameLabel.Content = p.Fname + " " + p.Lname;
         }
 
         /// <summary>
@@ -39,6 +42,10 @@ namespace LOginForm.Pages
        
        
 
+        /*-----------------------------------------------------------
+         * This region contains logic for every Matrix Related Button
+         * ---------------------------------------------------------*/
+
         #region Buttons and Queryes
 
         /// <summary>
@@ -51,8 +58,7 @@ namespace LOginForm.Pages
 
             //create ActiveCase object
             TableCore tc = new ActiveClassObj();
-                     
-
+            
             //Open Form with Active Case Data
             OpenForm(tc);          
 
@@ -139,6 +145,91 @@ namespace LOginForm.Pages
             TableCore tc = new CaseTruckingObj();
 
             //Open Form with NOT Sutteled Case Trucking
+            OpenForm(tc);
+        }
+
+        /// <summary>
+        /// This button will open a page with Medical record Page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void CaseTRucking_Copy_Click(object sender, RoutedEventArgs e)
+        {
+            //create Medical record object
+            TableCore tc = new MedicalRecordObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
+
+        /// <summary>
+        /// This button will open a page with Medical Matrix Page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MediclMatrixButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Medical Matrix record object
+            TableCore tc = new MedicalMatrixObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
+
+        /// <summary>
+        /// This button will open a page with Settaled Attorneys List
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SatteledAttorneysButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Setteled Attorney record object
+            TableCore tc = new SetteledAttorneysObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
+
+        /// <summary>
+        /// This button will open a page with Setteled Judges List
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SatteledJudjesButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Setteled Judge record object
+            TableCore tc = new SetteledJudgesObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
+
+        /// <summary>
+        /// This button will open a page with Motion Matrix
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MotionMatrixButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Motion Matrix record object
+            TableCore tc = new MotionMatrixObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
+
+
+        /// <summary>
+        /// This button will open a page with Discovery Matrix
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DiscoveryMatrixButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Motion Matrix record object
+            TableCore tc = new DiscoveryMatrixObj();
+
+            //Open Form with Active Case Data
             OpenForm(tc);
         }
 
@@ -229,95 +320,25 @@ namespace LOginForm.Pages
         private void Settings_Click(object sender, RoutedEventArgs e)
         {
             //Creating an instance of the setting page
-            Settings st = new Settings();
+            //Settings st = new Settings();
+
+            //st.Show();
+
+            RestrictionLevelPage restrictionPage = new RestrictionLevelPage();
+
+            restrictionPage.Show();
+           
             
-            //redirecting to the page
-            st.Show();
         }
 
         /// <summary>
-        /// This button will open a page with Medical record Page
+        /// This button will allow user to change his/her password
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void CaseTRucking_Copy_Click(object sender, RoutedEventArgs e)
+        private void settingsButton_Click(object sender, RoutedEventArgs e)
         {
-            //create Medical record object
-            TableCore tc = new MedicalRecordObj();
-
-            //Open Form with Active Case Data
-            OpenForm(tc);
-        }
-
-        /// <summary>
-        /// This button will open a page with Medical Matrix Page
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MediclMatrixButton_Click(object sender, RoutedEventArgs e)
-        {
-            //create Medical Matrix record object
-            TableCore tc = new MedicalMatrixObj();
-
-            //Open Form with Active Case Data
-            OpenForm(tc);
-        }
-
-        /// <summary>
-        /// This button will open a page with Settaled Attorneys List
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SatteledAttorneysButton_Click(object sender, RoutedEventArgs e)
-        {
-            //create Setteled Attorney record object
-            TableCore tc = new SetteledAttorneysObj();
-
-            //Open Form with Active Case Data
-            OpenForm(tc);
-        }
-
-        /// <summary>
-        /// This button will open a page with Setteled Judges List
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void SatteledJudjesButton_Click(object sender, RoutedEventArgs e)
-        {
-            //create Setteled Judge record object
-            TableCore tc = new SetteledJudgesObj();
-
-            //Open Form with Active Case Data
-            OpenForm(tc);
-        }
-
-        /// <summary>
-        /// This button will open a page with Motion Matrix
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MotionMatrixButton_Click(object sender, RoutedEventArgs e)
-        {
-            //create Motion Matrix record object
-            TableCore tc = new MotionMatrixObj();
-
-            //Open Form with Active Case Data
-            OpenForm(tc);
-        }
-
-
-        /// <summary>
-        /// This button will open a page with Discovery Matrix
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void DiscoveryMatrixButton_Click(object sender, RoutedEventArgs e)
-        {
-            //create Motion Matrix record object
-            TableCore tc = new DiscoveryMatrixObj();
-
-            //Open Form with Active Case Data
-            OpenForm(tc);
+            System.Windows.MessageBox.Show("Here will be a password window");
         }
     }
 }

@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+﻿using System.Windows.Forms;
 
 namespace LOginForm
 {
@@ -33,6 +28,8 @@ namespace LOginForm
             //Delete query
             DeliteQuery = "DELETE FROM `case_list` WHERE Case_No = ";
 
+            TableGroupNumber = "2";
+
             MyRecord = new CaseListRecord();
         }
 
@@ -61,6 +58,7 @@ namespace LOginForm
             return false;
         }
 
+     
         #endregion
 
 

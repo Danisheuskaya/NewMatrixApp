@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Windows.Forms;
-using Microsoft.VisualBasic;
 using DGVPrinterHelper;
 
 
@@ -13,19 +12,11 @@ namespace LOginForm
     {
 
         #region Variables
-        /// <summary>
-        /// Variables containers
-        /// </summary>
-        private TableCore tc; //Holder for the table object
-        private DBConnection db; //data base connection
-        private List<string> updateQueryes;  //Container of queryes, that would be created when table is modefyed
 
-        /// <summary>
-        /// Flag that would allow rto modefy table by 
-        /// adding controls such as dropbox column, button coulmns 
-        /// only once
-        /// </summary>
-        private bool controlWasAdded = false;
+        private TableCore tc; //Holder for the table object
+        private DBConnection db = new DBConnection(); //Create data base connection
+        
+        private List<string> updateQueryes;  //Container of queryes, that would be created when table is modefyed by user
 
         #endregion
 
@@ -34,21 +25,18 @@ namespace LOginForm
         /// <summary>
         /// Constructor 
         /// </summary>
-        /// <param name="tableCore"> Is the type of table object that was passed through the button</param>
+        /// <param name="tableCore"> Type of the table object that was passed through the button</param>
         /// <param name="restrictionLvl">Restriction of the user, that was passed trough the information about logged in user</param>
         public MatrixForm(TableCore tableCore, int restrictionLvl)
         {
 
             InitializeComponent();
-            
-            //Create data base connection
-            db = new DBConnection();
 
             //invoce table object
             tc = tableCore;
 
-            //Change name of the table that correspond to the name of the table object
-            ChangeName();
+            //Changethe name of table holder 
+            tabelNameLabel.Text = tc.TableName;
 
             //Load the table
             LoadTable();
@@ -58,27 +46,33 @@ namespace LOginForm
 
             //Block buttons if user is not allowed to modefy/add new records
             BlockRestrictedButtons(restrictionLvl);
-
-            //Make table sortable:
-            //SortTable();
     }
 
 
-        /// <summary>
-        /// This method will make table sortable
-        /// </summary>
-        private void SortTable()
-        {
-
-            foreach (DataGridViewColumn column in dataGridView1.Columns)
-            {
-                column.SortMode = DataGridViewColumnSortMode.Automatic;
-            }
-        }
 
         #endregion
 
         #region Load Table Helpers
+
+        /// <summary>
+        /// This method loads the table in the DataGridView
+        /// </summary>
+        public void LoadTable()
+        {
+            //Creating a table object that corspont to the DataBase Table
+            DataTable table = tc.FillTable();
+
+            //Placing it inside the datagrid view
+            dataGridView1.DataSource = table;
+
+            //Blocking the DBkey value column from being modefyed b y User
+            dataGridView1.Columns[tc.KeyFieldIndex].ReadOnly = true;
+
+            //Adding special controls if there is any
+            //such as dropdown options, check marks, buttons...
+            tc.AddControls(dataGridView1);
+        }
+
 
         /// <summary>
         /// This method will block Add/Delete/Modefy record buttons
@@ -97,57 +91,17 @@ namespace LOginForm
             {
                 modefyTableRecordBtn.Visible = true;
             }
-            //level 2: user can view, add and modefy table
+            //level 2: user can view, add new records, and modefy table
             if (restrictionLvl >= 2)
             {
                 addNewRecordBtn.Visible = true;
             }
-            //level 3: user can view, add,modefy and delete table
+            //level 3: user can view, add, modefy and delete table
             if (restrictionLvl == 3)
             {
                 deleteRecordBtn.Visible = true;
             }
         }
-
-        /// <summary>
-        /// This method loads the table
-        /// </summary>
-        public void LoadTable()
-        {
-            //Creating a table object
-            DataTable table = tc.FillTable();
-
-            //Placing itr inside the datagrid view
-            dataGridView1.DataSource = table;
-            
-            //Blocking the key value column from being modefyed
-            blockKeyColumn();
-
-            //Adding special controls if there any
-            //such as dropdown options, check marks, buttons...
-            tc.AddControls(dataGridView1, controlWasAdded);
-        }
-
-        
-        /// <summary>
-        /// This function blocks key value column from being modefyed
-        /// </summary>
-        private void blockKeyColumn()
-        {
-            dataGridView1.Columns[tc.KeyFieldIndex].ReadOnly = true;
-        }
-
-
-    
-        /// <summary>
-        /// This method sets the header for the page
-        /// </summary>
-        /// <param name="tableName"></param>
-        private void ChangeName()
-        {
-            label1.Text = tc.TableName;
-        }
-
 
         #endregion
 
@@ -348,6 +302,7 @@ namespace LOginForm
         private void dataGridView1_CellFormatting_1(object sender, DataGridViewCellFormattingEventArgs e)
         {
             tc.ColorTable(dataGridView1);
+            
             return;
         }
 
@@ -367,6 +322,11 @@ namespace LOginForm
             //If yes, close this instance of a table
             if (dialog == DialogResult.Yes)
             {
+                
+                //Run all updates
+                modefyBtn_Click(sender, e);
+
+                //Close the form
                 ControlBox = false;
             }
             else
@@ -379,15 +339,15 @@ namespace LOginForm
         }
 
         /// <summary>
-        /// TEST TEST TEST TEST TEST TEST TEST TEST TEST TEST 
+        /// This method will print the form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void button5_Click(object sender, EventArgs e)
         {
             DGVPrinter printer = new DGVPrinter();
-            printer.Title = "Here will be some dinamic title";//Header
-            printer.SubTitle = string.Format("Date: {0}", DateTime.Now.Date);
+            printer.Title = tc.TableName;//Header
+            printer.SubTitle = string.Format("Date: {0}", DateTime.Now.Date.ToString());
             printer.SubTitleFormatFlags = System.Drawing.StringFormatFlags.LineLimit | System.Drawing.StringFormatFlags.NoClip;
             printer.PageNumbers = true;
             printer.PageNumberInHeader = false;
@@ -425,6 +385,5 @@ namespace LOginForm
             }
         }
 
-        
     }
 }

@@ -92,8 +92,6 @@ namespace LOginForm
                 {
                     //Add the level of restriction to the level window
                     level.Text = reader["Priority"].ToString();
-
-
                 }
 
             }
@@ -105,11 +103,6 @@ namespace LOginForm
             {
                 db.CloseConnection();
             }
-
-
-
-
-
         }
 
 

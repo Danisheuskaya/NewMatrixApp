@@ -75,9 +75,11 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="UIAutomationProvider" />
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
+    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -107,7 +109,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\RestrictionLevel.xaml">
+    <Page Include="Pages\RestrictionLevelPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -206,6 +208,12 @@
     <Compile Include="Matrixes\Tables\Table components\HelperForms\LetterTypeForm.Designer.cs">
       <DependentUpon>LetterTypeForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Matrixes\Tables\Table components\HelperForms\PasswordManager.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Matrixes\Tables\Table components\HelperForms\PasswordManager.Designer.cs">
+      <DependentUpon>PasswordManager.cs</DependentUpon>
+    </Compile>
     <Compile Include="Matrixes\Tables\Table components\HelperForms\TeamMembersDropBox.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -213,28 +221,28 @@
       <DependentUpon>TeamMembersDropBox.cs</DependentUpon>
     </Compile>
     <Compile Include="Matrixes\Tables\Table components\Interfaces\RecordCore.cs" />
-    <Compile Include="Matrixes\Tables\Table components\TableObjects\ActiveCaseObj.cs" />
-    <Compile Include="Matrixes\Tables\Table components\TableObjects\DiscoveryMatrixObj.cs" />
-    <Compile Include="Matrixes\Tables\Table components\TableObjects\MedicalMatrixObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\Group1_blue\ActiveCaseObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\Group3_peach\DiscoveryMatrixObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\Group4_gold\MedicalMatrixObj.cs" />
     <Compile Include="Matrixes\Tables\Table components\Interfaces\TableCore.cs" />
-    <Compile Include="Matrixes\Tables\Table components\TableObjects\CaseLIstObj.cs" />
-    <Compile Include="Matrixes\Tables\Table components\TableObjects\CaseTruckingObj.cs" />
-    <Compile Include="Matrixes\Tables\Table components\TableObjects\ClientListDataObj.cs" />
-    <Compile Include="Matrixes\Tables\Table components\TableObjects\CourtListObj.cs" />
-    <Compile Include="Matrixes\Tables\Table components\TableObjects\MedicalRecordObj.cs" />
-    <Compile Include="Matrixes\Tables\Table components\TableObjects\MotionMatrixObj.cs" />
-    <Compile Include="Matrixes\Tables\Table components\TableObjects\SateledCasesObj.cs" />
-    <Compile Include="Matrixes\Tables\Table components\TableObjects\SetteledAttorneysObj.cs" />
-    <Compile Include="Matrixes\Tables\Table components\TableObjects\SetteledJudgesObj.cs" />
-    <Compile Include="Matrixes\Tables\Table components\TableObjects\TrialDatesObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\Group2_pink\CaseLIstObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\Group5_red\CaseTruckingObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\Group2_pink\ClientListDataObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\Group2_pink\CourtListObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\Group4_gold\MedicalRecordObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\Group3_peach\MotionMatrixObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\Group1_blue\SateledCasesObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\Group6_grey\SetteledAttorneysObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\Group6_grey\SetteledJudgesObj.cs" />
+    <Compile Include="Matrixes\Tables\Table components\TableObjects\Group1_blue\TrialDatesObj.cs" />
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\RestrictionLevel.xaml.cs">
-      <DependentUpon>RestrictionLevel.xaml</DependentUpon>
+    <Compile Include="Pages\RestrictionLevelPage.xaml.cs">
+      <DependentUpon>RestrictionLevelPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Settings.cs">
       <SubType>Form</SubType>
@@ -299,6 +307,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Matrixes\Tables\Table components\HelperForms\LetterTypeForm.resx">
       <DependentUpon>LetterTypeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Matrixes\Tables\Table components\HelperForms\PasswordManager.resx">
+      <DependentUpon>PasswordManager.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Matrixes\Tables\Table components\HelperForms\TeamMembersDropBox.resx">
       <DependentUpon>TeamMembersDropBox.cs</DependentUpon>

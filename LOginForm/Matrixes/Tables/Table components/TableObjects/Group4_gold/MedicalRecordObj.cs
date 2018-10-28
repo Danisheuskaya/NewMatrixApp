@@ -37,6 +37,8 @@ namespace LOginForm
             //Delete query
             DeliteQuery = "DELETE FROM `medical_record` WHERE `Case_Pair_ID` = ";
 
+            TableGroupNumber = "4";
+
             //Add Controle Form
             MyRecord = new MedicalRecord();
         }
@@ -51,7 +53,7 @@ namespace LOginForm
         /// </summary>
         /// <param name="dg"></param>
         /// <param name="flag"></param>
-        public override void AddControls(DataGridView dg, bool flag)
+        public override void AddControls(DataGridView dg)
         {
             //Hide ID column
             dg.Columns[0].Visible = false;

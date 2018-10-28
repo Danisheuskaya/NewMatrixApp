@@ -40,6 +40,8 @@ namespace LOginForm
 
             //Add Controle Form
             MyRecord = new TrialDatesRecord();
+
+            TableGroupNumber = "1";
         }
 
 
@@ -55,7 +57,7 @@ namespace LOginForm
         /// </summary>
         /// <param name="dg"></param>
         /// <param name="flag"></param>
-        public override void AddControls(DataGridView dg, bool flag)
+        public override void AddControls(DataGridView dg)
         {
 
             //Add checkBox that will show if dates show "team member out of office"

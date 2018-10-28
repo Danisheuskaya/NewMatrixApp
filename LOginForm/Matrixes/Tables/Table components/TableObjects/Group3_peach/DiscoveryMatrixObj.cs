@@ -31,6 +31,8 @@ namespace LOginForm
             //Delete query
             DeliteQuery = "DELETE FROM `settled_attorneys` WHERE ID = ";
 
+            TableGroupNumber = "3";
+
             //Add Controle Form
             MyRecord = new DiscoveryMatrixRecord();
         }
@@ -42,7 +44,7 @@ namespace LOginForm
         /// </summary>
         /// <param name="dg"></param>
         /// <param name="controlWasAdded"></param>
-        public override void AddControls(DataGridView dg, bool controlWasAdded)
+        public override void AddControls(DataGridView dg)
         {
             AddNewColumn(dg);
 

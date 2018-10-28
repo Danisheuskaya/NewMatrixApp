@@ -38,10 +38,7 @@ namespace LOginForm
 
             DisplayQuery = "SELECT Case_No, Case_Name , Trial_Date, Name, a.Team_ID, Note, Satteled From active_case a JOIN team t On a.Team_ID = t.Team_ID WHERE Satteled = 0";
 
-            /*****************************************************************
-             *          BUG DUE TO THE BUTTONS!, NEED TO ADD AN EMPTY FIELD
-             * **************************************************************/
-
+        
             //Fields in DB
             DbFields = new string[] { "Case_No", "Case_Name",  "Trial_Date", "Team_ID", "Team_ID", "Note", "Satteled", "Satteled" };
 
@@ -53,6 +50,8 @@ namespace LOginForm
 
             //Add Controle Form
             MyRecord = new ActiveCaseRecord();
+
+            TableGroupNumber = "1";
 
 
         }
@@ -67,7 +66,7 @@ namespace LOginForm
         /// This method will add a comboBox as a column with team members
         /// </summary>
         /// <param name="dg"></param>
-        public override void AddControls(DataGridView dg, bool controlWasAdded)
+        public override void AddControls(DataGridView dg)
         {
             //Add checkBox Column that will Unable User to move record to the satteled case:
             AddCheckBoxColumn(dg, "Mark Case as Settled? ", DisplayQuery, "Satteled", 7);

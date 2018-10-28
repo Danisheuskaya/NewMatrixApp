@@ -37,12 +37,14 @@ namespace LOginForm
             DeliteQuery = "DELETE FROM `settled_cases` WHERE Case_ID = ";
 
             AddNewRecordMessage = "Sorry, you can only move existing record from the table 'Active Cases'";
-           
+
+            TableGroupNumber = "1";
+
         }
 
         #region Override
 
-        public override void AddControls(DataGridView dg, bool controlWasAdded)
+        public override void AddControls(DataGridView dg)
         {
             
             //This method ads a checkbox in order for user to mark a case when it is done

@@ -45,6 +45,8 @@ namespace LOginForm
             //Delete query
             DeliteQuery = "DELETE FROM `medical_matrix` WHERE `Case_Pair_ID` = ";
 
+            TableGroupNumber = "4";
+
             //Add Controle Form
             MyRecord = new MedicalMatrixRecord();
         }
@@ -65,11 +67,8 @@ namespace LOginForm
         /// </summary>
         /// <param name="dg"></param>
         /// <param name="flag"></param>
-        public override void AddControls(DataGridView dg, bool flag)
+        public override void AddControls(DataGridView dg)
         {
-           
-            
-
             //Hide flag columns where 13 is printed and 14 is noteboo
             dg.Columns[13].Visible = false;
             dg.Columns[14].Visible = false;
