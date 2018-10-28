@@ -14,7 +14,7 @@
             </LinearGradientBrush>
         </Grid.Background>
         <Label x:Name="userNameLabel" Content="Please, select person:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,30,0,0" Width="200" Foreground="#FF839899"/>
-        <ComboBox x:Name="userNamesComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="287" Margin="335,30,0,0" SelectionChanged="userNamesComboBox_SelectionChanged" BorderBrush="#FF0A2323" Background="#FF839899"/>
+        <ComboBox x:Name="userNamesComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="287" Margin="335,30,0,0" SelectionChanged="userNamesComboBox_SelectionChanged" BorderBrush="#FF0A2323" Background="#FF839899" IsEditable="True"/>
         <CheckBox x:Name="group1CheckBox" Content="Group 1" HorizontalAlignment="Left" Height="39.211" Margin="39.293,124.715,0,0" VerticalAlignment="Top" Width="149.174"/>
         <StackPanel Margin="39.293,163.926,0,152.744" HorizontalAlignment="Left" Width="115.344">
             <Label Content="Active Cases" Height="31.383"/>
@@ -37,7 +37,7 @@
             <Label Content="Medical Matrix" Height="31.383"/>
             <Label Content="Medical Record"/>
         </StackPanel>
-        <CheckBox x:Name="group5CheckBox" Content="Group 4" HorizontalAlignment="Right" Height="39.211" Margin="0,124.715,25.218,0" VerticalAlignment="Top" Width="149.174"/>
+        <CheckBox x:Name="group5CheckBox" Content="Group 5" HorizontalAlignment="Right" Height="39.211" Margin="0,124.715,25.218,0" VerticalAlignment="Top" Width="149.174" />
         <StackPanel Margin="0,163.926,36.885,186.84" HorizontalAlignment="Right" Width="137.507">
             <Label Content="Case Trucking" Height="32.235"/>
         </StackPanel>
