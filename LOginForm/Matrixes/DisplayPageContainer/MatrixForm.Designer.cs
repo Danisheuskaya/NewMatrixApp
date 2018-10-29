@@ -28,13 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.tabelNameLabel = new System.Windows.Forms.Label();
             this.addNewRecordBtn = new System.Windows.Forms.Button();
             this.deleteRecordBtn = new System.Windows.Forms.Button();
-            this.modefyTableRecordBtn = new System.Windows.Forms.Button();
+            this.saveChangesBtn = new System.Windows.Forms.Button();
             this.print_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
@@ -42,28 +42,28 @@
             // dataGridView1
             // 
             this.dataGridView1.AllowUserToAddRows = false;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
-            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(237)))), ((int)(((byte)(237)))), ((int)(((byte)(254)))));
+            this.dataGridView1.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.AllCells;
             this.dataGridView1.ColumnHeadersBorderStyle = System.Windows.Forms.DataGridViewHeaderBorderStyle.Single;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.Padding = new System.Windows.Forms.Padding(1);
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.ControlText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.HighlightText;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.Padding = new System.Windows.Forms.Padding(1);
+            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.GradientInactiveCaption;
+            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.ControlText;
+            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
+            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dataGridView1.Location = new System.Drawing.Point(105, 153);
+            this.dataGridView1.Location = new System.Drawing.Point(12, 138);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(950, 657);
+            this.dataGridView1.Size = new System.Drawing.Size(1332, 672);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
@@ -87,7 +87,6 @@
             this.addNewRecordBtn.TabIndex = 4;
             this.addNewRecordBtn.Text = "Add New Record";
             this.addNewRecordBtn.UseVisualStyleBackColor = true;
-            this.addNewRecordBtn.Visible = false;
             this.addNewRecordBtn.Click += new System.EventHandler(this.addBtn_Click);
             // 
             // deleteRecordBtn
@@ -98,19 +97,17 @@
             this.deleteRecordBtn.TabIndex = 5;
             this.deleteRecordBtn.Text = "Delete Record";
             this.deleteRecordBtn.UseVisualStyleBackColor = true;
-            this.deleteRecordBtn.Visible = false;
             this.deleteRecordBtn.Click += new System.EventHandler(this.deleteRecord_Click);
             // 
-            // modefyTableRecordBtn
+            // saveChangesBtn
             // 
-            this.modefyTableRecordBtn.Location = new System.Drawing.Point(360, 97);
-            this.modefyTableRecordBtn.Name = "modefyTableRecordBtn";
-            this.modefyTableRecordBtn.Size = new System.Drawing.Size(216, 35);
-            this.modefyTableRecordBtn.TabIndex = 6;
-            this.modefyTableRecordBtn.Text = "Save Changes";
-            this.modefyTableRecordBtn.UseVisualStyleBackColor = true;
-            this.modefyTableRecordBtn.Visible = false;
-            this.modefyTableRecordBtn.Click += new System.EventHandler(this.modefyBtn_Click);
+            this.saveChangesBtn.Location = new System.Drawing.Point(360, 97);
+            this.saveChangesBtn.Name = "saveChangesBtn";
+            this.saveChangesBtn.Size = new System.Drawing.Size(216, 35);
+            this.saveChangesBtn.TabIndex = 6;
+            this.saveChangesBtn.Text = "Save Changes";
+            this.saveChangesBtn.UseVisualStyleBackColor = true;
+            this.saveChangesBtn.Click += new System.EventHandler(this.modefyBtn_Click);
             // 
             // print_button
             // 
@@ -131,14 +128,15 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1391, 838);
+            this.ClientSize = new System.Drawing.Size(1406, 947);
             this.Controls.Add(this.print_button);
-            this.Controls.Add(this.modefyTableRecordBtn);
+            this.Controls.Add(this.saveChangesBtn);
             this.Controls.Add(this.deleteRecordBtn);
             this.Controls.Add(this.addNewRecordBtn);
             this.Controls.Add(this.tabelNameLabel);
             this.Controls.Add(this.dataGridView1);
             this.Name = "MatrixForm";
+            this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Matrix Form";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MatrixForm_FormClosing);
@@ -153,7 +151,7 @@
         private System.Windows.Forms.Label tabelNameLabel;
         private System.Windows.Forms.Button addNewRecordBtn;
         private System.Windows.Forms.Button deleteRecordBtn;
-        private System.Windows.Forms.Button modefyTableRecordBtn;
+        private System.Windows.Forms.Button saveChangesBtn;
         private System.Windows.Forms.Button print_button;
     }
 }

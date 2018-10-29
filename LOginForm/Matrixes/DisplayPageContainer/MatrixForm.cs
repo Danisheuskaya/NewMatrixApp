@@ -18,6 +18,8 @@ namespace LOginForm
         
         private List<string> updateQueryes;  //Container of queryes, that would be created when table is modefyed by user
 
+        bool admin = true; //This is a flag, indicating if user can do any changes
+
         #endregion
 
         #region Constructor
@@ -26,18 +28,19 @@ namespace LOginForm
         /// Constructor 
         /// </summary>
         /// <param name="tableCore"> Type of the table object that was passed through the button</param>
-        /// <param name="restrictionLvl">Restriction of the user, that was passed trough the information about logged in user</param>
+        /// <param name="person">Instance of the current User</param>
         public MatrixForm(TableCore tableCore,  Person person)
         {
 
             InitializeComponent();
 
-            //invoce table object
+            //invoke table object
             tc = tableCore;
 
             //Changethe name of table holder 
             tabelNameLabel.Text = tc.TableName;
 
+            //This method will determine what user can do with the table
             CheckUserPemition(person);
 
             //Load the table
@@ -50,9 +53,38 @@ namespace LOginForm
             //BlockRestrictedButtons(person.AdminGroupList);
     }
 
+
+        /// <summary>
+        /// This method will determine what user can do with the table based
+        /// on the Admin previlages
+        /// if User is an admin, the Tag of the table will be in the DB 
+        /// As an admin, user can modefy table, as wiever - only see and print
+        /// </summary>
+        /// <param name="person"></param>
         private void CheckUserPemition(Person person)
         {
-            var a = 2;
+            //Get the tag of the loaded table table
+            var tableTag = tc.TableGroupNumber;
+
+            //retrieve the list of groups where this person is admin
+            List<string> groups = person.AdminGroupList.Split('_').OfType<string>().ToList();
+
+            //If user is not an admin of this group, add some restrictions:
+            if (groups.IndexOf(tableTag) == -1)
+            {
+                //Block dataGridView from being modefyed:
+                dataGridView1.ReadOnly = true;
+                //Mark user as viewer
+                admin = false;
+
+                //Hid all the buttons except print
+                addNewRecordBtn.Visible = false;
+                saveChangesBtn.Visible = false;
+                deleteRecordBtn.Visible = false;
+                
+            }
+
+            
         }
 
 
@@ -97,7 +129,7 @@ namespace LOginForm
             //level 1: user can view and modefy table
             if(restrictionLvl >= 1)
             {
-                modefyTableRecordBtn.Visible = true;
+                saveChangesBtn.Visible = true;
             }
             //level 2: user can view, add new records, and modefy table
             if (restrictionLvl >= 2)
@@ -379,18 +411,23 @@ namespace LOginForm
         /// <param name="e"></param>
         private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (tc.ButtonInsideTableHandler(dataGridView1, e))
+            //If user can modefy table : 
+            if (admin)
             {
-                //add query to the list
-                updateQueryes.Add(tc.UpdateQuery);
+                if (tc.ButtonInsideTableHandler(dataGridView1, e))
+                {
+                    //add query to the list
+                    updateQueryes.Add(tc.UpdateQuery);
 
-                //TEST
-                MessageBox.Show(tc.UpdateQuery);
+                    //TEST
+                    MessageBox.Show(tc.UpdateQuery);
 
-                //Run all updates
-                modefyBtn_Click(sender, e);
-                
+                    //Run all updates
+                    modefyBtn_Click(sender, e);
+
+                }
             }
+           
         }
 
     }

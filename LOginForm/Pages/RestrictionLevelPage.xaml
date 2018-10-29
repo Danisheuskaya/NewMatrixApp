@@ -16,51 +16,51 @@
         <Label x:Name="userNameLabel" Content="Please, select person:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,30,0,0" Width="200" Foreground="#FF839899"/>
         <ComboBox x:Name="userNamesComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="287" Margin="335,30,0,0" SelectionChanged="userNamesComboBox_SelectionChanged" BorderBrush="#FF0A2323" Background="#FF839899" IsEditable="True"/>
         <Grid Name="CheckBoxHolderGrid">
-            <CheckBox x:Name="group1CheckBox" Content="Group 1" HorizontalAlignment="Left" Height="39.211" Margin="39.293,90.715,0,0" VerticalAlignment="Top" Width="149.174" Click="group1CheckBox_Click"/>
+            <CheckBox x:Name="group1CheckBox" Content="Group 1" HorizontalAlignment="Left" Height="39.211" Margin="39.293,90.715,0,0" VerticalAlignment="Top" Width="149.174" Click="group1CheckBox_Click" Foreground="#FF79A0A0"/>
             <StackPanel Margin="39,132,0,184.667" HorizontalAlignment="Left" Width="116">
-                <Label Content="Active Cases" Height="31.383"/>
-                <Label Content="Trial Dates"/>
-                <Label Content="Settled Cases"/>
+                <Label Content="Active Cases" Height="31.383" Foreground="#FF79A0A0"/>
+                <Label Content="Trial Dates" Foreground="#FF79A0A0"/>
+                <Label Content="Settled Cases" Foreground="#FF83B0B0"/>
             </StackPanel>
-            <CheckBox x:Name="group2CheckBox" Content="Group 2" HorizontalAlignment="Left" Height="39.211" Margin="181.648,90.715,0,0" VerticalAlignment="Top" Width="149.174" Click="group2CheckBox_Click"/>
+            <CheckBox x:Name="group2CheckBox" Content="Group 2" HorizontalAlignment="Left" Height="39.211" Margin="181.648,90.715,0,0" VerticalAlignment="Top" Width="149.174" Click="group2CheckBox_Click" Foreground="#FF621235" Background="#FF400C23"/>
             <StackPanel Margin="181.648,129.926,0,186.744" HorizontalAlignment="Left" Width="115.344">
-                <Label Content="Case List" Height="31.383"/>
-                <Label Content="Client List"/>
-                <Label Content="Court List"/>
+                <Label Content="Case List" Height="31.383" Foreground="#FF75284A"/>
+                <Label Content="Client List" Foreground="#FF75284A"/>
+                <Label Content="Court List" Foreground="#FF75284A"/>
             </StackPanel>
-            <CheckBox x:Name="group3CheckBox" Content="Group 3" Height="39.211" Margin="314.626,90.715,329.533,0" VerticalAlignment="Top" Click="group3CheckBox_Click"/>
+            <CheckBox x:Name="group3CheckBox" Content="Group 3" Height="39.211" Margin="314.626,90.715,329.533,0" VerticalAlignment="Top" Click="group3CheckBox_Click" Foreground="#FFB37E7E"/>
             <StackPanel Margin="314.626,129.926,329.533,0" Height="65.9" VerticalAlignment="Top">
-                <Label Content="Discovery Matrix" Height="31.383"/>
-                <Label Content="Motion Matrix"/>
+                <Label Content="Discovery Matrix" Height="31.383" Foreground="#FFB37E7E"/>
+                <Label Content="Motion Matrix" Foreground="#FFB37E7E"/>
             </StackPanel>
-            <CheckBox x:Name="group4CheckBox" Content="Group 4" HorizontalAlignment="Right" Height="39.211" Margin="0,90.715,180.359,0" VerticalAlignment="Top" Width="149.174" Click="group4CheckBox_Click"/>
+            <CheckBox x:Name="group4CheckBox" Content="Group 4" HorizontalAlignment="Right" Height="39.211" Margin="0,90.715,180.359,0" VerticalAlignment="Top" Width="149.174" Click="group4CheckBox_Click" Foreground="#FFDBAC8A"/>
             <StackPanel Margin="0,129.926,192.026,0" HorizontalAlignment="Right" Width="137.507" Height="65.9" VerticalAlignment="Top">
-                <Label Content="Medical Matrix" Height="31.383"/>
-                <Label Content="Medical Record"/>
+                <Label Content="Medical Matrix" Height="31.383" Foreground="#FFDBAC8A"/>
+                <Label Content="Medical Record" Foreground="#FFDBAC8A"/>
             </StackPanel>
-            <CheckBox x:Name="group5CheckBox" Content="Group 5" HorizontalAlignment="Right" Height="39.211" Margin="0,90.715,25.218,0" VerticalAlignment="Top" Width="149.174" Click="group5CheckBox_Click" />
+            <CheckBox x:Name="group5CheckBox" Content="Group 5" HorizontalAlignment="Right" Height="39.211" Margin="0,90.715,25.218,0" VerticalAlignment="Top" Width="149.174" Click="group5CheckBox_Click" Foreground="#FF411313" />
             <StackPanel Margin="0,129.926,36.885,0" HorizontalAlignment="Right" Width="137.507" Height="65.901" VerticalAlignment="Top">
-                <Label Content="Case Trucking" Height="34"/>
+                <Label Content="Case Trucking" Height="34" Foreground="#FF411313"/>
             </StackPanel>
         </Grid>
         <Button x:Name="saveChangesButton" Content="Save Changes" HorizontalAlignment="Right" Margin="0,0,36.885,27.24" VerticalAlignment="Bottom" Width="152.68" Height="43.935" FontFamily="Century Gothic" FontSize="16" BorderBrush="#FF101011" Background="#FF4C5F60" Foreground="#FFB7CECF" Click="saveChangesButton_Click"/>
         <Grid x:Name="gridGroup1" HorizontalAlignment="Left" Height="98.76" Margin="39.293,0,0,72.574" VerticalAlignment="Bottom" Width="93.333" RenderTransformOrigin="0.49,0.557">
-            <RadioButton x:Name="adminRadio1" Content="Admin" Margin="0,0,10,0" VerticalAlignment="Top"/>
+            <RadioButton x:Name="adminRadio1" Content="Admin" Margin="0,0,10,0" VerticalAlignment="Top" Background="#FF560C25" BorderBrush="#FF560C25"/>
             <RadioButton x:Name="viewerRadio1" Content="Viewer" Margin="0,25.94,10,48.12" d:LayoutOverrides="Height"/>
         </Grid>
         <Grid x:Name="gridGroup2" HorizontalAlignment="Left" Height="98.76" Margin="181.648,0,0,72.574" VerticalAlignment="Bottom" Width="93.333" RenderTransformOrigin="0.49,0.557">
-            <RadioButton x:Name="adminRadio2" Content="Admin" Margin="0,0,10,0" VerticalAlignment="Top"/>
-            <RadioButton x:Name="viewerRadio2" Content="Viewer" Margin="0,25.94,10,48.12" d:LayoutOverrides="Height"/>
+            <RadioButton x:Name="adminRadio2" Content="Admin" Margin="0,0,10,0" VerticalAlignment="Top" Foreground="#FF27121B"/>
+            <RadioButton x:Name="viewerRadio2" Content="Viewer" Margin="0,25.94,10,48.12" d:LayoutOverrides="Height" Foreground="#FF27121B"/>
         </Grid>
         <Grid x:Name="gridGroup3" Height="98.76" Margin="322.981,0,377.019,72.574" VerticalAlignment="Bottom" RenderTransformOrigin="0.49,0.557">
             <RadioButton x:Name="adminRadio3" Content="Admin" Margin="0,0,10,0" VerticalAlignment="Top"/>
             <RadioButton x:Name="viewerRadio3" Content="Viewer" Margin="0,25.94,10,48.12" d:LayoutOverrides="Height"/>
         </Grid>
-        <Grid x:Name="gridGroup4" Height="98.76" Margin="0,0,224.352,68.408" VerticalAlignment="Bottom" RenderTransformOrigin="0.49,0.557" HorizontalAlignment="Right" Width="93.333">
+        <Grid x:Name="gridGroup4" Height="98.76" Margin="0,0,224.352,71.762" VerticalAlignment="Bottom" RenderTransformOrigin="0.49,0.557" HorizontalAlignment="Right" Width="93.333">
             <RadioButton x:Name="adminRadio4" Content="Admin" Margin="0,0,10,0" VerticalAlignment="Top"/>
             <RadioButton x:Name="viewerRadio4" Content="Viewer" Margin="0,25.94,10,48.12" d:LayoutOverrides="Height"/>
         </Grid>
-        <Grid x:Name="gridGroup5" Height="98.76" Margin="0,0,75.352,68.408" VerticalAlignment="Bottom" RenderTransformOrigin="0.49,0.557" HorizontalAlignment="Right" Width="93.333">
+        <Grid x:Name="gridGroup5" Height="98.76" Margin="0,0,75.352,71.762" VerticalAlignment="Bottom" RenderTransformOrigin="0.49,0.557" HorizontalAlignment="Right" Width="93.333">
             <RadioButton x:Name="adminRadio5" Content="Admin" Margin="0,0,10,0" VerticalAlignment="Top"/>
             <RadioButton x:Name="viewerRadio5" Content="Viewer" Margin="0,25.94,10,48.12" d:LayoutOverrides="Height"/>
         </Grid>
