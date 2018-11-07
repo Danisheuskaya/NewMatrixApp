@@ -12,7 +12,9 @@ namespace LOginForm
         public String Fname { get; set; }
         //User's Last Name
         public String Lname { get; set; }
-       
+        //User's Last Name
+        public String Login { get; set; }
+
         //User's Priority
         //0 : View public pages only
         //1 : View and Add public pages only
@@ -23,11 +25,12 @@ namespace LOginForm
         #endregion
 
         #region Constructor
-        public Person(int id, String fname, String lname, string adminGroupList, string tableGroups)
+        public Person(int id, String fname, String lname, string login, string adminGroupList, string tableGroups)
         {
             ID = id;
             Fname = fname;
             Lname = lname;
+            Login = login;
             AdminGroupList = adminGroupList;
             TableGroups = tableGroups;
 

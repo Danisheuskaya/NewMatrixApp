@@ -101,6 +101,10 @@
       <DependentUpon>LoginPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Pages\ChangePassword.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\HomePage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -235,6 +239,9 @@
     <Compile Include="Matrixes\Tables\Table components\TableObjects\Group0_grey\SetteledAttorneysObj.cs" />
     <Compile Include="Matrixes\Tables\Table components\TableObjects\Group0_grey\SetteledJudgesObj.cs" />
     <Compile Include="Matrixes\Tables\Table components\TableObjects\Group1_blue\TrialDatesObj.cs" />
+    <Compile Include="Pages\ChangePassword.xaml.cs">
+      <DependentUpon>ChangePassword.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
     </Compile>
@@ -358,6 +365,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Pages\switch-user.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\warning.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

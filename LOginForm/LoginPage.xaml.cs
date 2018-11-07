@@ -33,6 +33,7 @@ namespace LOginForm
         //Holder for th elast name
         string Lname = "";
 
+
         //Holder for the admin list
         string AdminGroupList = "";
 
@@ -157,7 +158,7 @@ namespace LOginForm
                 ErrorBox.Visibility = Visibility.Hidden;
 
                 //Create a person obj
-                person = new Person(ID, Fname, Lname, AdminGroupList, TableGroups);
+                person = new Person(ID, Fname, Lname, login, AdminGroupList, TableGroups);
 
                 return true;
             }

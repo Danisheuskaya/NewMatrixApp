@@ -358,7 +358,7 @@ namespace LOginForm.Pages
 
             RestrictionLevelPage restrictionPage = new RestrictionLevelPage();
 
-            restrictionPage.Show();
+            restrictionPage.ShowDialog();
            
             
         }
@@ -370,7 +370,9 @@ namespace LOginForm.Pages
         /// <param name="e"></param>
         private void settingsButton_Click(object sender, RoutedEventArgs e)
         {
-            System.Windows.MessageBox.Show("Here will be a password window");
+            ChangePassword cp = new ChangePassword(person);
+
+            cp.ShowDialog();
         }
     }
 }
