@@ -59,13 +59,17 @@ namespace LOginForm
                 if (CheckLoginInfo())
                 {
                     // creating HomePage instance
-                    Window1 hp = new Window1(person);
+                   // Window1 hp = new Window1(person);
 
                     //Closing Login window
-                    Application.Current.Windows[0].Close();
+                    //Application.Current.Windows[0].Close();
 
                     //Redirect to the new Page
-                    hp.ShowDialog();
+                    //hp.ShowDialog();
+
+                    NewMainPage NMP = new NewMainPage();
+
+                    NMP.ShowDialog();
 
                     
 

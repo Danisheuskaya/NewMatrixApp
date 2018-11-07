@@ -205,7 +205,7 @@
             </Button.Effect>
         </Button>
         <Label x:Name="userNameLabel" Content="Label" HorizontalAlignment="Left" Margin="19.998,17.023,0,0" VerticalAlignment="Top" FontFamily="Century Gothic" Foreground="#FF7A8996"/>
-        <Button x:Name="settingsButton" Content="Settings" HorizontalAlignment="Left" Margin="0,305,0,0" VerticalAlignment="Top" Width="151" Height="37" Background="{x:Null}" FontFamily="Century Gothic" BorderBrush="{x:Null}" Foreground="#FF7A8996" FontSize="16" Visibility="Visible" Click="settingsButton_Click" >
+        <Button x:Name="settingsButton" Content="PASSWORD" HorizontalAlignment="Left" Margin="0,305,0,0" VerticalAlignment="Top" Width="151" Height="37" Background="{x:Null}" FontFamily="Century Gothic" BorderBrush="{x:Null}" Foreground="#FF7A8996" FontSize="16" Visibility="Visible" Click="settingsButton_Click" >
             <Button.Effect>
                 <DropShadowEffect/>
             </Button.Effect>
