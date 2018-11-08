@@ -66,6 +66,11 @@ namespace LOginForm
             ButtonCloseMenu.Visibility = Visibility.Collapsed;
         }
 
+        private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
         
     }
 }

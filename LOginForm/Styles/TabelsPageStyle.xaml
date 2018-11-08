@@ -1,0 +1,91 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:LOginForm.Styles">
+    
+    <!-- Style for the first button group -->
+    <Style x:Key="FirstGroupStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedAccentButton}">
+       
+
+        <Setter Property="Background" Value="#273642"/>
+        <Setter Property="Foreground" Value="#FF6E7780"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="Foreground" Value="#FF0E1923"/>
+                <Setter Property="BorderBrush" Value="#FF466E93"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    
+    <!-- Style for the second button group -->
+    <Style x:Key="SecondGroupStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedAccentButton}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#FF224753"/>
+        <Setter Property="BorderBrush" Value="#FF6F9BAA"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FF224753"/>
+                <Setter Property="Foreground" Value="#FF7A9AA4"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+
+    <!-- Style for the third button group -->
+    <Style x:Key="ThirdGroupStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedAccentButton}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#FF75666F"/>
+        <Setter Property="BorderBrush" Value="#FF804F6C"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FF75666F"/>
+                <Setter Property="Foreground" Value="#FFD1C1CA"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Style for the Forth button group -->
+    <Style x:Key="ForthGroupStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedAccentButton}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#FFDC6263"/>
+        <Setter Property="BorderBrush" Value="#FF9A4545"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FF9A4545"/>
+                <Setter Property="Foreground" Value="#FFF6A0A1"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Style for the Fifth button group -->
+    <Style x:Key="FifthGroupStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedAccentButton}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#FF8E1C16"/>
+        <Setter Property="BorderBrush" Value="#FFA24540"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FF8E1C16"/>
+                <Setter Property="Foreground" Value="#FFF6A0A1"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <!-- Style for the Sixth button group -->
+    <Style x:Key="SixthGroupStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedAccentButton}">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#FF5D5F6F"/>
+        <Setter Property="BorderBrush" Value="#FF5D5F6F"/>
+
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="#FF5D5F6F"/>
+                <Setter Property="Foreground" Value="#FFDEDFE2"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>
