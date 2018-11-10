@@ -370,9 +370,7 @@ namespace LOginForm.Pages
         /// <param name="e"></param>
         private void settingsButton_Click(object sender, RoutedEventArgs e)
         {
-            ChangePassword cp = new ChangePassword(person);
-
-            cp.ShowDialog();
+            //
         }
     }
 }

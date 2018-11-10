@@ -101,11 +101,7 @@
       <DependentUpon>LoginPage.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Page Include="NewMainPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\ChangePassword.xaml">
+    <Page Include="Pages\NewMainPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -118,6 +114,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\RestrictionLevelPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\Window2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -247,11 +247,8 @@
     <Compile Include="Matrixes\Tables\Table components\TableObjects\Group0_grey\SetteledAttorneysObj.cs" />
     <Compile Include="Matrixes\Tables\Table components\TableObjects\Group0_grey\SetteledJudgesObj.cs" />
     <Compile Include="Matrixes\Tables\Table components\TableObjects\Group1_blue\TrialDatesObj.cs" />
-    <Compile Include="NewMainPage.xaml.cs">
+    <Compile Include="Pages\NewMainPage.xaml.cs">
       <DependentUpon>NewMainPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\ChangePassword.xaml.cs">
-      <DependentUpon>ChangePassword.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\HomePage.xaml.cs">
       <DependentUpon>HomePage.xaml</DependentUpon>
@@ -262,11 +259,8 @@
     <Compile Include="Pages\RestrictionLevelPage.xaml.cs">
       <DependentUpon>RestrictionLevelPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Settings.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Pages\Settings.Designer.cs">
-      <DependentUpon>Settings.cs</DependentUpon>
+    <Compile Include="Pages\Window2.xaml.cs">
+      <DependentUpon>Window2.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
@@ -332,9 +326,6 @@
     <EmbeddedResource Include="Matrixes\Tables\Table components\HelperForms\TeamMembersDropBox.resx">
       <DependentUpon>TeamMembersDropBox.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Pages\Settings.resx">
-      <DependentUpon>Settings.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -373,9 +364,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\switch-user.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Pages\switch-user.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\warning.png" />

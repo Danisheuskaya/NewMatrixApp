@@ -67,7 +67,7 @@ namespace LOginForm
                     //Redirect to the new Page
                     //hp.ShowDialog();
 
-                    NewMainPage NMP = new NewMainPage();
+                    NewMainPage NMP = new NewMainPage(person);
 
                     NMP.ShowDialog();
 

@@ -30,7 +30,7 @@
             </Rectangle>
 
             <!-- Placehouulder for the future logo-->
-            <Image Source="Image/home.png" Width="100" Height="100" VerticalAlignment="Top" Margin="43.419,20,125,0" Grid.Column="1"/>
+            <Image Source="/LOginForm;component/Image/home.png" Width="100" Height="100" VerticalAlignment="Top" Margin="43.419,20,125,0" Grid.Column="1"/>
 
             <!-- White rectangle with shadow -->
             <Rectangle Width="280" Height="240" Fill="#FFFCFCFC" VerticalAlignment="Bottom" Margin="35,0,35,100" Grid.ColumnSpan="2">

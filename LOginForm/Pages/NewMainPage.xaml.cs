@@ -1,0 +1,242 @@
+﻿using MaterialDesignThemes.Wpf;
+using MySql.Data.MySqlClient;
+using System.Windows;
+using System.Windows.Forms;
+using LOginForm.Pages;
+
+namespace LOginForm
+{
+    /// <summary>
+    /// Interaction logic for NewMainPage.xaml
+    /// </summary>
+    public partial class NewMainPage : Window
+    {
+        Person user;
+        DBConnection db = new DBConnection();
+
+        public NewMainPage(Person person)
+        {
+            InitializeComponent();
+            user = person;
+        }
+
+        /// <summary>
+        /// This method closes an application
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
+        {
+            //Create window  dialog for conformation
+            DialogResult dialog = System.Windows.Forms.MessageBox.Show("Do you want to close application?", "Exit", MessageBoxButtons.YesNo);
+
+            //If yes, close application
+            if (dialog == System.Windows.Forms.DialogResult.Yes)
+            {
+                System.Windows.Application.Current.Shutdown();
+            }
+            //If not, cancel
+            e.Handled = true;
+        }
+
+
+
+        #region Animation handelers
+        /// <summary>
+        /// This method will open mwnu sideBar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonOpenMenu.Visibility = Visibility.Collapsed;
+            ButtonCloseMenu.Visibility = Visibility.Visible;
+        }
+
+        /// <summary>
+        /// This method will close menu sideBar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ButtonCloseMenu_Click(object sender, RoutedEventArgs e)
+        {
+            ButtonOpenMenu.Visibility = Visibility.Visible;
+            ButtonCloseMenu.Visibility = Visibility.Collapsed;
+        }
+
+        #endregion
+
+        #region Change password logic
+
+        //Variabels that will be used:
+        string oldPassword = "";
+        string newPassword = "";
+        string passwordConformation = "";
+
+        /// <summary>
+        /// This method will update user's password
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChangePasswordButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CheckFormValues())
+            {
+                // Update query
+                string UpdateUserPassword = "UPDATE `person` SET `Password` = '" + newPassword + "' WHERE `Login` = '" + user.Login + "'";
+
+                db.InsertDeleteQuery(UpdateUserPassword);
+
+                System.Windows.MessageBox.Show("Password updated");
+
+                //Close the form
+                ChangePasswordPopUp.IsOpen = false;
+            }
+        }
+
+     
+
+        /// <summary>
+        /// This method will check if all the values in the form are field
+        /// </summary>
+        private bool CheckFormValues()
+        {
+            GetValues();
+
+            //When all values entered:
+            if (!string.IsNullOrEmpty(oldPassword) && !string.IsNullOrEmpty(newPassword) && !string.IsNullOrEmpty(passwordConformation))
+            {
+                //Check if it is this user's old password:
+                if (IsUsersPassword())
+                {
+                    if (newPassword.Equals(passwordConformation))
+                    {                        
+                        return true;
+                    }
+
+                    //Show some worning
+                    System.Windows.MessageBox.Show("Passwords do not match");
+                }
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// This method gets values from the form
+        /// </summary>
+        private void GetValues()
+        {
+            //Show warning if all the fields
+            oldPassword = OldPasswordHolder.Password;
+            newPassword = NewPasswordHolder.Password;
+            passwordConformation = NewPasswordConformationHolder.Password;
+        }
+
+        /// <summary>
+        /// This method checks if Login and Password belong to the same user
+        /// </summary>
+        /// <returns>true if user is authentified</returns>
+        private bool IsUsersPassword()
+        {
+            //Constructing query to get password that corresponds to this User
+            string query = "SELECT * FROM `person` WHERE `Login` = '" + user.Login + "'";
+
+            //Run the query and save result in the reader
+            MySqlDataReader reader = db.Reader(query);
+
+            //Holder for the db value
+            string passwordFromDB = "";
+
+            while (reader.Read())
+            {
+                //If record with this login is found, retrieve password
+                passwordFromDB = reader["Password"].ToString();
+            }
+            db.CloseConnection();
+
+            //If passwords match, user is authenticated 
+            if (passwordFromDB.Equals(oldPassword))
+            {
+                return true;
+            }
+
+            System.Windows.MessageBox.Show("Old password and Login do not match");
+            return false;
+        }
+
+
+        #endregion
+        
+        #region Even listeners
+        /// <summary>
+        /// Thrying to open dialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePasswordPopUp.IsOpen = true;
+        }
+
+        private void OldPasswordHolder_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            CheckShowButton();
+        }
+
+        private void NewPasswordHolder_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            CheckShowButton();
+        }
+
+        private void NewPasswordConformationHolder_PasswordChanged(object sender, RoutedEventArgs e)
+        {
+            CheckShowButton();
+        }
+
+        /// <summary>
+        /// This method will show "Save changes" button
+        /// after all passwords are not null.
+        /// </summary>
+        private void CheckShowButton()
+        {
+            //Get form values
+            GetValues();
+
+            //Check if all fields are not null or empty
+            if (!string.IsNullOrEmpty(oldPassword) && !string.IsNullOrEmpty(newPassword) && !string.IsNullOrEmpty(passwordConformation))
+            {
+                //Show User a button
+                ChangePasswordButton.IsEnabled = true;
+            }
+        }
+
+        
+
+        private void CloseChangePassword_Click(object sender, RoutedEventArgs e)
+        {
+            ChangePasswordPopUp.IsOpen = false;
+        }
+
+        #endregion
+
+
+        private void RestrictionButton_Click(object sender, RoutedEventArgs e)
+        {
+            RestrictionLevelPage restrictionPage = new RestrictionLevelPage();
+
+            restrictionPage.ShowDialog();
+        }
+
+        /// <summary>
+        /// TEST TSET TEST
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            Window2 w2 = new Window2();
+            w2.ShowDialog();
+        }
+    }
+}
