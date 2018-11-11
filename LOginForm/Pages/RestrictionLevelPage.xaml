@@ -6,15 +6,9 @@
         xmlns:local="clr-namespace:LOginForm.Pages"
         mc:Ignorable="d"
         Title="RestrictionLevelPage" Height="450" Width="800">
-    <Grid Name="MainGrid">
-        <Grid.Background>
-            <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
-                <GradientStop Color="#FF071718" Offset="0"/>
-                <GradientStop Color="#FFC3DBDC" Offset="1"/>
-            </LinearGradientBrush>
-        </Grid.Background>
-        <Label x:Name="userNameLabel" Content="Please, select person:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,30,0,0" Width="200" Foreground="#FF839899"/>
-        <ComboBox x:Name="userNamesComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="287" Margin="335,30,0,0" SelectionChanged="userNamesComboBox_SelectionChanged" BorderBrush="#FF0A2323" Background="#FF839899" IsEditable="True"/>
+    <Grid Name="MainGrid" Background="White">
+        <Label x:Name="userNameLabel" Content="Please, select person:" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="86,30,0,0" Width="200" Foreground="#FF3084BC"/>
+        <ComboBox x:Name="userNamesComboBox" HorizontalAlignment="Left" VerticalAlignment="Top" Width="287" Margin="335,30,0,0" SelectionChanged="userNamesComboBox_SelectionChanged" BorderBrush="#FF007ACC" Background="White" IsEditable="True"/>
         <Grid Name="CheckBoxHolderGrid">
             <CheckBox x:Name="group1CheckBox" Content="Group 1" HorizontalAlignment="Left" Height="39.211" Margin="39.293,90.715,0,0" VerticalAlignment="Top" Width="149.174" Click="group1CheckBox_Click" Foreground="#FF79A0A0"/>
             <StackPanel Margin="39,132,0,184.667" HorizontalAlignment="Left" Width="116">
@@ -22,7 +16,7 @@
                 <Label Content="Trial Dates" Foreground="#FF79A0A0"/>
                 <Label Content="Settled Cases" Foreground="#FF83B0B0"/>
             </StackPanel>
-            <CheckBox x:Name="group2CheckBox" Content="Group 2" HorizontalAlignment="Left" Height="39.211" Margin="181.648,90.715,0,0" VerticalAlignment="Top" Width="149.174" Click="group2CheckBox_Click" Foreground="#FF621235" Background="#FF400C23"/>
+            <CheckBox x:Name="group2CheckBox" Content="Group 2" HorizontalAlignment="Left" Height="39.211" Margin="181.648,90.715,0,0" VerticalAlignment="Top" Width="149.174" Click="group2CheckBox_Click" Foreground="#FF621235" Background="#FF2196F3"/>
             <StackPanel Margin="181.648,129.926,0,186.744" HorizontalAlignment="Left" Width="115.344">
                 <Label Content="Case List" Height="31.383" Foreground="#FF75284A"/>
                 <Label Content="Client List" Foreground="#FF75284A"/>
@@ -43,9 +37,9 @@
                 <Label Content="Case Trucking" Height="34" Foreground="#FF411313"/>
             </StackPanel>
         </Grid>
-        <Button x:Name="saveChangesButton" Content="Save Changes" HorizontalAlignment="Right" Margin="0,0,36.885,27.24" VerticalAlignment="Bottom" Width="152.68" Height="43.935" FontFamily="Century Gothic" FontSize="16" BorderBrush="#FF101011" Background="#FF4C5F60" Foreground="#FFB7CECF" Click="saveChangesButton_Click"/>
+        <Button x:Name="saveChangesButton" Content="Save Changes" HorizontalAlignment="Right" Margin="0,0,36.885,27.24" VerticalAlignment="Bottom" Width="152.68" Height="43.935" FontFamily="Century Gothic" FontSize="16" BorderBrush="#FF007ACC" Background="{x:Null}" Foreground="#FF007ACC" Click="saveChangesButton_Click"/>
         <Grid x:Name="gridGroup1" HorizontalAlignment="Left" Height="98.76" Margin="39.293,0,0,72.574" VerticalAlignment="Bottom" Width="93.333" RenderTransformOrigin="0.49,0.557">
-            <RadioButton x:Name="adminRadio1" Content="Admin" Margin="0,0,10,0" VerticalAlignment="Top" Background="#FF560C25" BorderBrush="#FF560C25"/>
+            <RadioButton x:Name="adminRadio1" Content="Admin" Margin="0,0,10,0" VerticalAlignment="Top" Background="#FF2196F3" BorderBrush="#FF2196F3"/>
             <RadioButton x:Name="viewerRadio1" Content="Viewer" Margin="0,25.94,10,48.12" d:LayoutOverrides="Height"/>
         </Grid>
         <Grid x:Name="gridGroup2" HorizontalAlignment="Left" Height="98.76" Margin="181.648,0,0,72.574" VerticalAlignment="Bottom" Width="93.333" RenderTransformOrigin="0.49,0.557">
@@ -64,6 +58,6 @@
             <RadioButton x:Name="adminRadio5" Content="Admin" Margin="0,0,10,0" VerticalAlignment="Top"/>
             <RadioButton x:Name="viewerRadio5" Content="Viewer" Margin="0,25.94,10,48.12" d:LayoutOverrides="Height"/>
         </Grid>
-       
+
     </Grid>
 </Window>

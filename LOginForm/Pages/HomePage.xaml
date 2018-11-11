@@ -40,7 +40,7 @@
         </Button>
 
         <!-- Log out button -->
-        <Image Name="LogOut"  HorizontalAlignment="Left" Height="23.5" Margin="730.167,6.833,0,0" VerticalAlignment="Top" Width="20" Source="switch-user.png" RenderTransformOrigin="0.183,-0.956" MouseLeftButtonDown="LogOut_MouseLeftButtonDown"/>
+        <Image Name="LogOut"  HorizontalAlignment="Left" Height="23.5" Margin="730.167,6.833,0,0" VerticalAlignment="Top" Width="20" Source="/LOginForm;component/Image/switch-user.png" RenderTransformOrigin="0.183,-0.956" MouseLeftButtonDown="LogOut_MouseLeftButtonDown"/>
         <!-- Log out button -->
         <Image HorizontalAlignment="Left" Height="20.333" Margin="761.555,6.833,0,0" VerticalAlignment="Top" Width="21.778" Source="/LOginForm;component/Image/exit.png" MouseLeftButtonDown="Image_MouseLeftButtonDown_1" RenderTransformOrigin="-0.231,0.636"  />
 

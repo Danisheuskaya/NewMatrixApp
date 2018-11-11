@@ -4,16 +4,14 @@
     
     <!-- Style for the first button group -->
     <Style x:Key="FirstGroupStyle" TargetType="{x:Type Button}" BasedOn="{StaticResource MaterialDesignRaisedAccentButton}">
-       
 
-        <Setter Property="Background" Value="#273642"/>
-        <Setter Property="Foreground" Value="#FF6E7780"/>
-
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Foreground" Value="#FF0E1923"/>
+        <Setter Property="BorderBrush" Value="#FF466E93"/>
         <Style.Triggers>
             <Trigger Property="IsMouseOver" Value="True">
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="Foreground" Value="#FF0E1923"/>
-                <Setter Property="BorderBrush" Value="#FF466E93"/>
+                <Setter Property="Background" Value="#273642"/>
+                <Setter Property="Foreground" Value="#FF6E7780"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -87,5 +85,23 @@
                 <Setter Property="Foreground" Value="#FFDEDFE2"/>
             </Trigger>
         </Style.Triggers>
+    </Style>
+    
+    <!-- Style for the calendar -->
+    <Style x:Key="styleCalendar" TargetType="{x:Type Calendar}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Calendar}">
+                    <!-- Wrapping in ViewBox will enlarge calendar of that size.-->
+                    <Viewbox Height="200"
+                         Width="200">
+                        <CalendarItem x:Name="PART_CalendarItem"
+                                  Background="{TemplateBinding Background}"
+                                  BorderBrush="{TemplateBinding BorderBrush}"
+                                  BorderThickness="{TemplateBinding BorderThickness}"/>
+                    </Viewbox>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>

@@ -5,8 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:LOginForm.Pages"
         mc:Ignorable="d"
-        Title="Window2" Height="450" Width="800">
+        Title="Window2" Height="768" Width="1024">
     <Grid>
-        <DataGrid Name="testForTabel" GotMouseCapture="testForTabel_GotMouseCapture" />
+        <StackPanel>
+            <Button Content="Some Button"/>
+            <DataGrid Width="824" Height="618" Name="testDataGrid"  VerticalAlignment="Center" HorizontalAlignment="Center" CellEditEnding="testDataGrid_CellEditEnding" />
+        </StackPanel>
+        
+        
+
     </Grid>
 </Window>

@@ -5,6 +5,7 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Forms;
 using System.Windows.Input;
+using LOginForm.Pages;
 
 namespace LOginForm.Pages
 {
@@ -24,19 +25,7 @@ namespace LOginForm.Pages
             userNameLabel.Content = p.Fname + " " + p.Lname;
         }
 
-        /// <summary>
-        /// This Method shows restricted buttons depending on the person priority
-        /// </summary>
-        /// <param name="Priority"></param>
-        private void CheckRestriction(int Priority)
-        {
-            if(Priority > 1)
-            {
-                CaseTRucking.Visibility = Visibility.Visible;
-                Settings.Visibility = Visibility.Visible;
-            }
-            
-        }
+        
 
 
         
@@ -61,10 +50,10 @@ namespace LOginForm.Pages
 
             //create ActiveCase object
             TableCore tc = new ActiveClassObj();
-            
+
             //Open Form with Active Case Data
             OpenForm(tc);          
-
+            
         }
 
         /// <summary>
@@ -252,6 +241,9 @@ namespace LOginForm.Pages
             {
                 //Creating instance of the new page and sending corespondent query
                 MatrixForm mf = new MatrixForm(tc, person);
+
+                mf.Text = tc.TableName;
+               
                 mf.ShowDialog();
             }
 
@@ -356,9 +348,15 @@ namespace LOginForm.Pages
 
             //st.Show();
 
-            RestrictionLevelPage restrictionPage = new RestrictionLevelPage();
+            //RestrictionLevelPage restrictionPage = new RestrictionLevelPage();
 
-            restrictionPage.ShowDialog();
+            //restrictionPage.ShowDialog();
+
+
+           // LOginForm.Pages.ResrtrictionPage Restriction = new ResrtrictionPage();
+
+            //Restriction.ShowDialog();
+            
            
             
         }

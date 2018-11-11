@@ -31,7 +31,6 @@
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.tabelNameLabel = new System.Windows.Forms.Label();
             this.addNewRecordBtn = new System.Windows.Forms.Button();
             this.deleteRecordBtn = new System.Windows.Forms.Button();
             this.saveChangesBtn = new System.Windows.Forms.Button();
@@ -58,30 +57,20 @@
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle2;
             this.dataGridView1.GridColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.dataGridView1.Location = new System.Drawing.Point(70, 156);
+            this.dataGridView1.Location = new System.Drawing.Point(69, 66);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.RowTemplate.Resizable = System.Windows.Forms.DataGridViewTriState.True;
             this.dataGridView1.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.dataGridView1.Size = new System.Drawing.Size(1063, 627);
+            this.dataGridView1.Size = new System.Drawing.Size(1166, 653);
             this.dataGridView1.TabIndex = 2;
             this.dataGridView1.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellClick);
             this.dataGridView1.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellEndEdit);
             this.dataGridView1.CellFormatting += new System.Windows.Forms.DataGridViewCellFormattingEventHandler(this.dataGridView1_CellFormatting_1);
             // 
-            // tabelNameLabel
-            // 
-            this.tabelNameLabel.AutoSize = true;
-            this.tabelNameLabel.Font = new System.Drawing.Font("Century Gothic", 16F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tabelNameLabel.Location = new System.Drawing.Point(510, 44);
-            this.tabelNameLabel.Name = "tabelNameLabel";
-            this.tabelNameLabel.Size = new System.Drawing.Size(204, 38);
-            this.tabelNameLabel.TabIndex = 3;
-            this.tabelNameLabel.Text = "Table Name";
-            // 
             // addNewRecordBtn
             // 
-            this.addNewRecordBtn.Location = new System.Drawing.Point(105, 97);
+            this.addNewRecordBtn.Location = new System.Drawing.Point(167, 25);
             this.addNewRecordBtn.Name = "addNewRecordBtn";
             this.addNewRecordBtn.Size = new System.Drawing.Size(216, 35);
             this.addNewRecordBtn.TabIndex = 4;
@@ -91,7 +80,7 @@
             // 
             // deleteRecordBtn
             // 
-            this.deleteRecordBtn.Location = new System.Drawing.Point(662, 97);
+            this.deleteRecordBtn.Location = new System.Drawing.Point(724, 25);
             this.deleteRecordBtn.Name = "deleteRecordBtn";
             this.deleteRecordBtn.Size = new System.Drawing.Size(216, 35);
             this.deleteRecordBtn.TabIndex = 5;
@@ -101,7 +90,7 @@
             // 
             // saveChangesBtn
             // 
-            this.saveChangesBtn.Location = new System.Drawing.Point(360, 97);
+            this.saveChangesBtn.Location = new System.Drawing.Point(422, 25);
             this.saveChangesBtn.Name = "saveChangesBtn";
             this.saveChangesBtn.Size = new System.Drawing.Size(216, 35);
             this.saveChangesBtn.TabIndex = 6;
@@ -111,7 +100,7 @@
             // 
             // print_button
             // 
-            this.print_button.Location = new System.Drawing.Point(899, 97);
+            this.print_button.Location = new System.Drawing.Point(961, 25);
             this.print_button.Name = "print_button";
             this.print_button.Size = new System.Drawing.Size(216, 35);
             this.print_button.TabIndex = 8;
@@ -127,12 +116,11 @@
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Gainsboro;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
-            this.ClientSize = new System.Drawing.Size(1240, 828);
+            this.ClientSize = new System.Drawing.Size(1344, 706);
             this.Controls.Add(this.print_button);
             this.Controls.Add(this.saveChangesBtn);
             this.Controls.Add(this.deleteRecordBtn);
             this.Controls.Add(this.addNewRecordBtn);
-            this.Controls.Add(this.tabelNameLabel);
             this.Controls.Add(this.dataGridView1);
             this.Name = "MatrixForm";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Show;
@@ -141,13 +129,11 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MatrixForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
         #endregion
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.Label tabelNameLabel;
         private System.Windows.Forms.Button addNewRecordBtn;
         private System.Windows.Forms.Button deleteRecordBtn;
         private System.Windows.Forms.Button saveChangesBtn;

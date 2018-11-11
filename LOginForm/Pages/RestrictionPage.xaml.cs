@@ -6,39 +6,60 @@ using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Forms;
-
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace LOginForm.Pages
 {
     /// <summary>
-    /// Interaction logic for RestrictionLevelPage.xaml
+    /// Interaction logic for ResrtrictionPage.xaml
     /// </summary>
-    public partial class RestrictionLevelPage : Window
+    public partial class ResrtrictionPage : Window
     {
-
-        #region variabels
         DBConnection db = new DBConnection();
+        Person User;
+
+        #region Variabels
 
         string Login = "";
-
         string tableGroups = "0";
-
         string newAdminGroups = "0";
-
         string oldGroups = "";
-
         string oldAdminGroups = "";
+
         #endregion
 
-        public RestrictionLevelPage()
+        public ResrtrictionPage(Person user)
         {
             InitializeComponent();
-
+            User = user;
             LoadComboBox();
-
-            SetDefaultControls();
+            CheckPermission();
+           
         }
 
+        /// <summary>
+        /// This method will block regular user from acessing 
+        /// Admin buttons
+        /// </summary>
+        private void CheckPermission()
+        {
+            if (User.Role.Equals("user"))
+            {
+                RoutedEventArgs e = new RoutedEventArgs();
+                //Press my status button
+                MyStatusButton_Click(this, e);
+                MyStatusButton.Visibility = Visibility.Collapsed;
+                ComboName.Content = "USER NAME : ";
+
+                //Hide save changes button
+                SaveChangesButton.Visibility = Visibility.Collapsed;
+                userNamesComboBox.IsEnabled = false;
+            }
+        }
+
+
+
+        #region Load ComboBox
         /// <summary>
         /// This method will populate comboBox with all the user's from "Person" dataTable
         /// </summary>
@@ -87,7 +108,9 @@ namespace LOginForm.Pages
             userNamesComboBox.SelectedValuePath = "Key";
 
         }
+        #endregion
 
+        #region Boxes
         /// <summary>
         /// This method will assign new value when selection of comboBox changes
         /// </summary>
@@ -95,6 +118,8 @@ namespace LOginForm.Pages
         /// <param name="e"></param>
         private void userNamesComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            ClearCheckBoxes();
+
             //Retrieve info about selected person
             List<string> userInformation = (List<string>)userNamesComboBox.SelectedValue;
 
@@ -114,131 +139,11 @@ namespace LOginForm.Pages
 
         }
 
-
         /// <summary>
-        /// This method will show what groups User can Access NOW
+        /// This method clears previous selcetions
         /// </summary>
-        private void ShowUsersGroups()
+        private void ClearCheckBoxes()
         {
-
-            SetDefaultControls();
-
-
-            //Move get button groups list
-            List<string> groups = oldGroups.Split('_').OfType<string>().ToList();
-
-            //Get admin list
-            List<string> admin = oldAdminGroups.Split('_').OfType<string>().ToList();
-
-            //For some reson Controls do not exist
-            //Hence, hard code
-
-            if (groups.IndexOf("1") != -1)
-            {
-                group1CheckBox.IsChecked = true;
-                //Unlock radio ButtonGroup:
-                gridGroup1.IsEnabled = true;
-
-                //set radioButton value, showing if user is Admin or Viewer
-                if (admin.IndexOf("1") != -1)
-                {
-                    adminRadio1.IsChecked = true;
-                }
-                else
-                {
-                    viewerRadio1.IsChecked = true;
-                }
-            }
-            if (groups.IndexOf("2") != -1)
-            {
-                group2CheckBox.IsChecked = true;
-                //Unlock radio ButtonGroup:
-                gridGroup2.IsEnabled = true;
-
-                //set radioButton value, showing if user is Admin or Viewer
-                if (admin.IndexOf("2") != -1)
-                {
-                    adminRadio2.IsChecked = true;
-                }
-                else
-                {
-                    viewerRadio2.IsChecked = true;
-                }
-            }
-            if (groups.IndexOf("3") != -1)
-            {
-                group3CheckBox.IsChecked = true;
-                //Unlock radio ButtonGroup:
-                gridGroup3.IsEnabled = true;
-
-                //set radioButton value, showing if user is Admin or Viewer
-                if (admin.IndexOf("3") != -1)
-                {
-                    adminRadio3.IsChecked = true;
-                }
-                else
-                {
-                    viewerRadio3.IsChecked = true;
-                }
-            }
-            if (groups.IndexOf("4") != -1)
-            {
-                group4CheckBox.IsChecked = true;
-                //Unlock radio ButtonGroup:
-                gridGroup4.IsEnabled = true;
-
-                //set radioButton value, showing if user is Admin or Viewer
-                if (admin.IndexOf("4") != -1)
-                {
-                    adminRadio4.IsChecked = true;
-                }
-                else
-                {
-                    viewerRadio4.IsChecked = true;
-                }
-            }
-            if (groups.IndexOf("5") != -1)
-            {
-                group5CheckBox.IsChecked = true;
-                //Unlock radio ButtonGroup:
-                gridGroup5.IsEnabled = true;
-
-                //set radioButton value, showing if user is Admin or Viewer
-                if (admin.IndexOf("5") != -1)
-                {
-                    adminRadio5.IsChecked = true;
-                }
-                else
-                {
-                    viewerRadio5.IsChecked = true;
-                }
-            }
-        }
-
-
-
-
-
-        /// <summary>
-        /// This method Unchecks all CheckBoxes
-        /// And blocks all radio buttons groups by default
-        /// </summary>
-        private void SetDefaultControls()
-        {
-            //By default everything is unchecked
-            group1CheckBox.IsChecked = false;
-            group2CheckBox.IsChecked = false;
-            group3CheckBox.IsChecked = false;
-            group4CheckBox.IsChecked = false;
-            group5CheckBox.IsChecked = false;
-
-            //Block all ragioButton groups:
-            gridGroup1.IsEnabled = false;
-            gridGroup2.IsEnabled = false;
-            gridGroup3.IsEnabled = false;
-            gridGroup4.IsEnabled = false;
-            gridGroup5.IsEnabled = false;
-
             //Uncheck All radio buttons
             adminRadio1.IsChecked = false;
             adminRadio2.IsChecked = false;
@@ -253,15 +158,115 @@ namespace LOginForm.Pages
             viewerRadio4.IsChecked = false;
             viewerRadio5.IsChecked = false;
 
+            //Unckeck checkBoxes
+            //By default everything is unchecked
+            group1CheckBox.IsChecked = false;
+            group2CheckBox.IsChecked = false;
+            group3CheckBox.IsChecked = false;
+            group4CheckBox.IsChecked = false;
+            group5CheckBox.IsChecked = false;
         }
 
+        /// <summary>
+        /// This method shows what tabels User can see, 
+        /// and what status they have
+        /// </summary>
+        private void ShowUsersGroups()
+        {
+            //Get button groups list
+            List<string> groups = oldGroups.Split('_').OfType<string>().ToList();
+
+            //Get admin list
+            List<string> admin = oldAdminGroups.Split('_').OfType<string>().ToList();
+
+            //For some reson Controls do not exist
+            //Hence, hard code
+
+            if (groups.IndexOf("1") != -1)
+            {
+                group1CheckBox.IsChecked = true;
+                
+                //set radioButton value, showing if user is Admin or Viewer
+                if (admin.IndexOf("1") != -1)
+                {
+                    adminRadio1.IsChecked = true;
+                }
+                else
+                {
+                    viewerRadio1.IsChecked = true;
+                }
+            }
+            if (groups.IndexOf("2") != -1)
+            {
+                group2CheckBox.IsChecked = true;
+                //Unlock radio ButtonGroup:
+               
+
+                //set radioButton value, showing if user is Admin or Viewer
+                if (admin.IndexOf("2") != -1)
+                {
+                    adminRadio2.IsChecked = true;
+                }
+                else
+                {
+                    viewerRadio2.IsChecked = true;
+                }
+            }
+            if (groups.IndexOf("3") != -1)
+            {
+                group3CheckBox.IsChecked = true;
+                
+                //set radioButton value, showing if user is Admin or Viewer
+                if (admin.IndexOf("3") != -1)
+                {
+                    adminRadio3.IsChecked = true;
+                }
+                else
+                {
+                    viewerRadio3.IsChecked = true;
+                }
+            }
+            if (groups.IndexOf("4") != -1)
+            {
+                group4CheckBox.IsChecked = true;
+               
+                //set radioButton value, showing if user is Admin or Viewer
+                if (admin.IndexOf("4") != -1)
+                {
+                    adminRadio4.IsChecked = true;
+                }
+                else
+                {
+                    viewerRadio4.IsChecked = true;
+                }
+            }
+            if (groups.IndexOf("5") != -1)
+            {
+                group5CheckBox.IsChecked = true;
+               
+                //set radioButton value, showing if user is Admin or Viewer
+                if (admin.IndexOf("5") != -1)
+                {
+                    adminRadio5.IsChecked = true;
+                }
+                else
+                {
+                    viewerRadio5.IsChecked = true;
+                }
+            }
+        }
+
+        #endregion
+
+        #region Buttons
 
         /// <summary>
-        /// This method saves all the setting for the User
+        /// This method will Change Users groups
+        /// 
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void saveChangesButton_Click(object sender, RoutedEventArgs e)
+        private void SaveChangesButton_Click(object sender, RoutedEventArgs e)
         {
             ConstructGenerateGroupString();
 
@@ -336,85 +341,86 @@ namespace LOginForm.Pages
                 }
             }
         }
-
+   
         /// <summary>
-        /// This will handel the radio Buttons appearnece
+        /// This method will close the form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void group1CheckBox_Click(object sender, RoutedEventArgs e)
+        private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
-            if (group1CheckBox.IsChecked == true)
-            {
-                //Show radio buttons
-                gridGroup1.IsEnabled = true;
-            }
-            else
-            {
-                //Show radio buttons
-                gridGroup1.IsEnabled = false;
+            //Create window  dialog for conformation
+            DialogResult dialog = System.Windows.Forms.MessageBox.Show("Do you want to close application?", "Exit", MessageBoxButtons.YesNo);
 
+            //If yes, close application
+            if (dialog == System.Windows.Forms.DialogResult.Yes)
+            {
+                System.Windows.Application.Current.Shutdown();
             }
+            //If not, cancel
+            e.Handled = true;
         }
 
-        private void group2CheckBox_Click(object sender, RoutedEventArgs e)
+        #endregion
+
+
+        #region Event Listeners
+
+        private void InformationButton_Click(object sender, RoutedEventArgs e)
         {
-            if (group2CheckBox.IsChecked == true)
-            {
-                //Show radio buttons
-                gridGroup2.IsEnabled = true;
-            }
-            else
-            {
-                //Show radio buttons
-                gridGroup2.IsEnabled = false;
-
-
-            }
+            InformationPopUp.IsOpen = true;
         }
 
-        private void group3CheckBox_Click(object sender, RoutedEventArgs e)
+        private void CloseInfoButton_Click(object sender, RoutedEventArgs e)
         {
-            if (group3CheckBox.IsChecked == true)
-            {
-                //Show radio buttons
-                gridGroup3.IsEnabled = true;
-            }
-            else
-            {
-                //Show radio buttons
-                gridGroup3.IsEnabled = false;
-            }
-        }
-
-        private void group4CheckBox_Click(object sender, RoutedEventArgs e)
-        {
-            if (group4CheckBox.IsChecked == true)
-            {
-                //Show radio buttons
-                gridGroup4.IsEnabled = true;
-            }
-            else
-            {
-                //Show radio buttons
-                gridGroup4.IsEnabled = false;
-            }
-        }
-
-        private void group5CheckBox_Click(object sender, RoutedEventArgs e)
-        {
-            if (group5CheckBox.IsChecked == true)
-            {
-                //Show radio buttons
-                gridGroup5.IsEnabled = true;
-            }
-            else
-            {
-                //Show radio buttons
-                gridGroup5.IsEnabled = false;
-            }
+            InformationPopUp.IsOpen = false;
         }
 
 
+        #endregion
+
+        /// <summary>
+        /// This method will show information about logged in user:
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MyStatusButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            SearchForName();
+            
+        }
+
+        /// <summary>
+        /// This method will find User's name from the comboBox list
+        /// </summary>
+        private void SearchForName()
+        {
+            string userName = User.Fname + " " + User.Lname;
+
+
+            int i = 0;
+            bool found = false;
+            while(i < userNamesComboBox.Items.Count && !found)
+            {
+                var Item = userNamesComboBox.Items[i];
+                if (Item is KeyValuePair<List<string>, string>)
+                {
+                    //Retrieve key:
+                    List<string> key = ((KeyValuePair<List<string>, string>)Item).Key;
+
+                    //Check if login from comboBox is the same as user's
+                    if (key[0].Equals(User.Login))
+                    {
+                        found = true;
+                        userNamesComboBox.SelectedIndex = i;
+                    }
+                }
+
+                i++;
+                //
+
+            }
+        }
     }
 }

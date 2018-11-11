@@ -27,21 +27,37 @@ namespace LOginForm.Pages
     public partial class Window2 : Window
     {
         DBConnection db = new DBConnection();
+
         TableCore tc = new ActiveClassObj();
+
+        //Holder for the Tabel instance
+        DataTable tabel;
 
         public Window2()
         {
             InitializeComponent();
-            DataGridView dgv = new DataGridView();
-            fillDGV(dgv);
+           
+            fillDataGrid();
+
+            GetDataTabel();
             
         }
 
-        private void fillDGV(DataGridView dgv)
+        /// <summary>
+        /// This method will save an instance of the current table
+        /// </summary>
+        private void GetDataTabel()
+        {
+            tabel = ((DataView)this.testDataGrid.ItemsSource).Table;
+        }
+
+        private void fillDataGrid()
         {
             DataTable table = tc.FillTable();
 
-            testForTabel.ItemsSource = table.DefaultView;
+            table.AcceptChanges();
+
+            testDataGrid.ItemsSource = table.DefaultView;
             //Placing it inside the datagrid view
             
 
@@ -49,56 +65,38 @@ namespace LOginForm.Pages
 
         }
 
-        /// <summary>
-        /// Experementing wirh columns
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void testForTabel_GotMouseCapture(object sender, System.Windows.Input.MouseEventArgs e)
+        private void testDataGrid_CellEditEnding(object sender, DataGridCellEditEndingEventArgs e)
         {
-            MessageBox.Show("I captured something: ");
+            //The way to get cell coordinates:
+            //Get row:
+            //1. Find selected Item
+            DataGrid dg = (DataGrid)sender;
+            DataRowView row_selected = dg.SelectedItem as DataRowView;
 
-            DependencyObject dep = (DependencyObject)e.OriginalSource;
+            //Get its index:
+            //Row =  tabel.Rows.IndexOf(row_selected.Row);
 
-            while ((dep != null) && !(dep is DataGridCell) && !(dep is DataGridColumnHeader))
+
+            //Get Column index:
+            int Column = testDataGrid.CurrentCell.Column.DisplayIndex;
+
+
+
+            int Row = 1000;
+
+            if (row_selected != null)
             {
-                dep = VisualTreeHelper.GetParent(dep);
+                Row = tabel.Rows.IndexOf(row_selected.Row);
+
             }
 
-            if (dep == null)
-                return;
+            MessageBox.Show("The cell coordinates are: Row : " + Row + " and Column : " + Column);
 
-            if (dep is DataGridColumnHeader)
-            {
-                DataGridColumnHeader columnHeader = dep as DataGridColumnHeader;
-                // do something
-            }
+            string CellValue = tabel.Rows[Row][Column].ToString();
 
-            if (dep is DataGridCell)
-            {
-                DataGridCell cell = dep as DataGridCell;
+            MessageBox.Show("The cell value is : " + CellValue);
 
-                // navigate further up the tree
-                while ((dep != null) && !(dep is DataGridRow))
-                {
-                    dep = VisualTreeHelper.GetParent(dep);
-                }
 
-                DataGridRow row = dep as DataGridRow;
-
-                
-            }
-        }
-
-        private int FindRowIndex(DataGridRow row)
-        {
-            DataGrid dataGrid = ItemsControl.ItemsControlFromItemContainer(row)
-                as DataGrid;
-
-            int index = dataGrid.ItemContainerGenerator.
-                IndexFromContainer(row);
-
-            return index;
         }
     }
 }

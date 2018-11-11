@@ -33,6 +33,8 @@ namespace LOginForm
         //Holder for th elast name
         string Lname = "";
 
+        string Role = "user";
+
 
         //Holder for the admin list
         string AdminGroupList = "";
@@ -59,13 +61,13 @@ namespace LOginForm
                 if (CheckLoginInfo())
                 {
                     // creating HomePage instance
-                   // Window1 hp = new Window1(person);
+                  // Window1 hp = new Window1(person);
 
                     //Closing Login window
                     //Application.Current.Windows[0].Close();
 
                     //Redirect to the new Page
-                    //hp.ShowDialog();
+                   // hp.ShowDialog();
 
                     NewMainPage NMP = new NewMainPage(person);
 
@@ -143,6 +145,7 @@ namespace LOginForm
                 ID = Convert.ToInt32(reader["ID"]);
                 Fname = reader["Fname"].ToString();
                 Lname = reader["Lname"].ToString();
+                Role = reader["role"].ToString();
                 AdminGroupList = reader["Admin_group_list"].ToString();
                 TableGroups = reader["tabel_groups"].ToString();
             }
@@ -162,7 +165,7 @@ namespace LOginForm
                 ErrorBox.Visibility = Visibility.Hidden;
 
                 //Create a person obj
-                person = new Person(ID, Fname, Lname, login, AdminGroupList, TableGroups);
+                person = new Person(ID, Fname, Lname, login, Role, AdminGroupList, TableGroups);
 
                 return true;
             }

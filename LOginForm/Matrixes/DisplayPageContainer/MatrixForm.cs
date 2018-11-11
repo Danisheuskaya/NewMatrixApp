@@ -38,7 +38,7 @@ namespace LOginForm
             tc = tableCore;
 
             //Changethe name of table holder 
-            tabelNameLabel.Text = tc.TableName;
+           
 
             //This method will determine what user can do with the table
             CheckUserPemition(person);
@@ -52,6 +52,8 @@ namespace LOginForm
             //Block buttons if user is not allowed to modefy/add new records
             //BlockRestrictedButtons(person.AdminGroupList);
     }
+
+     
 
 
         /// <summary>

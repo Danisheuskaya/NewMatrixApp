@@ -3,6 +3,9 @@ using MySql.Data.MySqlClient;
 using System.Windows;
 using System.Windows.Forms;
 using LOginForm.Pages;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace LOginForm
 {
@@ -168,7 +171,7 @@ namespace LOginForm
 
         #endregion
         
-        #region Even listeners
+        #region Event listeners
         /// <summary>
         /// Thrying to open dialog
         /// </summary>
@@ -223,20 +226,190 @@ namespace LOginForm
 
         private void RestrictionButton_Click(object sender, RoutedEventArgs e)
         {
-            RestrictionLevelPage restrictionPage = new RestrictionLevelPage();
+            Pages.ResrtrictionPage Restriction = new ResrtrictionPage(user);
 
-            restrictionPage.ShowDialog();
+            Restriction.ShowDialog();
+        }
+
+
+        #region Tabels Buttons 
+
+        
+        #region Group 1
+        private void ActiveCaseButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create ActiveCase object
+            TableCore tc = new ActiveClassObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
+
+        private void TrialDatesButton_Click(object sender, RoutedEventArgs e)
+        {
+            TableCore tc = new TrialDatesObj();
+
+            //Open Form with Trial Dates Data
+            OpenForm(tc);
+        }
+
+        private void SettledCasesButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Sateled Case obj
+            TableCore tc = new SateledCasesObj();
+
+            //Open form
+            OpenForm(tc);
+        }
+        #endregion
+
+        #region Group 2
+        private void CaseListButton_Click(object sender, RoutedEventArgs e)
+        {
+            //Create case list object
+            TableCore tc = new CaseLIstObj();
+
+            //Open Form with Case List Data
+            OpenForm(tc);
+        }
+
+        private void ClientListButton_Click(object sender, RoutedEventArgs e)
+        {
+            TableCore tc = new ClientListDataObj();
+
+            //Open Form with Client List Data
+            OpenForm(tc);
+        }
+
+        private void CourtListButton_Click(object sender, RoutedEventArgs e)
+        {
+            TableCore tc = new CourtListObj();
+
+            //Open Form with Court List Data
+            OpenForm(tc);
+        }
+        #endregion
+
+        #region Group 3
+        private void DiscoveryMatrixButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Motion Matrix record object
+            TableCore tc = new DiscoveryMatrixObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
+
+        private void MotionMatrixButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Motion Matrix record object
+            TableCore tc = new MotionMatrixObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
+        #endregion
+
+        #region Group 4
+        private void MedicalRecordButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Medical record object
+            TableCore tc = new MedicalRecordObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
+
+        private void MedicalMatrixButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Medical Matrix record object
+            TableCore tc = new MedicalMatrixObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
+        #endregion
+
+        #region Group 5
+        private void CaseTruckingButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Medical record object
+            TableCore tc = new MedicalRecordObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
+        #endregion
+
+        #region Group 0 (Archive)
+        private void SettledAttorneysButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Setteled Attorney record object
+            TableCore tc = new SetteledAttorneysObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
+
+        private void SettledJudjesButton_Click(object sender, RoutedEventArgs e)
+        {
+            //create Setteled Judge record object
+            TableCore tc = new SetteledJudgesObj();
+
+            //Open Form with Active Case Data
+            OpenForm(tc);
+        }
+        #endregion
+
+        /// <summary>
+        /// This method opens up a form view with requested Table
+        /// </summary>
+        /// <param name="query"></param>
+        private void OpenForm(TableCore tc)
+        {
+            if (PersonCanOpen(tc))
+            {
+                //Creating instance of the new page and sending corespondent query
+                MatrixForm mf = new MatrixForm(tc, user);
+
+                mf.Text = tc.TableName;
+
+                mf.ShowDialog();
+            }
+
+
         }
 
         /// <summary>
-        /// TEST TSET TEST
+        /// This method will determine if this person can modefy this form
         /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        /// <param name="tc"></param>
+        /// <returns></returns>
+        private bool PersonCanOpen(TableCore tc)
         {
-            Window2 w2 = new Window2();
-            w2.ShowDialog();
+
+            //Get the tag of the table
+            var tableTag = tc.TableGroupNumber;
+
+            //retrieve persons group list
+            List<string> groups = user.TableGroups.Split('_').OfType<string>().ToList();
+
+            if (groups.IndexOf(tableTag) == -1)
+            {
+                System.Windows.MessageBox.Show("Sorry, the access is denyed!");
+
+                return false;
+            }
+
+            return true;
         }
+
+
+
+
+
+        #endregion
+
+
     }
 }
