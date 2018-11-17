@@ -90,7 +90,7 @@ namespace LOginForm
            
             if (index == 7)
             {
-                //By this method will convert chackBox value into SQL valu and update UpdateQueryString
+                //This method will convert chackBox value into SQL valu and update UpdateQueryString
                 UpdateStringForCheckBoxInput(index, newValue, key);
 
                 //When user marks record as Sattaled,
@@ -101,13 +101,14 @@ namespace LOginForm
                //if record is not finished, we need to add one more line to the Update Quey
                 if (dialog == DialogResult.No)
                 {
-                    UpdateQuery += "UPDATE " + DbTable + " SET `Flag_Finished`= 1  WHERE " + keyField + " = '" + key + "' ;";
+                    UpdateQuery += "UPDATE " + DbTable + " SET `Flag_Finished`= '1'  WHERE " + keyField + " = '" + key + "' ;";
                 }
             
             }
-
-            UpdateQuery = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ;";
-
+            else
+            { 
+                UpdateQuery = "UPDATE " + DbTable + " SET " + DbFields[index] + " = '" + newValue + "' WHERE " + keyField + " = '" + key + "' ;";
+            }
         }
 
         /// <summary>
@@ -159,7 +160,7 @@ namespace LOginForm
         /// <param name="dg"></param>
         public override void ColorTable(DataGridView dg)
         {
-            //Asiign colors
+            //Assign colors
             string team1 = "#a8f7f0";
             string team2 = "#baf7a8";
             string team3 = "#d2d8d0";

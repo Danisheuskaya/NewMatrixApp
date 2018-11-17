@@ -6,6 +6,7 @@ using LOginForm.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Media.Animation;
 
 namespace LOginForm
 {
@@ -21,6 +22,20 @@ namespace LOginForm
         {
             InitializeComponent();
             user = person;
+            CheckStatus();
+        }
+
+        /// <summary>
+        /// This method will hida a button that shows
+        /// admin menu if user is NOT an admin
+        /// </summary>
+        private void CheckStatus()
+        {
+            if (user.Role.Equals("user"))
+            {
+                ButtonCloseMenu.Visibility = Visibility.Hidden;
+                ButtonOpenMenu.Visibility = Visibility.Hidden;
+            }
         }
 
         /// <summary>
@@ -224,6 +239,11 @@ namespace LOginForm
         #endregion
 
 
+        /// <summary>
+        /// This will show a restriction page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RestrictionButton_Click(object sender, RoutedEventArgs e)
         {
             Pages.ResrtrictionPage Restriction = new ResrtrictionPage(user);
@@ -334,7 +354,7 @@ namespace LOginForm
         private void CaseTruckingButton_Click(object sender, RoutedEventArgs e)
         {
             //create Medical record object
-            TableCore tc = new MedicalRecordObj();
+            TableCore tc = new CaseTruckingObj();
 
             //Open Form with Active Case Data
             OpenForm(tc);
@@ -408,8 +428,14 @@ namespace LOginForm
 
 
 
+
         #endregion
 
 
+    
+
+
+
+        
     }
 }

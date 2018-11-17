@@ -1,12 +1,15 @@
 ﻿
+using LOginForm.Properties;
+using MySql.Data.MySqlClient;
 using System;
+using System.Data;
 using System.Windows.Forms;
 
 namespace LOginForm
 {
     public partial class CaseTruckingRecord : FormPrototype
     {
-        DBConnection db;
+        DBConnection db = new DBConnection();
 
         //Query needed to select all team options for the dropBox
         string teamQ = "SELECT * FROM `team` ORDER BY Team_ID";
@@ -53,7 +56,6 @@ namespace LOginForm
             //On load clear date
             trialDateTimePicker.CustomFormat = " ";
             trialDateTimePicker.Format = DateTimePickerFormat.Custom;
-
             generateTeamOptions(teamComboBox, teamQ, keyV, valueV);
         }
 
@@ -97,7 +99,7 @@ namespace LOginForm
         private void addBtn_Click(object sender, System.EventArgs e)
         {
             //check if the case number is unique
-            if (CheckUniqueKeyField(caseNumber, warning, uniqueQ, dbKey))
+            if (CheckUniqueKeyField(caseNumberHolder, warning, uniqueQ, dbKey))
             {
                 //get all the info
                 getFormValues();
@@ -118,11 +120,11 @@ namespace LOginForm
 
         private void getFormValues()
         {
-             caseNo = caseNumber.Text;
-             name = caseName.Text;
-             venue = VenueText.Text;
+             caseNo = caseNumberHolder.Text;
+             name = caseNameHolder.Text;
+             venue = VenueHolder.Text;
             //Team is handeled by event Handeler
-             dateServed = ComplaintServed.Text;
+             dateServed = ComplaintServedHolder.Text;
              initDisc = intDiscovery.Text;
              attorney = attorneyText.Text;
              //Trial date is handeled by the event handeler
@@ -146,9 +148,11 @@ namespace LOginForm
             CleanForm();
         }
 
-        
+
+
 
         #endregion
+
 
        
     }

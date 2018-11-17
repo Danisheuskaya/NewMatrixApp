@@ -350,12 +350,12 @@ namespace LOginForm.Pages
         private void ButtonClose_Click(object sender, RoutedEventArgs e)
         {
             //Create window  dialog for conformation
-            DialogResult dialog = System.Windows.Forms.MessageBox.Show("Do you want to close application?", "Exit", MessageBoxButtons.YesNo);
+            DialogResult dialog = System.Windows.Forms.MessageBox.Show("Do you want to close this page", "Exit", MessageBoxButtons.YesNo);
 
             //If yes, close application
             if (dialog == System.Windows.Forms.DialogResult.Yes)
             {
-                System.Windows.Application.Current.Shutdown();
+                this.Close();
             }
             //If not, cancel
             e.Handled = true;

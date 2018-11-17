@@ -19,10 +19,10 @@ namespace LOginForm
             KeyFieldIndex = 0;
 
             //Fields in DB
-            DbFields = new string[] { "Case_Number", "Case_Name", "Judge_dpmt", "Court_Info", "Reporter", "Rullings", "Motion_Info"};
+            DbFields = new string[] { "Case_Number", "Case_Name", "Judge_dpmt", "Court_Info", "Reporter", "Rullings", "Note", "Motion_Info"};
 
             //Headers for the table columns
-            ColumnHeaders = new string[] { "Case Number", "Case Name", "Judge/Department", "Court Information", "Reporter Information", "Tenatative Rullings", "Motion Information" };
+            ColumnHeaders = new string[] { "Case Number", "Case Name", "Judge/Department", "Court Information", "Reporter Information", "Tenatative Rullings", "Notes", "Motion Information" };
 
             //Delete query
             DeliteQuery = "DELETE FROM `court_list` WHERE Case_Number = ";

@@ -64,6 +64,19 @@
             </DoubleAnimationUsingKeyFrames>
 
         </Storyboard>
+        <Storyboard x:Key="DropDownMenu">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="menu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="10"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="140"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
+
+        <Storyboard x:Key="HideBackMenu" Name="HideMenuStoryBoard">
+            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.Y)" Storyboard.TargetName="menu">
+                <EasingDoubleKeyFrame KeyTime="0" Value="140"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="10"/>
+            </DoubleAnimationUsingKeyFrames>
+        </Storyboard>
 
     </Window.Resources>
 
@@ -75,7 +88,15 @@
         <EventTrigger RoutedEvent="ButtonBase.Click" SourceName="ButtonCloseMenu">
             <BeginStoryboard x:Name="CloseMenu_BeginStoryboard" Storyboard="{StaticResource CloseMenu}"/>
         </EventTrigger>
+        <!--<EventTrigger RoutedEvent="ButtonBase.Click" SourceName="SettingsButton">
+            <BeginStoryboard Storyboard="{StaticResource DropDownMenu}"/>
+        </EventTrigger>-->
+        <!--<EventTrigger RoutedEvent="MouseDown" SourceName="GridMain">
+            <BeginStoryboard Storyboard="{StaticResource HideBackMenu}"/>
+        </EventTrigger>-->
     </Window.Triggers>
+
+
     <Grid Background="#FF3053A4" >
         <Grid.RowDefinitions>
             <RowDefinition Height="287.161"/>
@@ -85,7 +106,7 @@
         <!-- Grid when menu is closed-->
 
 
-        <StackPanel Name="StackPanelMenu" Width="250" HorizontalAlignment="Left" Margin="-250 0 0 0 " RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" >
+        <StackPanel x:Name="StackPanelMenu" Width="250" HorizontalAlignment="Left" Margin="-250 0 0 0 " RenderTransformOrigin="0.5,0.5" Grid.RowSpan="2" >
             <StackPanel.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -149,16 +170,16 @@
                     </ListViewItem.RenderTransform>
 
                     <materialDesign:DialogHost x:Name="ChangePasswordPopUp" CloseOnClickAway="True" >
-                         <materialDesign:DialogHost.DialogContent>
+                        <materialDesign:DialogHost.DialogContent>
                             <!--HERE WILL BE A STUCK-->
-                            <StackPanel Width="250" Margin="20" Background="White" >
+                            <StackPanel x:Name="PasswordPanel" Width="250" Margin="20" Background="White" >
 
                                 <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right">
-                                    <Button Name="CloseChangePassword"  Click="CloseChangePassword_Click" HorizontalAlignment="Right" BorderBrush="{x:Null}" Background="{x:Null}">
+                                    <Button x:Name="CloseChangePassword"  Click="CloseChangePassword_Click" HorizontalAlignment="Right" BorderBrush="{x:Null}" Background="{x:Null}">
                                         <materialDesign:PackIcon  Kind="Close" Width="20" Height="20" VerticalAlignment="Top"  Foreground="#DDCDCDCD"/>
                                     </Button>
                                 </StackPanel>
-                                
+
 
                                 <!--Here will be password parts -->
 
@@ -177,7 +198,7 @@
                                     materialDesign:HintAssist.Hint="Confirm Password"
                                     Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" PasswordChanged="NewPasswordConformationHolder_PasswordChanged" />
                                 <Button
-                                    Name="ChangePasswordButton"
+                                    x:Name="ChangePasswordButton"
                                     Style="{StaticResource MaterialDesignRaisedLightButton}"
                                     Width="100" Margin="5"
                                     ToolTip="Resource name: MaterialDesignRaisedLightButton" Background="{x:Null}" BorderBrush="Gray" Foreground="#DD4C4343" ForceCursor="True" Content="SAVE" Click="ChangePasswordButton_Click" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" IsEnabled="False" />
@@ -185,16 +206,16 @@
                             </StackPanel>
 
                         </materialDesign:DialogHost.DialogContent>
-                        
+
                         <StackPanel Orientation="Horizontal" Margin="10 0" >
                             <materialDesign:PackIcon Kind="AccountKey" Width="30" Height="30" VerticalAlignment="Center" Margin="5 5 0 5" Foreground="#DDCDCDCD"/>
                             <Button Content="Change Password"  VerticalAlignment="Center" Foreground="#FFB8BDC8" Click="Button_Click" BorderBrush="{x:Null}" Background="{x:Null}"/>
                         </StackPanel>
-                        
+
                     </materialDesign:DialogHost>
                 </ListViewItem>
-                
-                
+
+
                 <ListViewItem x:Name="listViewItem2" Height="60" RenderTransformOrigin="0.5,0.5">
                     <ListViewItem.RenderTransform>
                         <TransformGroup>
@@ -206,22 +227,22 @@
                     </ListViewItem.RenderTransform>
                     <StackPanel Orientation="Horizontal" Margin="10 0">
                         <materialDesign:PackIcon Kind="Lock" Width="30" Height="30" VerticalAlignment="Center" Margin="5 5 0 5" Foreground="#DDCDCDCD"/>
-                        <Button Name="RestrictionButton" Click="RestrictionButton_Click" Content="Restriction Manager" VerticalAlignment="Center" Foreground="#FFB8BDC8" Background="{x:Null}" BorderBrush="{x:Null}"/>
+                        <Button x:Name="RestrictionButton" Click="RestrictionButton_Click" Content="Restriction Manager" VerticalAlignment="Center" Foreground="#FFB8BDC8" Background="{x:Null}" BorderBrush="{x:Null}"/>
                     </StackPanel>
                 </ListViewItem>
-                
+
                 <!-- Trying to add magic -->
-                
+
             </ListView>
 
-        
-            
+
+
 
 
         </StackPanel>
 
         <!--Grid when menu is open-->
-        <Grid x:Name="GridMain" Background="#FF3350A0"  Width="1024" RenderTransformOrigin="0.5,0.5" Margin="0,0,-6.667,0" Grid.RowSpan="2">
+        <Grid x:Name="GridMain" Background="#FF3350A0"  Width="1024" RenderTransformOrigin="0.5,0.5" Margin="0,0,-6.667,0" Grid.RowSpan="2" >
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -239,11 +260,11 @@
             <Grid Grid.Column="1" VerticalAlignment="Center" >
                 <StackPanel Margin="0 40" >
                     <Calendar Style="{StaticResource styleCalendar}" />
-                   
+                    
                 </StackPanel>
             </Grid>
 
-           
+
 
             <!--The main part of the Grid Grid-->
             <Grid Background="#FFFAF9F9" >
@@ -273,40 +294,40 @@
                 <!---Area for the buttons-->
 
                 <!--First group -->
-                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center"  Name="ButtonGroupOne" Grid.Column="0" Grid.Row="2">
-                    <Button Margin="10" Width="110" Style="{StaticResource FirstGroupStyle}" FontSize="10" Name="ActiveCaseButton" Click="ActiveCaseButton_Click" >ACTIVE CASE</Button>
-                    <Button Margin="10" Width="110" Style="{StaticResource FirstGroupStyle}" FontSize="10" Name="TrialDatesButton" Click="TrialDatesButton_Click">TRIAL DATES</Button>
-                    <Button Margin="10" Width="110" Style="{StaticResource FirstGroupStyle}" FontSize="10" Name="SettledCasesButton" Click="SettledCasesButton_Click">SETTLED CASES</Button>
+                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center"  x:Name="ButtonGroupOne" Grid.Column="0" Grid.Row="2">
+                    <Button Margin="10" Width="110" Style="{StaticResource FirstGroupStyle}" FontSize="10" x:Name="ActiveCaseButton" Click="ActiveCaseButton_Click" Content="ACTIVE CASE" />
+                    <Button Margin="10" Width="110" Style="{StaticResource FirstGroupStyle}" FontSize="10" x:Name="TrialDatesButton" Click="TrialDatesButton_Click" Content="TRIAL DATES"/>
+                    <Button Margin="10" Width="110" Style="{StaticResource FirstGroupStyle}" FontSize="10" x:Name="SettledCasesButton" Click="SettledCasesButton_Click" Content="SETTLED CASES"/>
                 </StackPanel>
 
                 <!--Second group -->
-                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center"  Name="ButtonGroupTwo" Grid.Column="1" Grid.Row="2">
-                    <Button Margin="10" Width="110" Style="{StaticResource SecondGroupStyle}" FontSize="10" Name="CaseListButton" Click="CaseListButton_Click" >CASE LIST</Button>
-                    <Button Margin="10" Width="110" Style="{StaticResource SecondGroupStyle}" FontSize="10" Name="ClientListButton" Click="ClientListButton_Click">CLIENT LIST</Button>
-                    <Button Margin="10" Width="110" Style="{StaticResource SecondGroupStyle}" FontSize="10" Name="CourtListButton" Click="CourtListButton_Click">COURT LIST</Button>
+                <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center"  x:Name="ButtonGroupTwo" Grid.Column="1" Grid.Row="2">
+                    <Button Margin="10" Width="110" Style="{StaticResource SecondGroupStyle}" FontSize="10" x:Name="CaseListButton" Click="CaseListButton_Click" Content="CASE LIST" />
+                    <Button Margin="10" Width="110" Style="{StaticResource SecondGroupStyle}" FontSize="10" x:Name="ClientListButton" Click="ClientListButton_Click" Content="CLIENT LIST"/>
+                    <Button Margin="10" Width="110" Style="{StaticResource SecondGroupStyle}" FontSize="10" x:Name="CourtListButton" Click="CourtListButton_Click" Content="COURT LIST"/>
                 </StackPanel>
 
                 <!--Third group -->
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"  Name="ButtonGroupThree" Grid.Column="2" Grid.Row="2">
-                    <Button Margin="10" Width="125" Style="{StaticResource ThirdGroupStyle}" FontSize="10" Name="DiscoveryMatrixButton" Click="DiscoveryMatrixButton_Click" >DISCOVERY MATRIX</Button>
-                    <Button Margin="10" Width="125" Style="{StaticResource ThirdGroupStyle}" FontSize="10" Name="MotionMatrixButton" Click="MotionMatrixButton_Click">MOTION MATRIX</Button>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"  x:Name="ButtonGroupThree" Grid.Column="2" Grid.Row="2">
+                    <Button Margin="10" Width="125" Style="{StaticResource ThirdGroupStyle}" FontSize="10" x:Name="DiscoveryMatrixButton" Click="DiscoveryMatrixButton_Click" Content="DISCOVERY MATRIX" />
+                    <Button Margin="10" Width="125" Style="{StaticResource ThirdGroupStyle}" FontSize="10" x:Name="MotionMatrixButton" Click="MotionMatrixButton_Click" Content="MOTION MATRIX"/>
                 </StackPanel>
 
                 <!--Forth group -->
-                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center"  Name="ButtonGroupFore" Grid.Column="0" Grid.Row="4">
-                    <Button Margin="10" Width="125" Style="{StaticResource ForthGroupStyle}" FontSize="10" Name="MedicalRecordButton" Click="MedicalRecordButton_Click">MEDICAL RECORD</Button>
-                    <Button Margin="10" Width="125" Style="{StaticResource ForthGroupStyle}" FontSize="10" Name="MedicalMatrixButton" Click="MedicalMatrixButton_Click">MEDICAL MATRIX</Button>
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center"  x:Name="ButtonGroupFore" Grid.Column="0" Grid.Row="4">
+                    <Button Margin="10" Width="125" Style="{StaticResource ForthGroupStyle}" FontSize="10" x:Name="MedicalRecordButton" Click="MedicalRecordButton_Click" Content="MEDICAL RECORD"/>
+                    <Button Margin="10" Width="125" Style="{StaticResource ForthGroupStyle}" FontSize="10" x:Name="MedicalMatrixButton" Click="MedicalMatrixButton_Click" Content="MEDICAL MATRIX"/>
                 </StackPanel>
 
                 <!--Fifth group -->
-                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"  Name="ButtonGroupFive" Grid.Column="1" Grid.Row="3">
-                    <Button Margin="10" Width="125" Style="{StaticResource FifthGroupStyle}" FontSize="10" Name="CaseTruckingButton" Click="CaseTruckingButton_Click" >CASE TRUCKING</Button>
+                <StackPanel VerticalAlignment="Center" HorizontalAlignment="Center"  x:Name="ButtonGroupFive" Grid.Column="1" Grid.Row="3">
+                    <Button Margin="10" Width="125" Style="{StaticResource FifthGroupStyle}" FontSize="10" x:Name="CaseTruckingButton" Click="CaseTruckingButton_Click" Content="CASE TRUCKING" />
                 </StackPanel>
 
                 <!--Sixth group -->
-                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center"  Name="ButtonGroupSix" Grid.Column="2" Grid.Row="4">
-                    <Button Margin="10" Width="135" Style="{StaticResource SixthGroupStyle}" FontSize="10" Name="SettledAttorneysButton" Click="SettledAttorneysButton_Click" >SETTELED ATTORNEYS</Button>
-                    <Button Margin="10" Width="135" Style="{StaticResource SixthGroupStyle}" FontSize="10" Name="SettledJudjesButton" Click="SettledJudjesButton_Click">SETTELED JUDGES</Button>
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center"  x:Name="ButtonGroupSix" Grid.Column="2" Grid.Row="4">
+                    <Button Margin="10" Width="135" Style="{StaticResource SixthGroupStyle}" FontSize="10" x:Name="SettledAttorneysButton" Click="SettledAttorneysButton_Click" Content="SETTELED ATTORNEYS" />
+                    <Button Margin="10" Width="135" Style="{StaticResource SixthGroupStyle}" FontSize="10" x:Name="SettledJudjesButton" Click="SettledJudjesButton_Click" Content="SETTELED JUDGES"/>
                 </StackPanel>
 
 
@@ -316,12 +337,28 @@
 
         <!--This is buttons layout-->
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="40" HorizontalAlignment="Right" Margin="0,0,-0.001,0">
-            <Button Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" >
+            <Button x:Name="SettingsButton" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" >
                 <materialDesign:PackIcon Kind ="Settings"/>
             </Button>
             <Button x:Name="ButtonClose" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" Click="ButtonClose_Click" >
                 <materialDesign:PackIcon Kind ="Power"/>
             </Button>
+        </StackPanel>
+
+        <StackPanel x:Name="UserMenu"  Margin="0 -110 0 0" Width="200" Height="100" VerticalAlignment="Top" HorizontalAlignment="Right">
+            <Menu x:Name="menu" RenderTransformOrigin="0.5,0.5" >
+                <Menu.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Menu.RenderTransform>
+                <MenuItem Header="Change Password"/>
+                <MenuItem Header="My Restrictions"/>
+
+            </Menu>
         </StackPanel>
     </Grid>
 </Window>

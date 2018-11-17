@@ -63,6 +63,7 @@
     <Reference Include="System.Drawing" />
     <Reference Include="System.Drawing.Design" />
     <Reference Include="System.Management" />
+    <Reference Include="System.Messaging" />
     <Reference Include="System.Security" />
     <Reference Include="System.Transactions" />
     <Reference Include="System.Windows.Forms" />
@@ -105,15 +106,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\HomePage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Pages\RegisterPage.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Pages\RestrictionLevelPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -254,14 +247,8 @@
     <Compile Include="Pages\NewMainPage.xaml.cs">
       <DependentUpon>NewMainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\HomePage.xaml.cs">
-      <DependentUpon>HomePage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\RestrictionLevelPage.xaml.cs">
-      <DependentUpon>RestrictionLevelPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\Window2.xaml.cs">
       <DependentUpon>Window2.xaml</DependentUpon>
@@ -374,6 +361,30 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Image\warning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\printIcon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\saveIcon.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\png\001-save-file-option.png" />
+    <Resource Include="Image\png\002-save.png" />
+    <Resource Include="Image\png\003-save-1.png" />
+    <Resource Include="Image\png\004-printer.png" />
+    <Resource Include="Image\png\005-printer-1.png" />
+    <Resource Include="Image\png\006-print.png" />
+    <Resource Include="Image\png\007-printer-tool.png" />
+    <Resource Include="Image\png\008-rubbish-bin.png" />
+    <Resource Include="Image\png\009-delete.png" />
+    <Resource Include="Image\png\010-delete-1.png" />
+    <Resource Include="Image\png\011-power-button-off.png" />
+    <Resource Include="Image\png\012-power.png" />
+    <Resource Include="Image\png\013-plus.png" />
+    <Resource Include="Image\png\014-add.png" />
+    <Resource Include="Image\png\015-add-1.png" />
+    <Resource Include="Image\png\016-plus-1.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

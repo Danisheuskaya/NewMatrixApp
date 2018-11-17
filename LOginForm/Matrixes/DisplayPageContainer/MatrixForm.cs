@@ -43,14 +43,16 @@ namespace LOginForm
             //This method will determine what user can do with the table
             CheckUserPemition(person);
 
+            //Show tabel name
+            TabelNameLabel.Text = tc.TableName;
+
             //Load the table
             LoadTable();
 
             //Cleare a query holder
             updateQueryes = new List<string>();
 
-            //Block buttons if user is not allowed to modefy/add new records
-            //BlockRestrictedButtons(person.AdminGroupList);
+            
     }
 
      
@@ -79,11 +81,8 @@ namespace LOginForm
                 //Mark user as viewer
                 admin = false;
 
-                //Hid all the buttons except print
-                addNewRecordBtn.Visible = false;
-                saveChangesBtn.Visible = false;
-                deleteRecordBtn.Visible = false;
-                
+                UserMenuStrip.Visible = true;
+                AdminMenuStrip.Visible = false;
             }
 
             
@@ -116,34 +115,6 @@ namespace LOginForm
         }
 
 
-        /// <summary>
-        /// This method will block Add/Delete/Modefy record buttons
-        /// according to the user restriction level
-        /// </summary>
-        /// <param name="priority"></param>
-        private void BlockRestrictedButtons(int restrictionLvl)
-        {
-            //All buttons are blocked by default
-
-            //level 0: user can only view tables,
-            //no changes needed
-
-            //level 1: user can view and modefy table
-            if(restrictionLvl >= 1)
-            {
-                saveChangesBtn.Visible = true;
-            }
-            //level 2: user can view, add new records, and modefy table
-            if (restrictionLvl >= 2)
-            {
-                addNewRecordBtn.Visible = true;
-            }
-            //level 3: user can view, add, modefy and delete table
-            if (restrictionLvl == 3)
-            {
-                deleteRecordBtn.Visible = true;
-            }
-        }
 
         #endregion
 
@@ -153,79 +124,14 @@ namespace LOginForm
         * Since each table is unique, every table object has a corresponding record table.
         * */
 
-        #region Add Record Helpers      
-
-        /// <summary>
-        /// This function will open a supporting form for adding new record to the db, if there is one
-        /// Else, it would show a message that explaince what form is a parent one for current table
-        /// </summary>
-        /// <param name="sender">is the parent, or correspondig table core object</param>
-        /// <param name="e"></param>
-        private void addBtn_Click(object sender, EventArgs e)
-        {           
-
-            //Get the instance of the record Object
-            var addRecord = tc.MyRecord;
-
-            if (addRecord == null)
-            {
-                MessageBox.Show(tc.AddNewRecordMessage);
-            }
-            else
-            {
-                //Open record object
-                addRecord.ShowDialog(this);
-            }
-                     
-           
-        }
+        
 
 
-        #endregion
+     
 
-        /*
-        * Deletion of the record will remove selected by user row 
-        * from the database table based on the key value of that row
-        * */
+       
 
-        #region Delete record       
-
-        /// <summary>
-        /// Logic for the delete button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void deleteRecord_Click(object sender, EventArgs e)
-        {
-            //Get row values
-            int rowindex = dataGridView1.CurrentCell.RowIndex;
-
-            //get key value for that row
-            string key = dataGridView1.Rows[rowindex].Cells[tc.KeyFieldIndex].Value.ToString();
-
-            
-            //Create window  dialog for conformation, in case delet button is pressed by mistake
-            DialogResult dialog = MessageBox.Show("Are you sure you want to delete this record", "Delete", MessageBoxButtons.YesNo);
-
-            //If yes, return to the login page
-            if (dialog == DialogResult.Yes)
-            {
-                //Delete row
-                tc.DeleteRow(key);
-
-                MessageBox.Show("The record was successfully removed");
-
-                //Cleare data Grid
-                dataGridView1.DataSource = null;
-
-                //Load updated table
-                LoadTable();
-
-            }   
-
-        }
-
-        #endregion
+       
 
         /*
          * Modefecation of the record is done by processing all the queryes that
@@ -349,60 +255,9 @@ namespace LOginForm
         }
 
 
-        /// <summary>
-        /// This method lets the user to close any opend table
-        /// by pressing [X] button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void MatrixForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
+        
 
-            //Create window  dialog for conformation, in case exit button is pressed by mistake
-            DialogResult dialog = MessageBox.Show("Do you want to close this table?", "Exit", MessageBoxButtons.YesNo);
-
-            //If yes, close this instance of a table
-            if (dialog == DialogResult.Yes)
-            {
-                
-                //Run all updates
-                modefyBtn_Click(sender, e);
-
-                //Close the form
-                ControlBox = false;
-            }
-            else
-            {
-                //Discard an event
-                e.Cancel = true;
-            }
-
-           
-        }
-
-        /// <summary>
-        /// This method will print the form
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void button5_Click(object sender, EventArgs e)
-        {
-            DGVPrinter printer = new DGVPrinter();
-            printer.Title = tc.TableName;//Header
-            printer.SubTitle = string.Format("Date: {0}", DateTime.Now.Date.ToString());
-            printer.SubTitleFormatFlags = System.Drawing.StringFormatFlags.LineLimit | System.Drawing.StringFormatFlags.NoClip;
-            printer.PageNumbers = true;
-            printer.PageNumberInHeader = false;
-            printer.PorportionalColumns = true;
-            printer.HeaderCellAlignment = System.Drawing.StringAlignment.Near;
-            printer.Footer = "Some Footer Titel";
-            printer.FooterSpacing = 15;
-            printer.printDocument.DefaultPageSettings.Landscape = true;
-            //printer.PrintDataGridView(dataGridView1);
-            printer.PrintPreviewDataGridView(dataGridView1);
-
-
-        }
+        
 
 
         /// <summary>
@@ -431,6 +286,138 @@ namespace LOginForm
             }
            
         }
+
+        #region Manu Bar
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ExitButton_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+        /// <summary>
+        /// This method lets the user to close any opend table
+        /// by pressing [X] button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void MatrixForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+
+            //Create window  dialog for conformation, in case exit button is pressed by mistake
+            DialogResult dialog = MessageBox.Show("Do you want to close this table?", "Exit", MessageBoxButtons.YesNo);
+
+            //If yes, close this instance of a table
+            if (dialog == DialogResult.Yes)
+            {
+
+                //Run all updates
+                modefyBtn_Click(sender, e);
+
+                //Close the form
+                ControlBox = false;
+            }
+            else
+            {
+                //Discard an event
+                e.Cancel = true;
+            }
+
+
+        }
+
+        /// <summary>
+        /// This method will print the form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void addNewRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            DGVPrinter printer = new DGVPrinter();
+            printer.Title = tc.TableName;//Header
+            printer.SubTitle = string.Format("Date: {0}", DateTime.Now.Date.ToString());
+            printer.SubTitleFormatFlags = System.Drawing.StringFormatFlags.LineLimit | System.Drawing.StringFormatFlags.NoClip;
+            printer.PageNumbers = true;
+            printer.PageNumberInHeader = false;
+            printer.PorportionalColumns = true;
+            printer.HeaderCellAlignment = System.Drawing.StringAlignment.Near;
+            printer.Footer = "Some Footer Titel";
+            printer.FooterSpacing = 15;
+            printer.printDocument.DefaultPageSettings.Landscape = true;
+            //printer.PrintDataGridView(dataGridView1);
+            printer.PrintPreviewDataGridView(dataGridView1);
+        }
+
+        /// <summary>
+        /// This method will save 
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void saveChangesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            modefyBtn_Click(sender, e);
+        }
+
+        /// <summary>
+        /// This function will open a supporting form for adding new record to the db, if there is one
+        /// Else, it would show a message that explaince what form is a parent one for current table
+        /// </summary>
+        /// <param name="sender">is the parent, or correspondig table core object</param>
+        /// <param name="e"></param>
+        private void addRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Get the instance of the record Object
+            var addRecord = tc.MyRecord;
+
+            if (addRecord == null)
+            {
+                MessageBox.Show(tc.AddNewRecordMessage);
+            }
+            else
+            {
+                //Open record object
+                addRecord.ShowDialog(this);
+            }
+        }
+
+        /*
+        * Deletion of the record will remove selected by user row 
+        * from the database table based on the key value of that row
+        * */
+       
+        private void deleteRecordToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Get row values
+            int rowindex = dataGridView1.CurrentCell.RowIndex;
+
+            //get key value for that row
+            string key = dataGridView1.Rows[rowindex].Cells[tc.KeyFieldIndex].Value.ToString();
+
+
+            //Create window  dialog for conformation, in case delet button is pressed by mistake
+            DialogResult dialog = MessageBox.Show("Are you sure you want to delete this record", "Delete", MessageBoxButtons.YesNo);
+
+            //If yes, return to the login page
+            if (dialog == DialogResult.Yes)
+            {
+                //Delete row
+                tc.DeleteRow(key);
+
+                MessageBox.Show("The record was successfully removed");
+
+                //Cleare data Grid
+                dataGridView1.DataSource = null;
+
+                //Load updated table
+                LoadTable();
+
+            }
+        }
+
+        #endregion
+
 
     }
 }
