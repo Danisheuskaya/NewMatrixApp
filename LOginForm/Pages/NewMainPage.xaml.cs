@@ -6,7 +6,9 @@ using LOginForm.Pages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Windows.Media;
 using System.Windows.Media.Animation;
+using MessageBox = System.Windows.Forms.MessageBox;
 
 namespace LOginForm
 {
@@ -107,8 +109,9 @@ namespace LOginForm
 
                 System.Windows.MessageBox.Show("Password updated");
 
-                //Close the form
-                ChangePasswordPopUp.IsOpen = false;
+                //Clear the form:
+                OldPasswordHolder.Password = NewPasswordHolder.Password = NewPasswordConformationHolder.Password = "";
+                ChangePasswordButton.IsEnabled = false;
             }
         }
 
@@ -128,12 +131,13 @@ namespace LOginForm
                 if (IsUsersPassword())
                 {
                     if (newPassword.Equals(passwordConformation))
-                    {                        
+                    {
+                        NewPasswordConformationHolder.ClearValue(BorderBrushProperty);
                         return true;
                     }
 
-                    //Show some worning
-                    System.Windows.MessageBox.Show("Passwords do not match");
+                    //Passwords do not match, color conformation border 
+                    NewPasswordConformationHolder.BorderBrush = Brushes.OrangeRed;
                 }
             }
 
@@ -149,6 +153,8 @@ namespace LOginForm
             oldPassword = OldPasswordHolder.Password;
             newPassword = NewPasswordHolder.Password;
             passwordConformation = NewPasswordConformationHolder.Password;
+
+            
         }
 
         /// <summary>
@@ -176,10 +182,12 @@ namespace LOginForm
             //If passwords match, user is authenticated 
             if (passwordFromDB.Equals(oldPassword))
             {
+                OldPasswordHolder.ClearValue(BorderBrushProperty);
                 return true;
             }
 
-            System.Windows.MessageBox.Show("Old password and Login do not match");
+            //System.Windows.MessageBox.Show("Old password and Login do not match");
+            OldPasswordHolder.BorderBrush = Brushes.OrangeRed;
             return false;
         }
 
@@ -194,7 +202,32 @@ namespace LOginForm
         /// <param name="e"></param>
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            //ChangePasswordPopUp.IsOpen = true;
+
+            ChangePasswordPopUp.PlacementTarget = sender as UIElement;
             ChangePasswordPopUp.IsOpen = true;
+        }
+
+        
+
+        /// <summary>
+        /// This method will show "Save changes" button
+        /// after all passwords are not null.
+        /// </summary>
+        private void CheckShowButton()
+        {
+            //Get form values
+            GetValues();
+
+            
+            //Check if all fields are not null or empty
+            if (!string.IsNullOrEmpty(oldPassword) && !string.IsNullOrEmpty(newPassword) && !string.IsNullOrEmpty(passwordConformation))
+            {
+               
+                //Show User a button
+                ChangePasswordButton.IsEnabled = true;
+                
+            }
         }
 
         private void OldPasswordHolder_PasswordChanged(object sender, RoutedEventArgs e)
@@ -212,24 +245,7 @@ namespace LOginForm
             CheckShowButton();
         }
 
-        /// <summary>
-        /// This method will show "Save changes" button
-        /// after all passwords are not null.
-        /// </summary>
-        private void CheckShowButton()
-        {
-            //Get form values
-            GetValues();
 
-            //Check if all fields are not null or empty
-            if (!string.IsNullOrEmpty(oldPassword) && !string.IsNullOrEmpty(newPassword) && !string.IsNullOrEmpty(passwordConformation))
-            {
-                //Show User a button
-                ChangePasswordButton.IsEnabled = true;
-            }
-        }
-
-        
 
         private void CloseChangePassword_Click(object sender, RoutedEventArgs e)
         {
@@ -429,13 +445,48 @@ namespace LOginForm
 
 
 
+
+
+
+
+
+
         #endregion
 
+        #region Right corner munu buttons
+        /// <summary>
+        /// This method will open a password change popUp
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SettingsButton_Click(object sender, RoutedEventArgs e)
+        {
+            
+            ChangePasswordPopUp.PlacementTarget = sender as UIElement;
+            ChangePasswordPopUp.IsOpen = true;
+        }
 
-    
+        /// <summary>
+        /// This method will display a Restriction page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void InformationButton_Click(object sender, RoutedEventArgs e)
+        {
+            RestrictionButton_Click(sender, e);
+        }
 
+        #endregion
 
-
-        
+        /// <summary>
+        /// This method will open a page with wait list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void WaitListButton_Click(object sender, RoutedEventArgs e)
+        {
+            UserWaitList waitList = new UserWaitList();
+            waitList.ShowDialog();
+        }
     }
 }

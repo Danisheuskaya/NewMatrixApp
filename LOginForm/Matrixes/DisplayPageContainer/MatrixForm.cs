@@ -118,21 +118,7 @@ namespace LOginForm
 
         #endregion
 
-        /*
-        * To add a new record to the database, user will fill out a supporting 
-        * form that would pup-up after pressing button.
-        * Since each table is unique, every table object has a corresponding record table.
-        * */
-
         
-
-
-     
-
-       
-
-       
-
         /*
          * Modefecation of the record is done by processing all the queryes that
          * accumulated in the updateQueryes List.
@@ -177,7 +163,7 @@ namespace LOginForm
                 }
 
                 //For debug purposes show what update query was runned
-                MessageBox.Show(tc.UpdateQuery);
+                //MessageBox.Show(tc.UpdateQuery);
 
                 //Inform user that changes have been made
                 MessageBox.Show("All changes have been saved");
@@ -208,25 +194,25 @@ namespace LOginForm
             
 
             //TEST
-            MessageBox.Show("The column index is :  " + columnIndex);
+            //MessageBox.Show("The column index is :  " + columnIndex);
 
             //Get the row index
             int rowIndex = dataGridView1.CurrentCell.RowIndex;
 
             //TEST
-            MessageBox.Show("The row index is :  " + rowIndex);
+            //MessageBox.Show("The row index is :  " + rowIndex);
 
             //Get new value
             string newValue = dataGridView1.Rows[rowIndex].Cells[columnIndex].Value.ToString();
 
             //TEST
-            MessageBox.Show("The new value is :  " + newValue);
+            //MessageBox.Show("The new value is :  " + newValue);
 
             //Get the key value for this row
             string keyValue = dataGridView1.Rows[rowIndex].Cells[tc.KeyFieldIndex].Value.ToString();
 
             //TEST
-            MessageBox.Show("The key is :  " + keyValue);
+            //MessageBox.Show("The key is :  " + keyValue);
 
             //create update query
             tc.UpdateStringConstructor(columnIndex, newValue, keyValue);
@@ -235,7 +221,7 @@ namespace LOginForm
             updateQueryes.Add(tc.UpdateQuery);
 
             //TEST
-            MessageBox.Show(tc.UpdateQuery);
+            //MessageBox.Show(tc.UpdateQuery);
             
 
         }
@@ -287,7 +273,7 @@ namespace LOginForm
            
         }
 
-        #region Manu Bar
+        #region Menu Bar
         /// <summary>
         /// 
         /// </summary>
@@ -359,6 +345,12 @@ namespace LOginForm
         {
             modefyBtn_Click(sender, e);
         }
+
+        /*
+        * To add a new record to the database, user will fill out a supporting 
+        * form that would pup-up after pressing button.
+        * Since each table is unique, every table object has a corresponding record table.
+        * */
 
         /// <summary>
         /// This function will open a supporting form for adding new record to the db, if there is one

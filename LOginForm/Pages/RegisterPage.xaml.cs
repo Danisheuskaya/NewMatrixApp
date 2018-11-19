@@ -2,6 +2,7 @@
 using System;
 using System.Windows;
 using System.Windows.Input;
+using System.Windows.Media;
 
 /***************************************************************************
  * 
@@ -30,14 +31,15 @@ namespace LOginForm.Pages
         /// Variables for the person object and form values
         /// </summary>
 
-        private string Fname;
-        private string Lname;
-        private string login;
-        private string password;
-        private string passwordConfirm;
+        private string Fname = "";
+        private string Lname = "";
+        private string login ="";
+        private string password = "";
+        private string passwordConfirm = "";
 
         //Getting DB object
         private DBConnection db;
+        private RoutedEventArgs e;
 
         #endregion
 
@@ -49,7 +51,7 @@ namespace LOginForm.Pages
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        
+
         private void RegisterBtn_Click(object sender, RoutedEventArgs e)
         {
             //Check if all fields filled and login name is available
@@ -63,7 +65,7 @@ namespace LOginForm.Pages
         }
 
 
-        #region Check Functions
+        #region Check Filled functions
 
         /// <summary>
         /// This method checks if all the field in the form are field
@@ -77,26 +79,35 @@ namespace LOginForm.Pages
             clearWarnings();
 
             //Get first name value
-            Fname = FirstN.Text;
+            Fname = FirstNameHolder.Text;
             if (string.IsNullOrEmpty(Fname))
             {
-                FirstW.Visibility = Visibility.Visible;
+                //Color field border:
+                FirstNameHolder.BorderBrush = Brushes.OrangeRed;
+                //Add message
+                FirstNameHolder.ToolTip = "Please, enter your name";
                 flag = false;
             }
 
             //Get last name value
-            Lname = LastN.Text;
+            Lname = LastNameHolder.Text;
             if (string.IsNullOrEmpty(Lname))
             {
-                LastW.Visibility = Visibility.Visible;
+                //Color field border:
+                LastNameHolder.BorderBrush = Brushes.OrangeRed;
+                //Add message
+                LastNameHolder.ToolTip = "Please, enter your last name";
                 flag = false;
             }            
 
             ///Get login value
-            login = LoginR.Text;
+            login = LoginHolder.Text;
             if (string.IsNullOrEmpty(login))
             {
-                LoginWorning.Visibility = Visibility.Visible;
+                //Color field border:
+                LoginHolder.BorderBrush = Brushes.OrangeRed;
+                //Add message
+                LoginHolder.ToolTip = "Please, create your login";
                 flag = false;
             }
             else
@@ -105,19 +116,25 @@ namespace LOginForm.Pages
             }
 
             //Get Password
-            password = PasswordR.Password;
+            password = PasswordHolder.Password;
             if (string.IsNullOrEmpty(password))
             {
-                PasswordW.Visibility = Visibility.Visible;
+                //Color field border:
+                PasswordHolder.BorderBrush = Brushes.OrangeRed;
+                //Add message
+                PasswordHolder.ToolTip = "Please, enter your password";
                 flag = false;
             }
 
 
             //Get Password Conformation
-            passwordConfirm = PassworConf.Password;
+            passwordConfirm = PasswordConformationHolder.Password;
             if (string.IsNullOrEmpty(passwordConfirm))
             {
-                PasswordConformW.Visibility = Visibility.Visible;
+                //Color field border:
+                PasswordConformationHolder.BorderBrush = Brushes.OrangeRed;
+                //Add message
+                PasswordConformationHolder.ToolTip = "Please, confirm your password";
                 flag = false;
             }
 
@@ -128,69 +145,133 @@ namespace LOginForm.Pages
 
         }
 
-        #endregion
-
         /// <summary>
-        /// This method will check if this user is already in the system
+        /// This method checks if the login name is available
         /// </summary>
-        /// <returns></returns>
-
-        private bool CheckUniqueUser()
+        private bool CheckLoginAvailable()
         {
             bool unique = true;
 
+            //First, check if login is available among approved users:
+            string approvedUsers = "select * from person where Login = '" + login + "'";
 
-            //Query to retrieve a retrieve a record with user first and last name
-            string query = "SELECT * FROM `temp_person` WHERE Fname = '"+Fname+"' AND Lname = '"+Lname+"' AND Login = '"+login+"'";
+            //Now, check if this login is available among users in the wait list:
+            string waitListUsers = "SELECT * FROM `person_wait_list` where Login = '" + login + "'";
 
-            //process query
-            MySqlDataReader reader = db.Reader(query);
+            string[] listOfUsers = new string[] { approvedUsers, waitListUsers };
 
-            //If there is any results
-            while (reader.Read())
+            foreach (string query in listOfUsers)
             {
-                //If there is a line in the reader => user is not unique
-                unique = false;
+                //create reader
+                MySqlDataReader reader = db.Reader(query);
+
+                //If there is a record => login taken
+                while (reader.Read())
+                {
+                    //reading value of login from db
+                    unique = false;
+                }
+
+                //Close connection
+                db.CloseConnection();
+
             }
 
-            //close connection
-            db.CloseConnection();
-
-            /*********************************************************************************
-             * Also check if user is already approwed to be in the permanent table "person"
-             * ******************************************************************************/
-
-            //Query to retrieve a retrieve a record with user first and last name
-            string query2 = "SELECT * FROM `person` WHERE Fname = '" + Fname + "' AND Lname = '" + Lname + "' AND Login = '" + login + "'";
-
-            //process query
-            MySqlDataReader reader2 = db.Reader(query);
-
-            //If there is any results
-            while (reader2.Read())
+            //if login name is taken, showing warning
+            if (!unique)
             {
-                //If there is a line in the reader => user is not unique
-                unique = false;
+                //Color field border:
+                LoginHolder.BorderBrush = Brushes.OrangeRed;
+                //Add message
+                LoginHolder.ToolTip = "Sorry, this login is already taken";
             }
-
-            //close connection
-            db.CloseConnection();
 
             return unique;
         }
 
+
+        #endregion
+
+        #region Password Match and Unique User
+        /// <summary>
+        /// This method checks if the passwords match
+        /// </summary>
+        private bool CheckPasswordsMatch()
+        {
+            clearWarnings();
+
+            if (!password.Equals(passwordConfirm))
+            {
+                //Color field border:
+                PasswordConformationHolder.BorderBrush = Brushes.OrangeRed;
+                //Add message
+                PasswordConformationHolder.ToolTip = "Your passwords do not match.";
+
+                return false;
+
+            }
+
+            return true;
+        }
+        /// <summary>
+        /// This method will check if this user is already in the system
+        /// </summary>
+        /// <returns></returns>
+        /// 
+        private bool CheckUniqueUser()
+        {
+            bool unique = true;
+            
+            //Query to retrieve a retrieve a record with user first and last name
+            string waitListQuery = "SELECT * FROM `person_wait_list` WHERE Fname = '" + Fname+"' AND Lname = '"+Lname+"' AND Login = '"+login+"'";
+
+            string aprovedUsersQuery = "SELECT * FROM `person` WHERE Fname = '" + Fname + "' AND Lname = '" + Lname + "' AND Login = '" + login + "'";
+
+            string[] tabelsCheck = new string[]{ waitListQuery, aprovedUsersQuery };
+
+            //process query
+
+            foreach(string query in tabelsCheck)
+            {
+                MySqlDataReader reader = db.Reader(query);
+
+                //If there is any results
+                while (reader.Read())
+                {
+                    //If there is a line in the reader => user is not unique
+                    unique = false;
+                }
+
+                //close connection
+                db.CloseConnection();
+            }
+
+            //If combination already exist, return to login page:
+            if (!unique)
+            {
+                MessageBox.Show("User: " + Fname + " " + Lname + " with this login already exist");
+
+                //Redirect user to the Login Page
+                LoginPageButton_Click(this, e as RoutedEventArgs);
+            }
+            return unique;
+        }
+
+        #endregion
         /// <summary>
         /// This method adds user to the db and redirects to the login page
         /// </summary>
         private void AddUser()
         {
+            //If this user does not exist, it will be placed to the wait list
+
             //the insertion query
-            string query = "INSERT INTO person (`Fname`, `Lname`, `Login`, `Password`)" +
-                            " VALUES('"+ Fname + "', '" + Lname + "',  '" + login + "', '" + password + "');";
+            string query = "INSERT INTO `person_wait_list`(`Fname`, `Lname`, `Login`, `Password`) " +
+                "VALUES ('"+Fname+ "','"+Lname+ "','"+login+ "','"+password+"')";
             db.InsertDeleteQuery(query);
 
             //Show success message           
-            MessageBox.Show("You have been added to the system!");
+            MessageBox.Show("You have been added to the waitlist. It might take some time, before you will be able to access the forms.");
 
 
             //redirect to the login page
@@ -206,113 +287,30 @@ namespace LOginForm.Pages
         }
 
 
-        #region boolean checks
-
         
-
-        /// <summary>
-        /// This method checks if the login name is available
-        /// </summary>
-        private bool CheckLoginAvailable()
-        {
-            bool unique = true;           
-
-            
-            //Due to existance of the temporary table, we need to check if ....
-
-            string q = "select * from person where Login = '" + login + "'";
-
-            //create reader
-            MySqlDataReader reader =  db.Reader(q);
-
-            while (reader.Read())
-            {
-                //reading value of login from db
-                unique = false;
-            }
-
-            //Close connection
-            db.CloseConnection();
-
-            //if login name is taken, showing warning
-            if (!unique)
-            {
-                LoginDanger.Visibility = Visibility.Visible;                
-            }
-            else
-            {
-                LoginDanger.Visibility = Visibility.Collapsed;
-            }
-
-            return unique;
-        }
-
-        #endregion
 
         #region Helpers
 
         /// <summary>
         /// This method clears all the warnings
+        /// Every warning will change border brush and add a toolTip with warning message
         /// </summary>
         private void clearWarnings()
         {
-            //clear first name warning
-            FirstW.Visibility = Visibility.Collapsed;
+            FirstNameHolder.ToolTip = LastNameHolder.ToolTip = LoginHolder.ToolTip = PasswordConformationHolder.ToolTip = "";
 
-            //clear last name warning
-            LastN.Visibility = Visibility.Collapsed;
-
-            //clear login warning if there is one
-            LoginWorning.Visibility = Visibility.Collapsed;
-
-            //clear password warning if there is one
-            PasswordW.Visibility = Visibility.Collapsed;
-
-            //Clear password conformation warning if there is one
-            PasswordConformW.Visibility = Visibility.Collapsed;
-
+            FirstNameHolder.ClearValue(BorderBrushProperty);
+            LastNameHolder.ClearValue(BorderBrushProperty);
+            LoginHolder.ClearValue(BorderBrushProperty);
+            PasswordConformationHolder.ClearValue(BorderBrushProperty);
         }
 
-        /// <summary>
-        /// This method checks if the passwords match
-        /// </summary>
-        private bool CheckPasswordsMatch()
-        {
-            
-            if (password.Equals(passwordConfirm))
-            {
-                //clear warning if there is one
-                WorningBox.Visibility = Visibility.Collapsed;
-                return true;
-            }
-            else
-            {
-                //assign warning message
-                WorningBox.Visibility = Visibility.Visible;
-                return false;
-            }
-        }
+       
 
         #endregion
 
 
-        /// <summary>
-        /// This function will open login page
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void RegisterBtn_Copy_Click(object sender, RoutedEventArgs e)
-        {
-            //get instance of the login page
-            MainWindow mw = new MainWindow();
-
-            //close register page
-            Close();
-
-            //redirect to the login page
-            mw.Show();
-           
-        }
+        #region Redirect to login and Enter key
 
         /// <summary>
         /// This method handels the press of Enter. It will run all the checks,
@@ -329,5 +327,24 @@ namespace LOginForm.Pages
 
             }
         }
+
+        /// <summary>
+        /// This function will return user to the login page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void LoginPageButton_Click(object sender, RoutedEventArgs e)
+        {
+            //get instance of the login page
+            MainWindow mw = new MainWindow();
+
+            //close register page
+            Close();
+
+            //redirect to the login page
+            mw.Show();
+        }
+
+        #endregion
     }
 }

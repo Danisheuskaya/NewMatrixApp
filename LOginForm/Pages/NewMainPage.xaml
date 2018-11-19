@@ -116,13 +116,13 @@
                 </TransformGroup>
             </StackPanel.RenderTransform>
 
-            <!-- Holder for buttons -->
+            <!-- Holder for buttons --><!--
             <StackPanel x:Name="stackPanel1" Orientation="Horizontal" VerticalAlignment="Top" Height="100" HorizontalAlignment="Center">
                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Width="50" Height="50" Margin="10">
                     <materialDesign:PackIcon Kind="Settings" Width="40" Height="40"/>
                 </Button>
 
-                <!--Here can be User NAME-->
+                --><!--Here can be User NAME--><!--
                 <Button Style="{StaticResource MaterialDesignFloatingActionMiniAccentButton}" Background="{x:Null}" BorderBrush="{x:Null}" Padding="0" Width="50" Height="50" Margin="10">
                     <materialDesign:PackIcon Kind="Settings" Width="40" Height="40"/>
                 </Button>
@@ -131,10 +131,13 @@
                     <materialDesign:PackIcon Kind="InformationOutline" Width="40" Height="40"/>
                 </Button>
             </StackPanel>
-            <!--End of buttons-->
+            --><!--End of buttons-->
 
+            
+            
             <!--Start of menu list-->
-            <ListView>
+            
+            <ListView Margin=" 0 150 0 0">
                 <ListViewItem x:Name="listViewItem" Height="60" RenderTransformOrigin="0.5,0.5">
                     <ListViewItem.RenderTransform>
                         <TransformGroup>
@@ -144,6 +147,8 @@
                             <TranslateTransform/>
                         </TransformGroup>
                     </ListViewItem.RenderTransform>
+                    
+                    
                     <StackPanel x:Name="stackPanel" Orientation="Horizontal" Margin="10 0" RenderTransformOrigin="0.5,0.5">
                         <StackPanel.RenderTransform>
                             <TransformGroup>
@@ -153,8 +158,9 @@
                                 <TranslateTransform/>
                             </TransformGroup>
                         </StackPanel.RenderTransform>
+                        
                         <materialDesign:PackIcon Kind="Home" Width="30" Height="30" VerticalAlignment="Center" Margin="5" Foreground="#DDCDCDCD"/>
-                        <TextBlock Text="Home" Margin="10" VerticalAlignment="Center" Foreground="#FFB8BDC8"/>
+                        <Button Name="WaitListButton" Click="WaitListButton_Click" Content="Wait List" Margin="10" VerticalAlignment="Center" Foreground="#FFB8BDC8"/>
                     </StackPanel>
                 </ListViewItem>
 
@@ -169,50 +175,18 @@
                         </TransformGroup>
                     </ListViewItem.RenderTransform>
 
-                    <materialDesign:DialogHost x:Name="ChangePasswordPopUp" CloseOnClickAway="True" >
-                        <materialDesign:DialogHost.DialogContent>
+                   
                             <!--HERE WILL BE A STUCK-->
-                            <StackPanel x:Name="PasswordPanel" Width="250" Margin="20" Background="White" >
+                            
 
-                                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Right">
-                                    <Button x:Name="CloseChangePassword"  Click="CloseChangePassword_Click" HorizontalAlignment="Right" BorderBrush="{x:Null}" Background="{x:Null}">
-                                        <materialDesign:PackIcon  Kind="Close" Width="20" Height="20" VerticalAlignment="Top"  Foreground="#DDCDCDCD"/>
-                                    </Button>
-                                </StackPanel>
-
-
-                                <!--Here will be password parts -->
-
-                                <PasswordBox
-                                    x:Name="OldPasswordHolder"
-                                    materialDesign:HintAssist.Hint="Old Password"
-                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" PasswordChanged="OldPasswordHolder_PasswordChanged" />
-
-                                <PasswordBox
-                                    x:Name="NewPasswordHolder"
-                                    materialDesign:HintAssist.Hint="New Password"
-                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" PasswordChanged="NewPasswordHolder_PasswordChanged" />
-
-                                <PasswordBox
-                                    x:Name="NewPasswordConformationHolder"
-                                    materialDesign:HintAssist.Hint="Confirm Password"
-                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" PasswordChanged="NewPasswordConformationHolder_PasswordChanged" />
-                                <Button
-                                    x:Name="ChangePasswordButton"
-                                    Style="{StaticResource MaterialDesignRaisedLightButton}"
-                                    Width="100" Margin="5"
-                                    ToolTip="Resource name: MaterialDesignRaisedLightButton" Background="{x:Null}" BorderBrush="Gray" Foreground="#DD4C4343" ForceCursor="True" Content="SAVE" Click="ChangePasswordButton_Click" Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}" IsEnabled="False" />
-
-                            </StackPanel>
-
-                        </materialDesign:DialogHost.DialogContent>
+                        
 
                         <StackPanel Orientation="Horizontal" Margin="10 0" >
                             <materialDesign:PackIcon Kind="AccountKey" Width="30" Height="30" VerticalAlignment="Center" Margin="5 5 0 5" Foreground="#DDCDCDCD"/>
                             <Button Content="Change Password"  VerticalAlignment="Center" Foreground="#FFB8BDC8" Click="Button_Click" BorderBrush="{x:Null}" Background="{x:Null}"/>
                         </StackPanel>
 
-                    </materialDesign:DialogHost>
+                   
                 </ListViewItem>
 
 
@@ -336,29 +310,66 @@
         </Grid>
 
         <!--This is buttons layout-->
+        <!-- Trying to add a popUp -->
         <StackPanel Orientation="Horizontal" VerticalAlignment="Top" Height="40" HorizontalAlignment="Right" Margin="0,0,-0.001,0">
-            <Button x:Name="SettingsButton" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" >
-                <materialDesign:PackIcon Kind ="Settings"/>
+
+            
+                
+                    
+                
+
+            <Button ToolTip="See my tabel restrictions" 
+                    Click="InformationButton_Click" x:Name="InformationButton" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" >
+                <materialDesign:PackIcon Kind ="Information"/>
             </Button>
+
+            <Button ToolTip="Change password"
+                Click="SettingsButton_Click" x:Name="SettingsButton" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" >
+                    <materialDesign:PackIcon Kind ="Settings"/>
+                </Button>
+            
             <Button x:Name="ButtonClose" Width="30" Height="30" Padding="0" Background="{x:Null}" BorderBrush="{x:Null}" Click="ButtonClose_Click" >
                 <materialDesign:PackIcon Kind ="Power"/>
             </Button>
         </StackPanel>
 
-        <StackPanel x:Name="UserMenu"  Margin="0 -110 0 0" Width="200" Height="100" VerticalAlignment="Top" HorizontalAlignment="Right">
-            <Menu x:Name="menu" RenderTransformOrigin="0.5,0.5" >
-                <Menu.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform/>
-                        <RotateTransform/>
-                        <TranslateTransform/>
-                    </TransformGroup>
-                </Menu.RenderTransform>
-                <MenuItem Header="Change Password"/>
-                <MenuItem Header="My Restrictions"/>
+        
+        <!-- Trying a popUp thing -->
 
-            </Menu>
-        </StackPanel>
+        <Popup StaysOpen="False" Name="ChangePasswordPopUp" Placement="Bottom" PopupAnimation="Slide">
+            <materialDesign:Card>
+                <StackPanel x:Name="PasswordPanel" Width="250" Margin="20" Background="White" >
+
+                    <!--Here will be password parts -->
+
+                    <PasswordBox
+                                    x:Name="OldPasswordHolder"
+                                    materialDesign:HintAssist.Hint="Old Password"
+                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" PasswordChanged="OldPasswordHolder_PasswordChanged"  />
+                    <Label Name="OldPasswordWarning" Content="Please, enter your password" FontSize="8" Margin=" 0 0 0 0" HorizontalAlignment="Center" Foreground="OrangeRed" Visibility="Collapsed"/>
+                    <PasswordBox
+                                    x:Name="NewPasswordHolder"
+                                    materialDesign:HintAssist.Hint="New Password"
+                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" PasswordChanged="NewPasswordHolder_PasswordChanged" />
+
+                    <PasswordBox
+                                    x:Name="NewPasswordConformationHolder"
+                                    materialDesign:HintAssist.Hint="Confirm Password"
+                                    Style="{StaticResource MaterialDesignFloatingHintPasswordBox}" PasswordChanged="NewPasswordConformationHolder_PasswordChanged"  />
+                    <Button
+                                    x:Name="ChangePasswordButton"
+                                    Style="{StaticResource MaterialDesignRaisedLightButton}"
+                                    Width="100" Margin="5"
+                                    Content="UPDATE"
+                                    Click="ChangePasswordButton_Click"
+                                    IsEnabled="False" Background="LightGray" BorderBrush="Gray" Foreground="#DD423D3D" />
+
+                </StackPanel>
+            </materialDesign:Card>
+           
+        </Popup>
+        
+        
+        <!-- -->
     </Grid>
 </Window>

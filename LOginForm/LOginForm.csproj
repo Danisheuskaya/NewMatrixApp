@@ -110,11 +110,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\Window2.xaml">
+    <Page Include="Pages\RestrictionPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Pages\RestrictionPage.xaml">
+    <Page Include="Pages\UserWaitList.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -250,11 +250,11 @@
     <Compile Include="Pages\RegisterPage.xaml.cs">
       <DependentUpon>RegisterPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\Window2.xaml.cs">
-      <DependentUpon>Window2.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\RestrictionPage.xaml.cs">
       <DependentUpon>RestrictionPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\UserWaitList.xaml.cs">
+      <DependentUpon>UserWaitList.xaml</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
